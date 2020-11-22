@@ -1,0 +1,47 @@
+$body-font-family: 'Raleway', sans-serif;
+$heading-font-family: 'Raleway', sans-serif;
+$headings: (
+	'h1': (
+		'font-family': $heading-font-family,
+	),
+	'h2': (
+		'font-family': $heading-font-family,
+	),
+	'h3': (
+		'font-family': $heading-font-family,
+	),
+	'h4': (
+		'font-family': $heading-font-family,
+	),
+	'h5': (
+		'font-family': $heading-font-family,
+	),
+	'h6': (
+		'font-family': $heading-font-family,
+	),
+);
+
+html,
+body,
+.v-application {
+  font-family: $body-font-family;
+}
+.v-application {
+    .text-display-4,
+    .text-display-3,
+    .text-display-2,
+    .text-display-1,
+    .text-headline,
+    .text-title,
+    .text-subtitle-1,
+    .text-subtitle-2,
+    .text-body-1,
+    .text-body-2,
+    .text-caption,
+    .text-overline
+    {
+        font-family: $body-font-family;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:wght@400;700&display=swap');
