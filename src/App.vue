@@ -28,7 +28,8 @@
           class="mr-2"
           :color="navItem.featured ? 'warning' : ''"
           exact
-          small
+          :small="$vuetify.breakpoint.lgAndUp"
+          :x-small="$vuetify.breakpoint.mdAndDown"
           :to="navItem.link"
           >{{ navItem.name }}</v-btn
         >
