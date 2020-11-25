@@ -1,12 +1,11 @@
-<template>
-  <!-- <div class="about"> -->
+<!-- <template>
   <v-container>
     <v-row class="mt-6 justify-center">
-      <v-col cols="4 wrap">
+      <v-col cols="4" class="wrap">
         <v-img src="~@/assets/logo.png"></v-img>
       </v-col>
       <v-divider vertical></v-divider>
-      <v-col cols="6 my-auto">
+      <v-col cols="6" class="my-auto">
         <v-row>
           <v-card-text class="description">
             <span class="station_name">GraceWay Radio</span> is a one-of-a-kind station that is
@@ -47,27 +46,34 @@
       </v-col>
     </v-row>
   </v-container>
-  <!-- </div> -->
-</template>
+</template> -->
 
-<!--  ###############FOR SMALL SCREENS####################
+<!--  ###############FOR SMALL SCREENS#################### -->
+  <template>
   <v-container>
     <v-row class="mt-6 justify-center">
-      <v-col cols="6">
-        <v-card elevation="4">
-          <v-img src="~@/assets/logo.png"></v-img>
-
-          <v-card-text class="description">
-            GraceWay Radio is a one-of-a-kind station that is dedicated to the transmission of true
-            worship and Spirit-inspired messages that will foster real spiritual growth in
-            listeners. We are completely non-profit, and do not air advertisements--our station is
-            completely faith-based and listener-supported.
-          </v-card-text>
+      <v-col cols="6" md="12">
+        <v-card :elevation="$vuetify.breakpoint.smAndDown ? 4 : 0">
+          <v-row no-gutters>
+            <v-col cols="12" md="4">
+              <v-img src="~@/assets/logo.png"></v-img>
+            </v-col>
+            <v-divider v-if="$vuetify.breakpoint.mdAndUp" vertical></v-divider>
+            <v-col cols="12" md="6">
+              <v-card-text class="description">
+                GraceWay Radio is a one-of-a-kind station that is dedicated to
+                the transmission of true worship and Spirit-inspired messages
+                that will foster real spiritual growth in listeners. We are
+                completely non-profit, and do not air advertisements--our
+                station is completely faith-based and listener-supported.
+              </v-card-text>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
-  -->
+</template>
 
 <style lang="scss" scoped>
 .description {

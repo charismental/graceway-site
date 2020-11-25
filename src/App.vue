@@ -47,7 +47,9 @@
       <v-list nav dense>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="navItem in navItems" :key="navItem.name">
-            <v-list-item-title @click="navTo(navItem.link)">{{ navItem.name }}</v-list-item-title>
+            <v-list-item-title @click="navTo(navItem.link)">{{
+              navItem.name
+            }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -79,7 +81,7 @@ export default {
       },
       {
         name: 'How To Listen',
-        link: { name: 'HowToListen' },
+        link: { name: 'About' },
         featured: false,
       },
       {
