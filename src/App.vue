@@ -5,7 +5,6 @@
         <v-img
           alt="Graceway Radio Logo"
           contain
-          class="mt-2"
           :class="isMobile ? '' : 'ml-4'"
           src="@/assets/logo.png"
           max-height="60"
@@ -15,9 +14,9 @@
       <v-toolbar-title class="ml-2">
         <div
           :class="$vuetify.breakpoint.smAndUp ? 'text-h5' : 'text-body-1'"
-          class="glitch"
-          data-text="Graceway Radio"
         >
+          <!-- class="glitch"
+          data-text="Graceway Radio" -->
           Graceway Radio
         </div>
       </v-toolbar-title>

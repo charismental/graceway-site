@@ -10,6 +10,74 @@
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
+    <v-row>
+      <v-col cols="12" md="4">
+        <v-card>
+          <v-img src="~@/assets/blog.jpg"></v-img>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-card>
+          <v-img src="~@/assets/verse.jpg"></v-img>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <v-card>
+          <v-img src="~@/assets/news.jpg"></v-img>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-divider class="mt-4"></v-divider>
+    <v-row>
+      <v-col cols="3">
+        <v-card elevation="0">
+          <v-card-title class="justify-center text-h4">About Us</v-card-title>
+          <v-card-text class="pr-0">
+            GraceWay Radio is a one-of-a-kind station that is dedicated to the
+            transmission of true worship and Spirit-inspired messages that will
+            foster real spiritual growth in listeners...
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="4" class="offset-1" align-self="center">
+        <v-row>
+          <v-col cols="3">
+            <v-btn x-large icon>
+              <v-icon x-large>mdi-facebook</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="3">
+            <v-btn x-large icon>
+              <v-icon x-large>mdi-twitter</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="3">
+            <v-btn x-large icon>
+              <v-icon x-large>mdi-pinterest</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col cols="3">
+            <v-btn x-large icon>
+              <v-icon x-large>mdi-instagram</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field outlined label="Newsletter signup"></v-text-field>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="3" class="offset-1">
+        <v-card elevation="0">
+          <v-card-title class="justify-center text-h4">Contact</v-card-title>
+          <v-card-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
