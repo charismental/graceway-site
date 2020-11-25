@@ -52,14 +52,14 @@
   <template>
   <v-container>
     <v-row class="mt-6 justify-center">
-      <v-col cols="6" md="12">
+      <v-col sm='6' md="12">
         <v-card :elevation="$vuetify.breakpoint.smAndDown ? 4 : 0">
           <v-row no-gutters>
-            <v-col cols="12" md="4">
-              <v-img src="~@/assets/logo.png"></v-img>
+            <v-col cols="12" md="4" class='wrap'>
+              <v-img src="~@/assets/logo.png" contain></v-img>
             </v-col>
             <v-divider v-if="$vuetify.breakpoint.mdAndUp" vertical></v-divider>
-            <v-col cols="12" md="6">
+            <v-col cols="12" md="6" class='align-self-center'>
               <v-card-text class="description">
                 GraceWay Radio is a one-of-a-kind station that is dedicated to
                 the transmission of true worship and Spirit-inspired messages
@@ -67,6 +67,14 @@
                 completely non-profit, and do not air advertisements--our
                 station is completely faith-based and listener-supported.
               </v-card-text>
+              <v-row class='ma-2'>
+              <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
+              <v-icon>mdi-email</v-icon>
+              </v-btn>
+              <v-btn href="https://www.facebook.com/mastersvoiceradio" target="_blank" icon>
+              <v-icon>mdi-facebook</v-icon>
+              </v-btn>
+              </v-row>
             </v-col>
           </v-row>
         </v-card>
