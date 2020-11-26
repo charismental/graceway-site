@@ -29,7 +29,7 @@
     </v-row>
     <v-divider class="mt-4"></v-divider>
     <v-row>
-      <v-col cols="3">
+      <v-col cols="12" sm="6" md="3" order="1">
         <v-card elevation="0">
           <v-card-title class="justify-center text-h4">About Us</v-card-title>
           <v-card-text class="pr-0">
@@ -39,7 +39,7 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="4" class="offset-1" align-self="center">
+      <v-col cols="12" md="4" class="offset-md-1" order-md="2" order="3" align-self="center">
         <v-row>
           <v-col cols="3">
             <v-btn x-large icon>
@@ -68,7 +68,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="3" class="offset-1">
+      <v-col cols="12" sm="6" md="3" order="2" order-md="3" class="offset-md-1">
         <v-card elevation="0">
           <v-card-title class="justify-center text-h4">Contact</v-card-title>
           <v-card-text>
