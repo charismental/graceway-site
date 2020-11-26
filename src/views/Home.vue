@@ -1,13 +1,18 @@
 <template>
   <v-container fluid class="px-6">
     <!-- style="transform:rotate(-90deg)" -->
-    <v-carousel v-model="model" height="320" :show-arrows="false" cycle>
-      <v-carousel-item v-for="(color, i) in colors" :key="color">
-        <v-sheet :color="color" height="100%" tile>
-          <v-row class="fill-height" align="center" justify="center">
-            <div class="display-3">Slide {{ i + 1 }}</div>
-          </v-row>
-        </v-sheet>
+    <v-carousel
+      v-model="model"
+      width="1200"
+      height="auto"
+      :show-arrows="false"
+      cycle
+    >
+      <v-carousel-item
+        v-for="slide in slideShow"
+        :key="slide.src"
+        :src="require('@/assets/' + slide.src)"
+      >
       </v-carousel-item>
     </v-carousel>
     <v-row>
@@ -39,7 +44,14 @@
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="4" class="offset-md-1" order-md="2" order="3" align-self="center">
+      <v-col
+        cols="12"
+        md="4"
+        class="offset-md-1"
+        order-md="2"
+        order="3"
+        align-self="center"
+      >
         <v-row>
           <v-col cols="3">
             <v-btn x-large icon>
@@ -88,6 +100,32 @@ export default {
   data: () => ({
     model: 0,
     colors: ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'],
+    slideShow: [
+      {
+        src: '01 christmas.jpg',
+      },
+      {
+        src: '02.jpg',
+      },
+      {
+        src: '03 christmas.jpg',
+      },
+      {
+        src: '04 donation.jpg',
+      },
+      {
+        src: '05 christmas.jpg',
+      },
+      {
+        src: '06.jpg',
+      },
+      {
+        src: '07.jpg',
+      },
+      {
+        src: '08.jpg',
+      },
+    ],
   }),
 };
 </script>
