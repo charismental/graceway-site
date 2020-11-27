@@ -1,27 +1,28 @@
 <template>
   <div class="program-schedule">
     <v-container>
-      <v-row>
+      <v-row dense>
         <v-col
         v-for='s in speakers'
-        :key='s.name'
-        sm='2'
-        md='4'
+        :key='s'
+        :cols="$vuetify.breakpoint.xs ? '12' : '6'"
         >
-        <v-card tile>
-          <v-row class='fill-height'>
-            <v-col align-self='start'>
-              <v-avatar class='profile'>
-                <v-img :src="`~@/assets/${s.photo}`"></v-img>
+        <v-card outlined>
+          <v-row justify="space-between">
+            <v-col align-self='start' cols='3'>
+              <v-avatar tile size='100' :class='$vuetify.breakpoint.xs ? "ma-1" : "pa-4"'>
+                <v-img :src="require('@/assets/' + s.photo)" cover></v-img>
               </v-avatar>
             </v-col>
-            <v-col>
-              <v-list-item>
+            <v-col align-self='end'>
+              <v-list-item class='ml-auto'>
                 <v-list-item-content>
                   <v-list-item-title title>
                     {{s.name}}
                   </v-list-item-title>
-                  <v-list-item-subtitle>
+                  <v-list-item-subtitle
+                  :style="$vuetify.breakpoint.xs ? 'font-size:0.8rem;' : ''">
+                  <!-- TIMES NEEDS TO BE SPLIT AND WRAPPED IN FLEXBOX -->
                     {{s.times}}
                   </v-list-item-subtitle>
                 </v-list-item-content>
@@ -48,47 +49,47 @@ export default {
       },
       {
         name: 'David Pawson',
-        photo: '~@/assets/david_pawson.png',
+        photo: 'david_pawson.png',
         times: 'Mon, Wed, Fri @ 2:30AM/PM',
       },
       {
         name: 'John Casteel',
-        photo: '~@/assets/john_casteel.jpg',
+        photo: 'john_casteel.jpg',
         times: 'Mon, Wed, Fri - 6:30AM, 7:00PM',
       },
       {
         name: 'Paul Washer',
-        photo: '~@/assets/paul_washer.jpg',
+        photo: 'paul_washer.jpg',
         times: 'Mon, Wed, Fri - 8:30AM, 9:00PM',
       },
       {
         name: 'Chuck Missler',
-        photo: '~@/assets/chuch_missler.jpg',
+        photo: 'chuch_missler.jpg',
         times: 'Weekdays - 10:30AM, 11:00PM',
       },
       {
         name: 'Curtis Dougherty',
-        photo: '~@/assets/curtis_dougherty.jpg',
+        photo: 'curtis_dougherty.jpg',
         times: 'Mon, Wed, Fri @ 4:30AM/PM',
       },
       {
         name: 'Ern Baxter',
-        photo: '~@/assets/ern_baxter.jpg',
+        photo: 'ern_baxter.jpg',
         times: 'Tues, Thur @ 2:30AM/PM',
       },
       {
         name: 'Jamie Buckingham',
-        photo: '~@/assets/jamie_buckingham.jpg',
+        photo: 'jamie_buckingham.jpg',
         times: 'Tues, Thur @ 4:30AM/PM',
       },
       {
         name: 'David Wilkerson',
-        photo: '~@/assets/david_wilkerson.jpg',
+        photo: 'david_wilkerson.jpg',
         times: 'Tues, Thur - 8:30AM, 9:00PM',
       },
       {
         name: 'Derek Prince',
-        photo: '~@/assets/derek_prince.jpg',
+        photo: 'derek_prince.jpg',
         times: 'Beefy Potatoes with Gravy',
       },
     ],
