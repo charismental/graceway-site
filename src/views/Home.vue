@@ -11,8 +11,9 @@
       <v-carousel-item
         v-for="slide in slideShow"
         :key="slide.src"
-        :src="`https://raw.githubusercontent.com/charismental/images/main/${slide.src}`"
+        eager
       >
+        <v-img :src="`https://raw.githubusercontent.com/charismental/images/main/${slide.src}`" height="100%" eager/>
       </v-carousel-item>
     </v-carousel>
     <v-row>
