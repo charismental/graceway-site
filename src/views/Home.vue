@@ -11,7 +11,7 @@
       <v-carousel-item
         v-for="slide in slideShow"
         :key="slide.src"
-        :src="require('@/assets/' + slide.src)"
+        :src="`https://raw.githubusercontent.com/charismental/images/main/${slide.src}`"
       >
       </v-carousel-item>
     </v-carousel>
