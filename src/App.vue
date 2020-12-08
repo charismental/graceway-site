@@ -3,6 +3,8 @@
     <v-app-bar elevate-on-scroll app color="white">
       <div class="d-flex align-center">
         <v-img
+          style="cursor: pointer"
+          @click="navigateHome"
           alt="Graceway Radio Logo"
           contain
           :class="isMobile ? '' : 'ml-4'"
@@ -11,10 +13,12 @@
           max-width="60"
         />
       </div>
-      <v-toolbar-title class="ml-2">
-        <div
-          :class="$vuetify.breakpoint.smAndUp ? 'text-h5' : 'text-body-1'"
-        >
+      <v-toolbar-title
+        class="ml-2"
+        style="cursor: pointer"
+        @click="navigateHome"
+      >
+        <div :class="$vuetify.breakpoint.smAndUp ? 'text-h5' : 'text-body-1'">
           <!-- class="glitch"
           data-text="Graceway Radio" -->
           Graceway Radio
@@ -55,15 +59,18 @@
     </v-navigation-drawer>
     <v-main>
       <router-view />
+      <c-footer />
     </v-main>
   </v-app>
 </template>
 
 <script>
+import CFooter from '@/components/Footer.vue';
+
 export default {
   name: 'App',
 
-  components: {},
+  components: { CFooter },
 
   data: () => ({
     openSideNav: false,
@@ -101,6 +108,11 @@ export default {
     ],
   }),
   methods: {
+    navigateHome() {
+      if (this.$route.name !== 'Home') {
+        this.$router.push({ name: 'Home' });
+      }
+    },
     navTo(linkObj) {
       this.$router.push(linkObj);
     },

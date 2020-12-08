@@ -4,7 +4,7 @@
       <v-row dense>
         <v-col
         v-for='s in speakers'
-        :key='s'
+        :key='s.name'
         :cols="$vuetify.breakpoint.xs ? '12' : '6'"
         >
         <v-card outlined>
