@@ -120,8 +120,11 @@ export default {
         src: '03 christmas.jpg',
       },
       {
-        src: '04 donation.jpg',
+        src: '04.jpg',
       },
+      // {
+      //   src: '04 donation.jpg',
+      // },
       {
         src: '05 christmas.jpg',
       },
