@@ -56,13 +56,15 @@
         width: 300px;
         height: 60px;
       "
-      ><div class="text-capitalize text-h3">
-        Listen
-      </div>
-      <v-btn fab small absolute style="transform: rotate(-90deg); right: 0" @click.stop="playPause">
-        <v-icon v-if="!radioIsPlaying"
-          >mdi-play</v-icon
-        >
+      ><div class="text-capitalize text-h3">Listen</div>
+      <v-btn
+        fab
+        small
+        absolute
+        style="transform: rotate(-90deg); right: 0"
+        @click.stop="playPause"
+      >
+        <v-icon v-if="!radioIsPlaying">mdi-play</v-icon>
         <v-icon v-else>mdi-pause</v-icon>
       </v-btn>
     </v-btn>
@@ -100,13 +102,25 @@
           </div>
         </div>
       </div>
+      <v-list two-line>
+        <div  v-for="(song, i) in songQueue" :key="`${song.artist}_${song.title}`">
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ song.title }}</v-list-item-title>
+            <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider v-if="i !== songQueue.length - 1"></v-divider>
+        </div>
+      </v-list>
       <v-btn
         color="grey darken-2"
+        class="white--text"
         large
-        icon
+        fab
         absolute
-        left
-        bottom
+        right
+        style="bottom: 10px"
         @click="openPlayer = false"
       >
         <v-icon large>mdi-close</v-icon>
