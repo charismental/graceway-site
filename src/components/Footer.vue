@@ -53,8 +53,8 @@
         <v-card elevation="0">
           <v-card-title class="justify-center text-h4">Contact</v-card-title>
           <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
+              <v-icon>mdi-email</v-icon>
           </v-card-text>
         </v-card>
       </v-col>
