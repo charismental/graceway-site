@@ -142,7 +142,7 @@
     </v-navigation-drawer>
     <v-main>
       <router-view />
-      <c-footer />
+      <c-footer v-if="$route.name !== 'About'" />
     </v-main>
   </v-app>
 </template>
