@@ -1,6 +1,5 @@
 <template>
   <v-container fluid class="px-6">
-    <!-- style="transform:rotate(-90deg)" -->
     <v-carousel
       v-model="model"
       width="1200"
@@ -8,6 +7,8 @@
       :show-arrows="false"
       :hide-delimiters="$vuetify.breakpoint.smAndDown"
       cycle
+      interval="8000"
+      style="position: relative"
     >
       <v-carousel-item v-for="slide in slideShow" :key="slide.src" eager>
         <v-img
@@ -25,7 +26,9 @@
               <v-expand-transition>
                 <div
                   class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
+                  :style="
+                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
+                  "
                 >
                   <div
                     v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -48,7 +51,9 @@
               <v-expand-transition>
                 <div
                   class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
+                  :style="
+                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
+                  "
                 >
                   <div
                     v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -57,10 +62,7 @@
                     :style="$vuetify.breakpoint.smAndDown ? 'font-size: 10vw' : ''"
                   >
                     <span
-                      v-if="
-                        $vuetify.breakpoint.lgAndUp ||
-                        $vuetify.breakpoint.smOnly
-                      "
+                      v-if="$vuetify.breakpoint.lgAndUp || $vuetify.breakpoint.smOnly"
                     >
                       Verse of the Day
                     </span>
@@ -79,7 +81,9 @@
               <v-expand-transition>
                 <div
                   class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
+                  :style="
+                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
+                  "
                 >
                   <div
                     v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -105,7 +109,6 @@ export default {
   components: {},
   data: () => ({
     model: 0,
-    colors: ['primary', 'secondary', 'yellow darken-2', 'red', 'orange'],
     slideShow: [
       {
         src: '01 christmas.jpg',

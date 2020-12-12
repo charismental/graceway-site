@@ -13,11 +13,7 @@
           max-width="60"
         />
       </div>
-      <v-toolbar-title
-        class="ml-2"
-        style="cursor: pointer"
-        @click="navigateHome"
-      >
+      <v-toolbar-title class="ml-2" style="cursor: pointer" @click="navigateHome">
         <div :class="$vuetify.breakpoint.smAndUp ? 'text-h5' : 'text-body-1'">
           <!-- class="glitch"
           data-text="Graceway Radio" -->
@@ -28,7 +24,7 @@
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
         <v-btn
-          v-for="navItem in navItems"
+          v-for="navItem in navItems.filter((nav) => !nav.disabled)"
           :key="navItem.name"
           :text="!navItem.featured"
           active-class="active-button"
@@ -46,10 +42,83 @@
         @click.stop="openSideNav = !openSideNav"
       ></v-app-bar-nav-icon>
     </v-app-bar>
+    <v-btn
+      color="primary"
+      @click="openPlayer = true"
+      elevation="0"
+      tile
+      style="
+        transform: rotate(90deg);
+        z-index: 3;
+        position: fixed;
+        left: -125px;
+        top: 50%;
+        width: 300px;
+        height: 60px;
+      "
+      ><div class="text-capitalize text-h3">
+        Listen
+      </div>
+      <v-btn fab small absolute style="transform: rotate(-90deg); right: 0" @click.stop="playPause">
+        <v-icon v-if="!radioIsPlaying"
+          >mdi-play</v-icon
+        >
+        <v-icon v-else>mdi-pause</v-icon>
+      </v-btn>
+    </v-btn>
+    <v-navigation-drawer
+      fixed
+      style="z-index: 4; padding-top: 60px"
+      width="300"
+      v-model="openPlayer"
+    >
+      <div class="album-art" style="position: relative">
+        <v-img
+          :src="itemImg(songInfo)"
+          :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
+          onerror="this.src='https://cascadechapel.com/samHTMweb/customMissing.jpg'"
+        >
+        </v-img>
+
+        <v-btn fab color="grey lighten-1" large bottom right absolute @click="playPause">
+          <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
+          <v-icon large v-else>mdi-pause</v-icon>
+        </v-btn>
+        <audio id="audio" :src="stream">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="song-meta white--text">
+        <div class="text-h6 marquee-container">
+          <div :class="[marqueeTrigger(songInfo, 'title', 18) ? 'marquee' : '']">
+            {{ songInfo && songInfo.title ? songInfo.title : "" }}
+          </div>
+        </div>
+        <div class="text-body-2 marquee-container">
+          <div :class="[marqueeTrigger(songInfo, 'artist', 36) ? 'marquee' : '']">
+            {{ songInfo && songInfo.artist ? songInfo.artist : "" }}
+          </div>
+        </div>
+      </div>
+      <v-btn
+        color="grey darken-2"
+        large
+        icon
+        absolute
+        left
+        bottom
+        @click="openPlayer = false"
+      >
+        <v-icon large>mdi-close</v-icon>
+      </v-btn>
+    </v-navigation-drawer>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
-          <v-list-item v-for="navItem in navItems" :key="navItem.name">
+          <v-list-item
+            v-for="navItem in navItems.filter((nav) => !nav.disabled)"
+            :key="navItem.name"
+          >
             <v-list-item-title @click="navTo(navItem.link)">{{
               navItem.name
             }}</v-list-item-title>
@@ -66,6 +135,7 @@
 
 <script>
 import CFooter from '@/components/Footer.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -73,7 +143,14 @@ export default {
   components: { CFooter },
 
   data: () => ({
+    stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
+    songInfo: null,
+    songHistory: null,
+    songQueue: null,
+    loadingSongInfo: false,
+    openPlayer: false,
+    radioIsPlaying: false,
     navItems: [
       {
         name: 'Home',
@@ -84,9 +161,10 @@ export default {
         name: 'Program Schedule',
         link: { name: 'ProgramSchedule' },
         featured: false,
+        disabled: true,
       },
       {
-        name: 'How To Listen',
+        name: 'About Us',
         link: { name: 'About' },
         featured: false,
       },
@@ -94,20 +172,71 @@ export default {
         name: 'Blog',
         link: { name: 'Blog' },
         featured: false,
+        disabled: true,
       },
       {
         name: 'Contact',
         link: { name: 'Contact' },
         featured: false,
+        disabled: true,
       },
       {
         name: 'Make A Donation',
         link: { name: 'Donate' },
         featured: true,
+        disabled: true,
       },
     ],
   }),
+  created() {
+    this.getSongInfo();
+    // eslint-disable-next-line no-unused-vars
+    const newInterval = setInterval(this.getSongInfo, 10000);
+  },
   methods: {
+    marqueeTrigger(el, att, val) {
+      return !!(el && el[att] && el[att].length > val);
+    },
+    itemImg(item) {
+      const url = 'https://cascadechapel.com/samHTMweb/';
+      if (item?.picture) {
+        return url + item.picture;
+      }
+      if (this.loading) {
+        return `${url}loading.gif`;
+        // return `${url}graceway.png`;
+      }
+      return `${url}customMissing.jpg`;
+    },
+    getSongInfo() {
+      this.loadingSongInfo = true;
+      axios
+        .get('https://cascadechapel.com/samHTMweb/info.json')
+        .then((res) => {
+          if (res.data.song_info) {
+            this.songInfo = res.data.song_info;
+            this.songQueue = res.data.song_queue;
+            this.songHistory = res.data.song_history;
+          }
+          this.loadingSongInfo = false;
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+          this.loadingSongInfo = false;
+        });
+    },
+    playPause() {
+      if (this.radioIsPlaying) {
+        this.radioIsPlaying = false;
+        // eslint-disable-next-line no-undef
+        audio.pause();
+      } else {
+        this.radioIsPlaying = true;
+        // eslint-disable-next-line no-undef
+        audio.play();
+      }
+    },
     navigateHome() {
       if (this.$route.name !== 'Home') {
         this.$router.push({ name: 'Home' });
@@ -127,7 +256,7 @@ export default {
 
 <style lang="scss" scoped>
 .active-button {
-  color: red;
+  color: blue;
 }
 @mixin glitchCopy {
   content: attr(data-text);
@@ -137,7 +266,27 @@ export default {
   width: 100%;
   height: 100%;
 }
-
+.album-art {
+  height: 300px;
+}
+.marquee-container {
+  overflow: hidden;
+}
+.marquee {
+  white-space: nowrap;
+  animation: marquee 8s linear infinite;
+  -webkit-animation: marquee 8s linear infinite;
+}
+.marquee:hover {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+.song-meta {
+  padding-top: 5px;
+  padding-left: 5px;
+  height: 65px;
+  background-color: dodgerblue;
+}
 .glitch {
   position: relative;
   color: black;
@@ -186,6 +335,22 @@ export default {
     #{percentage($i*(1/$steps))} {
       transform: skew((random(10) - 5) + deg);
     }
+  }
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-130%);
+  }
+}
+@-webkit-keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-130%);
   }
 }
 </style>
