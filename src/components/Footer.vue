@@ -53,6 +53,7 @@
         </v-card>
       </v-col>
     </v-row>
+    <p class='font-weight-thin text-center'>&copy; 2020 GraceWay Radio</p>
   </div>
 </template>
 
