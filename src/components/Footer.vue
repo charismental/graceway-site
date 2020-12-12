@@ -14,7 +14,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="4" class="offset-md-1" order-md="2" order="3" align-self="center">
-        <v-row>
+        <v-row >
           <v-col cols="3">
             <v-btn x-large icon href="https://facebook.com/gracewayradio">
               <v-icon x-large>mdi-facebook</v-icon>
@@ -45,15 +45,15 @@
       <v-col cols="12" sm="6" md="3" order="2" order-md="3" class="offset-md-1">
         <v-card elevation="0">
           <v-card-title class="justify-center text-h4">Contact</v-card-title>
-          <v-card-text>
-            <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
-              <v-icon>mdi-email</v-icon>
+          <v-card-text class='ml-3'><v-icon>mdi-email</v-icon>
+            <v-btn href="mailto:admin@gracewayradio.com" elevation='0'>
+              admin@gracewayradio.com
             </v-btn>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    <p class='font-weight-thin text-center'>&copy; 2020 GraceWay Radio</p>
+    <p class="font-weight-thin text-center">&copy; 2020 GraceWay Radio</p>
   </div>
 </template>
 
