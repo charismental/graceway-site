@@ -20,7 +20,7 @@
     </v-carousel>
     <v-row>
       <v-col cols="12" md="4">
-        <v-card>
+        <v-card @click="triggerSnackbar('Blog Page is Coming Soon!')">
           <v-hover v-slot:default="{ hover }">
             <v-img src="~@/assets/blog.jpg">
               <v-expand-transition>
@@ -94,7 +94,7 @@
         </v-dialog>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card>
+        <v-card @click="triggerSnackbar('What\'s New Page is Coming Soon!')">
           <v-hover v-slot:default="{ hover }">
             <v-img src="~@/assets/news.jpg">
               <v-expand-transition>
@@ -119,6 +119,9 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-snackbar v-model="showSnackbar" multi-line color="warning">
+      <div class="text-body-1 text-center">{{ snackBarText }}</div>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -129,6 +132,8 @@ export default {
   data: () => ({
     model: 0,
     showVerse: false,
+    showSnackbar: false,
+    snackBarText: '',
     slideShow: [
       {
         src: '01 christmas.jpg',
@@ -170,6 +175,10 @@ export default {
     },
   },
   methods: {
+    triggerSnackbar(text) {
+      this.snackBarText = text;
+      this.showSnackbar = true;
+    },
     toggleVerse() {
       this.showVerse = !this.showVerse;
     },
