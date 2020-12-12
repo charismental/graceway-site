@@ -60,21 +60,21 @@
             </v-col>
             <v-divider v-if="$vuetify.breakpoint.mdAndUp" vertical></v-divider>
             <v-col cols="12" md="6" class='align-self-center'>
-              <v-card-text class="description">
+              <v-card-text class="description" >
                 GraceWay Radio is a one-of-a-kind station that is dedicated to
                 the transmission of true worship and Spirit-inspired messages
                 that will foster real spiritual growth in listeners. We are
                 completely non-profit, and do not air advertisements--our
                 station is completely faith-based and listener-supported.
               </v-card-text>
-              <v-row class='ma-2'>
+             <!--   <v-row class='ma-2'>
               <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
               <v-icon>mdi-email</v-icon>
-              <!--</v-btn>
-              <v-btn href="https://www.facebook.com/gracewayradio" target="_blank" icon>
+              </v-btn>
+            <v-btn href="https://www.facebook.com/gracewayradio" target="_blank" icon>
               <v-icon>mdi-facebook</v-icon>
-              </v-btn>-->
-              </v-row>
+              </v-btn>
+              </v-row>-->
             </v-col>
           </v-row>
         </v-card>
@@ -85,7 +85,8 @@
 
 <style lang="scss" scoped>
 .description {
-  line-height: 1.5rem;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
   text-indent: 2rem;
 }
 .paragraph_holder {
