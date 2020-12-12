@@ -23,22 +23,22 @@
       >
         <v-row>
           <v-col cols="3">
-            <v-btn x-large icon>
+            <v-btn x-large icon href='https://facebook.com/gracewayradio'>
               <v-icon x-large>mdi-facebook</v-icon>
             </v-btn>
           </v-col>
           <v-col cols="3">
-            <v-btn x-large icon>
+            <v-btn x-large icon href='https://twitter.com/gracewayradio'>
               <v-icon x-large>mdi-twitter</v-icon>
             </v-btn>
           </v-col>
           <v-col cols="3">
-            <v-btn x-large icon>
+            <v-btn x-large icon href='https://www.pinterest.com/0d3aa86dbac59562a79530250b16e8'>
               <v-icon x-large>mdi-pinterest</v-icon>
             </v-btn>
           </v-col>
           <v-col cols="3">
-            <v-btn x-large icon>
+            <v-btn x-large icon href='https://www.instagram.com/gracewayradio/'>
               <v-icon x-large>mdi-instagram</v-icon>
             </v-btn>
           </v-col>
