@@ -70,10 +70,10 @@
               <v-row class='ma-2'>
               <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
               <v-icon>mdi-email</v-icon>
-              </v-btn>
-              <v-btn href="https://www.facebook.com/mastersvoiceradio" target="_blank" icon>
+              <!--</v-btn>
+              <v-btn href="https://www.facebook.com/gracewayradio" target="_blank" icon>
               <v-icon>mdi-facebook</v-icon>
-              </v-btn>
+              </v-btn>-->
               </v-row>
             </v-col>
           </v-row>
