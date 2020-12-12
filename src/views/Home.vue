@@ -45,34 +45,53 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card>
-          <v-hover v-slot:default="{ hover }">
-            <v-img src="~@/assets/verse.jpg">
-              <v-expand-transition>
-                <div
-                  class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="
-                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
-                  "
-                >
-                  <div
-                    v-if="hover || $vuetify.breakpoint.smAndDown"
-                    class="hover-text transition-fast-in-fast-out"
-                    style="background-color: #0d47a1"
-                    :style="$vuetify.breakpoint.smAndDown ? 'font-size: 10vw' : ''"
-                  >
-                    <span
-                      v-if="$vuetify.breakpoint.lgAndUp || $vuetify.breakpoint.smOnly"
+        <v-dialog v-model="showVerse" max-width="600">
+          <template v-slot:activator="{ on, attrs }">
+            <v-card style="cursor: pointer" v-bind="attrs" v-on="on" @click="toggleVerse">
+              <v-hover v-slot:default="{ hover }">
+                <v-img src="~@/assets/verse.jpg">
+                  <v-expand-transition>
+                    <div
+                      class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
+                      :style="
+                        hover || $vuetify.breakpoint.smAndDown
+                          ? 'height: 38%'
+                          : 'height: 5%'
+                      "
                     >
-                      Verse of the Day
-                    </span>
-                    <span v-else>Today's Verse</span>
-                  </div>
-                </div>
-              </v-expand-transition></v-img
+                      <div
+                        v-if="hover || $vuetify.breakpoint.smAndDown"
+                        class="hover-text transition-fast-in-fast-out"
+                        style="background-color: #0d47a1"
+                        :style="$vuetify.breakpoint.smAndDown ? 'font-size: 10vw' : ''"
+                      >
+                        <span
+                          v-if="$vuetify.breakpoint.lgAndUp || $vuetify.breakpoint.smOnly"
+                        >
+                          Verse of the Day
+                        </span>
+                        <span v-else>Today's Verse</span>
+                      </div>
+                    </div>
+                  </v-expand-transition></v-img
+                >
+              </v-hover>
+            </v-card>
+          </template>
+          <v-card class="mx-auto">
+            <v-img :src="verseOfTheDay"></v-img>
+            <v-btn
+              color="grey lighten-2"
+              fab
+              absolute
+              small
+              style="top: 10px; right: 10px"
+              @click="showVerse = false"
             >
-          </v-hover>
-        </v-card>
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-card>
+        </v-dialog>
       </v-col>
       <v-col cols="12" md="4">
         <v-card>
@@ -109,6 +128,7 @@ export default {
   components: {},
   data: () => ({
     model: 0,
+    showVerse: false,
     slideShow: [
       {
         src: '01 christmas.jpg',
@@ -139,6 +159,21 @@ export default {
       },
     ],
   }),
+  computed: {
+    verseOfTheDay() {
+      let dateDigit = new Date().toISOString().charAt(9);
+      if (dateDigit === 0) {
+        dateDigit = 5;
+      }
+      const url = 'https://raw.githubusercontent.com/charismental/images/main/verse/';
+      return `${url}verse00${dateDigit}.jpg`;
+    },
+  },
+  methods: {
+    toggleVerse() {
+      this.showVerse = !this.showVerse;
+    },
+  },
 };
 </script>
 
