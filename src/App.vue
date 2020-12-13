@@ -245,8 +245,9 @@ export default {
     getSongInfo() {
       this.loadingSongInfo = true;
       axios
-        .get('https://cascadechapel.com/samHTMweb/info.json')
+        .get('https://cascadechapel.com/samHTMweb/info.html')
         .then((res) => {
+          console.log(res.data)
           if (res.data.song_info) {
             this.songInfo = res.data.song_info;
             this.songQueue = res.data.song_queue;
