@@ -1,70 +1,70 @@
   <template>
-  <v-container>
-    <v-row class="mt-6 justify-center">
-      <v-col sm='6' md="12">
-        <v-card :elevation="$vuetify.breakpoint.smAndDown ? 4 : 0">
-          <v-row no-gutters>
-            <v-col cols="12" md="4" class='wrap'>
-              <v-img src="~@/assets/logo.png" contain></v-img>
-            </v-col>
-            <v-divider v-if="$vuetify.breakpoint.mdAndUp" vertical></v-divider>
-            <v-col cols="12" md="6" class='align-self-center'>
-              <v-card-text class="description" >
-                GraceWay Radio is a one-of-a-kind station that is dedicated to
-                the transmission of true worship and Spirit-inspired messages
-                that will foster real spiritual growth in listeners. We are
-                completely non-profit, and do not air advertisements--our
-                station is completely faith-based and listener-supported.
-              </v-card-text>
-             <!--   <v-row class='ma-2'>
-              <v-btn href="mailto:admin@gracewayradio.com" class="mx-2" icon>
-              <v-icon>mdi-email</v-icon>
-              </v-btn>
-            <v-btn href="https://www.facebook.com/gracewayradio" target="_blank" icon>
-              <v-icon>mdi-facebook</v-icon>
-              </v-btn>
-              </v-row>-->
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
-
+  <v-container class='mt-2'>
+    <v-card :elevation='$vuetify.breakpoint.smAndDown ? 4 : 0'>
+      <v-row>
+        <v-col>
+          <v-img
+            :style='$vuetify.breakpoint.mdAndUp ? "position:absolute;" : "height:50vh;"'
+            src="~@/assets/logo.png"
+            alt="logo"
+            contain
+            id="logo"
+          ></v-img>
+        </v-col>
+        <v-col>
+          <v-card-text
+            class="description"
+            id='glass'
+            :style='$vuetify.breakpoint.mdAndDown ? "padding:2em;" : "padding:2.5em;"'
+          >
+            <p class="seq">
+              GraceWay Radio is a one-of-a-kind station that is dedicated to
+              the transmission of true worship and Spirit-inspired messages
+              that will foster real spiritual growth in listeners. We are
+              completely non-profit, and do not air advertisements--our
+              station is completely faith-based and listener-supported.
+            </p>
+          </v-card-text>
+        </v-col>
+      </v-row>
+    </v-card>
   </v-container>
 </template>
 
+<script>
+import { gsap } from 'gsap';
+
+export default {
+  name: 'About',
+  mounted() {
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.inOut', duration: 1.5 },
+    });
+    tl.from('.description', { opacity: 0, delay: 0.5, duration: 1 }, '-=1.5')
+      .from('.description', { x: '-120%', backdropFilter: 'blur(0px)' })
+      .from(
+        '.seq',
+        {
+          y: -500, opacity: 0, stagger: 0.2, duration: 2,
+        },
+        '-=.5',
+      );
+  },
+};
+</script>
+
 <style lang="scss" scoped>
-.description {
-  font-size: 1.3rem;
-  line-height: 1.8rem;
-  text-indent: 2rem;
-}
-.paragraph_holder {
-  background-image: url("~@/assets/logo.png");
-  background-size: cover;
-  opacity: 0.2;
-}
-.station_name {
-  font-size: 1.3rem;
-  font-weight: bold;
-}
+#logo {
+  height: 90vh;
 
-.wrap {
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-
-  img {
-    position: absolute;
-  }
   &:before {
     content: "";
     z-index: 10;
     position: absolute;
-    height: 200%;
-    width: 200%;
-    top: -120%;
-    left: -120%;
+    height: 100%;
+    width: 100%;
+    top: -105%;
+    left: -105%;
     background: linear-gradient(
       transparent 0%,
       rgba(255, 255, 255, 0.1) 45%,
@@ -79,12 +79,31 @@
 }
 @keyframes shine {
   from {
-    top: -120%;
-    left: -120%;
+    top: -105%;
+    left: -105%;
   }
   to {
     left: 100%;
     top: 100%;
+  }
+}
+
+.description {
+  top: calc(100% - 70%);
+  position: relative;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3em;
+  z-index: 1;
+  backdrop-filter: blur(30px);
+  border: solid 2px transparent;
+  background-clip: padding-box;
+  box-shadow: 10px 10px 10px rgba(39, 46, 58, 0.08);
+  line-height: 1.8rem;
+  font-size: 1.3rem;
+  text-indent: 2rem;
+
+  @media screen and (max-width: 960px) {
+    top: 0;
   }
 }
 </style>
