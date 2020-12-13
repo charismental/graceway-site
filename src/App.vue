@@ -76,6 +76,8 @@
     >
       <div class="album-art" style="position: relative">
         <v-img
+          width="auto"
+          height="300"
           :src="itemImg(songInfo)"
           :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
           onerror="this.src='https://cascadechapel.com/samHTMweb/customMissing.jpg'"
@@ -281,7 +283,7 @@ export default {
   height: 100%;
 }
 .album-art {
-  height: 300px;
+  max-height: 300px;
 }
 .marquee-container {
   overflow: hidden;
