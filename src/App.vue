@@ -248,7 +248,7 @@ export default {
         .get('https://cascadechapel.com/samHTMweb/info.html')
         .then((res) => {
         // eslint-disable-next-line no-console
-          console.log(res.data)
+          console.log(res.data);
           if (res.data.song_info) {
             this.songInfo = res.data.song_info;
             this.songQueue = res.data.song_queue;
