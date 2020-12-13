@@ -1,5 +1,8 @@
 <template>
   <v-app>
+    <audio id="audio" :src="stream">
+      Your browser does not support the audio element.
+    </audio>
     <v-app-bar elevate-on-scroll app color="white">
       <div class="d-flex align-center">
         <v-img
@@ -42,92 +45,99 @@
         @click.stop="openSideNav = !openSideNav"
       ></v-app-bar-nav-icon>
     </v-app-bar>
-    <v-btn
-      color="primary"
-      @click="openPlayer = true"
-      elevation="0"
-      tile
-      style="
-        transform: rotate(90deg);
-        z-index: 3;
-        position: fixed;
-        left: -125px;
-        top: 50%;
-        width: 300px;
-        height: 60px;
-      "
-      ><div class="text-capitalize text-h3">Listen</div>
+    <div v-if="!isMobile">
       <v-btn
-        fab
-        small
-        absolute
-        style="transform: rotate(-90deg); right: 0"
-        @click.stop="playPause"
-      >
-        <v-icon v-if="!radioIsPlaying">mdi-play</v-icon>
-        <v-icon v-else>mdi-pause</v-icon>
-      </v-btn>
-    </v-btn>
-    <v-navigation-drawer
-      fixed
-      style="z-index: 4; padding-top: 60px"
-      width="300"
-      v-model="openPlayer"
-    >
-      <div class="album-art" style="position: relative">
-        <v-img
-          width="auto"
-          height="300"
-          :src="itemImg(songInfo)"
-          :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
-          onerror="this.src='https://cascadechapel.com/samHTMweb/customMissing.jpg'"
+        color="primary"
+        @click="openPlayer = true"
+        elevation="0"
+        tile
+        style="
+          transform: rotate(90deg);
+          z-index: 3;
+          position: fixed;
+          left: -125px;
+          top: 50%;
+          width: 300px;
+          height: 60px;
+        "
+        ><div class="text-capitalize text-h3">Listen</div>
+        <v-btn
+          fab
+          small
+          absolute
+          style="transform: rotate(-90deg); right: 0"
+          @click.stop="playPause"
         >
-        </v-img>
-
-        <v-btn fab color="grey lighten-1" large bottom right absolute @click="playPause">
-          <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
-          <v-icon large v-else>mdi-pause</v-icon>
+          <v-icon v-if="!radioIsPlaying">mdi-play</v-icon>
+          <v-icon v-else>mdi-pause</v-icon>
         </v-btn>
-        <audio id="audio" :src="stream">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-      <div class="song-meta white--text">
-        <div class="text-h6 marquee-container">
-          <div :class="[marqueeTrigger(songInfo, 'title', 18) ? 'marquee' : '']">
-            {{ songInfo && songInfo.title ? songInfo.title : "" }}
-          </div>
-        </div>
-        <div class="text-body-2 marquee-container">
-          <div :class="[marqueeTrigger(songInfo, 'artist', 36) ? 'marquee' : '']">
-            {{ songInfo && songInfo.artist ? songInfo.artist : "" }}
-          </div>
-        </div>
-      </div>
-      <v-list two-line>
-        <div  v-for="(song, i) in songQueue" :key="`${song.artist}_${song.title}`">
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>{{ song.title }}</v-list-item-title>
-            <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider v-if="i !== songQueue.length - 1"></v-divider>
-        </div>
-      </v-list>
-      <v-btn
-        color="grey darken-2"
-        class="white--text"
-        large
-        fab
-        absolute
-        right
-        style="bottom: 10px"
-        @click="openPlayer = false"
-      >
-        <v-icon large>mdi-close</v-icon>
       </v-btn>
-    </v-navigation-drawer>
+      <v-navigation-drawer
+        fixed
+        style="z-index: 4; padding-top: 60px"
+        width="300"
+        v-model="openPlayer"
+      >
+        <div class="album-art" style="position: relative">
+          <v-img
+            width="auto"
+            height="300"
+            :src="itemImg(songInfo)"
+            :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
+            onerror="this.src='https://cascadechapel.com/samHTMweb/customMissing.jpg'"
+          >
+          </v-img>
+
+          <v-btn
+            fab
+            color="grey lighten-1"
+            large
+            bottom
+            right
+            absolute
+            @click="playPause"
+          >
+            <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
+            <v-icon large v-else>mdi-pause</v-icon>
+          </v-btn>
+        </div>
+        <div class="song-meta white--text">
+          <div class="text-h6 marquee-container">
+            <div :class="[marqueeTrigger(songInfo, 'title', 18) ? 'marquee' : '']">
+              {{ songInfo && songInfo.title ? songInfo.title : "" }}
+            </div>
+          </div>
+          <div class="text-body-2 marquee-container">
+            <div :class="[marqueeTrigger(songInfo, 'artist', 36) ? 'marquee' : '']">
+              {{ songInfo && songInfo.artist ? songInfo.artist : "" }}
+            </div>
+          </div>
+        </div>
+        <v-list two-line>
+          <div v-for="(song, i) in songQueue" :key="`${song.artist}_${song.title}`">
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ song.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-divider v-if="i !== songQueue.length - 1"></v-divider>
+          </div>
+        </v-list>
+        <v-btn
+          color="grey darken-2"
+          class="white--text"
+          large
+          fab
+          absolute
+          right
+          style="bottom: 10px"
+          @click="openPlayer = false"
+        >
+          <v-icon large>mdi-close</v-icon>
+        </v-btn>
+      </v-navigation-drawer>
+    </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
@@ -146,18 +156,26 @@
       <router-view />
       <c-footer v-if="$route.name !== 'About'" />
     </v-main>
+    <v-expand-transition>
+      <bottom-player
+        v-if="isMobile"
+        :currentSongInfo="songInfo"
+        :songPicture="itemImg(songInfo)"
+        :isPlaying="radioIsPlaying"
+        @play-pause="playPause"
+      />
+    </v-expand-transition>
   </v-app>
 </template>
 
 <script>
-import CFooter from '@/components/Footer.vue';
 import axios from 'axios';
+import CFooter from '@/components/Footer.vue';
+import BottomPlayer from '@/components/BottomPlayer.vue';
 
 export default {
   name: 'App',
-
-  components: { CFooter },
-
+  components: { CFooter, BottomPlayer },
   data: () => ({
     stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
@@ -177,7 +195,7 @@ export default {
         name: 'Program Schedule',
         link: { name: 'ProgramSchedule' },
         featured: false,
-        disabled: true,
+        disabled: false,
       },
       {
         name: 'About Us',
