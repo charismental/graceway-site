@@ -14,8 +14,8 @@
         <v-col>
           <v-card-text
             class="description"
-            id='glass'
-            :style='$vuetify.breakpoint.mdAndDown ? "padding:2em;" : "padding:2.5em;"'
+            :style=
+            '$vuetify.breakpoint.mdAndDown ? "padding:2em;" : "padding:2.5em;max-width: 600px;"'
           >
             <p class="seq">
               GraceWay Radio is a one-of-a-kind station that is dedicated to
@@ -24,6 +24,8 @@
               completely non-profit, and do not air advertisements--our
               station is completely faith-based and listener-supported.
             </p>
+              <p class='seq'>Graceway Radio -</p>
+              <small class='font-italic seq'>Pure Worship, Pure Word, Pure Radio</small>
           </v-card-text>
         </v-col>
       </v-row>
@@ -89,7 +91,7 @@ export default {
 }
 
 .description {
-  top: calc(100% - 70%);
+  top: calc(100% - 50%);
   position: relative;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 3em;

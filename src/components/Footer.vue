@@ -62,10 +62,9 @@
       <v-col cols="12" sm="6" md="3" order="2" order-md="3" class="offset-md-1">
         <v-card elevation="0">
           <v-card-title class="justify-center text-h4">Contact</v-card-title>
-          <v-card-text class="ml-3"
-            ><v-icon>mdi-email</v-icon>
-            <v-btn href="mailto:admin@gracewayradio.com" elevation="0">
-              admin@gracewayradio.com
+          <v-card-text class='text-center'>
+            <v-btn href="mailto:admin@gracewayradio.com" icon>
+              <v-icon>mdi-email</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>
