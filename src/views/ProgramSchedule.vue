@@ -90,7 +90,7 @@ export default {
       {
         name: 'Derek Prince',
         photo: 'derek_prince.jpg',
-        times: 'Beefy Potatoes with Gravy',
+        times: 'Tues, Thur - 6:30AM, 7:00PM',
       },
     ],
   }),
