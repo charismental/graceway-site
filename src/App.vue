@@ -222,6 +222,11 @@ export default {
       },
     ],
   }),
+  watch: {
+    $route() {
+      this.openPlayer = false;
+    },
+  },
   created() {
     this.getSongInfo();
     // eslint-disable-next-line no-unused-vars
@@ -236,7 +241,7 @@ export default {
       if (item?.picture) {
         return url + item.picture;
       }
-      if (this.loading) {
+      if (this.loadingSongInfo) {
         return `${url}loading.gif`;
         // return `${url}graceway.png`;
       }
@@ -245,10 +250,8 @@ export default {
     getSongInfo() {
       this.loadingSongInfo = true;
       axios
-        .get('https://cascadechapel.com/samHTMweb/info.html')
+        .get('https://cascadechapel.com/samHTMweb/info.json')
         .then((res) => {
-        // eslint-disable-next-line no-console
-          console.log(res.data);
           if (res.data.song_info) {
             this.songInfo = res.data.song_info;
             this.songQueue = res.data.song_queue;
@@ -279,7 +282,9 @@ export default {
       }
     },
     navTo(linkObj) {
-      this.$router.push(linkObj);
+      if (linkObj?.name && this.$route.name !== linkObj.name) {
+        this.$router.push(linkObj);
+      }
     },
   },
   computed: {
