@@ -4,11 +4,12 @@
 <template>
   <v-container>
     <v-row
-      class="blog justify-center mt-4 mb-4"
+      class="blog justify-start mt-4 mb-4 main_row"
       no-gutters
+      align='end'
     >
-      <v-col :cols='$vuetify.breakpoint.smAndDown ? "8" : "5"'>
-        <v-card>
+      <v-col :cols='$vuetify.breakpoint.smAndDown ? "8" : "5"' >
+        <v-card class="main_card">
           <v-card-title
             primary-title
             class='display-1 mb-2'
@@ -20,7 +21,7 @@
           <div class='caption  mr-2'>{{date}}</div>
           </div>
           <v-divider></v-divider>
-          <v-card-text>
+          <v-card-text >
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
@@ -64,18 +65,8 @@
           </v-expand-transition>
         </v-card>
       </v-col>
-      <v-col :cols='$vuetify.breakpoint.smAndDown ? 4 : 5'>
-        <v-img
-          src='https://rb.gy/vwzqov'
-          height='100%'
-          width='100%'
-          cover
-          gradient='to bottom right, rgba(255,255,255,0.8412407199207808) 33%,
-        rgba(0,246,255,.6) 100%'
-        ></v-img>
-      </v-col>
     </v-row>
-    <v-spacer></v-spacer>
+    <!-- <v-spacer></v-spacer>
     <v-row>
       <v-col
         v-for='n in 8'
@@ -118,7 +109,7 @@
           </v-card>
         </v-hover>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 
@@ -144,6 +135,27 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.main_row {
+  background: url('https://rb.gy/vwzqov'), url('https://rb.gy/vwzqov');
+  height: 100%;
+  background-blend-mode: darken;
+  background-position: center center;
+  background-size: cover;
+  height: 600px;
+
+  & .main_card {
+      background: transparent;
+
+    & * {
+      color: white;
+      font-size: 1.2em;
+      border: none;
+      background: transparent;
+    }
+  }
+
+}
+
 .v-card--reveal {
   bottom: 0;
   opacity: 1 !important;
