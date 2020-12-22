@@ -11,9 +11,9 @@ new Vue({
   store,
   beforeCreate() {
     const path = localStorage.getItem('path');
-    if (path) {
+    if (path && path.length) {
       localStorage.removeItem('path');
-      this.$router.navigate([path]);
+      this.$router.push(`/${path}`);
     }
   },
   vuetify,
