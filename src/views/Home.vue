@@ -191,6 +191,29 @@ export default {
       },
     ],
   }),
+  metaInfo() {
+    return {
+      meta: [
+        // Twitter Card
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:title', content: 'Graceway Radio - Verse of the day' },
+        {
+          name: 'twitter:description',
+          content: 'Graceway Radio - See today\'s verse!',
+        },
+        { name: 'twitter:image', content: this.verseOfTheDay },
+        // Facebook OpenGraph
+        { property: 'og:title', content: 'Graceway Radio - Verse of the day' },
+        { property: 'og:site_name', content: 'Graceway Radio' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:image', content: this.verseOfTheDay },
+        {
+          property: 'og:description',
+          content: 'Graceway Radio - See today\'s verse!',
+        },
+      ],
+    };
+  },
   watch: {
     isMobile(val) {
       if (val) {
