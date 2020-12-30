@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import Donate from '../views/Donate.vue';
 import Blog from '../views/Blog.vue';
 import Contact from '../views/Contact.vue';
+import VerseDisplay from '../components/VerseDisplay.vue';
 import HowToListen from '../views/HowToListen.vue';
 import ProgramSchedule from '../views/ProgramSchedule.vue';
 
@@ -14,6 +15,17 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+    children: [
+      {
+        name: 'Verse',
+        path: 'verse/:verseId',
+        component: VerseDisplay,
+        props: true,
+        meta: {
+          showModal: true,
+        },
+      },
+    ],
   },
   {
     path: '/blog',
