@@ -79,7 +79,7 @@
             </v-card>
           </template>
           <v-sheet class="mx-auto" style="position: relative">
-            <v-img :src="verseOfTheDay"></v-img>
+            <v-img :src="verseOfTheDay" ref="verseOfDay" @error="imgErrorHandler"></v-img>
             <v-btn
               color="grey lighten-2"
               fab
@@ -214,19 +214,20 @@ export default {
       return 'bottom: 0; right: -60px';
     },
     verseOfTheDay() {
-      let dateDigits = new Date().getDate();
-      if (dateDigits === 29) {
-        dateDigits = 12;
-      } else if (dateDigits === 30) {
-        dateDigits = 16;
-      } else if (dateDigits === 31) {
-        dateDigits = 19;
-      }
-      const url = 'https://raw.githubusercontent.com/charismental/images/main/verse/';
-      return `${url}verse0${dateDigits}.jpg`;
+      const today = new Date();
+      const dayOfYear = Math.floor(
+        (today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24,
+      );
+      const url = `https://raw.githubusercontent.com/charismental/images/main/verse/verse${dayOfYear}.jpg`;
+      return url;
     },
   },
   methods: {
+    imgErrorHandler() {
+      // this is overwritten by computed verseofTheDay, will trigger console error
+      const random = Math.floor(Math.random() * 10);
+      this.$refs.verseOfDay.src = `https://raw.githubusercontent.com/charismental/images/main/verse/verse00${random}.jpg`;
+    },
     triggerSnackbar(text) {
       this.snackBarText = text;
       this.showSnackbar = true;
