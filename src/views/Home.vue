@@ -78,7 +78,7 @@
               </v-hover>
             </v-card>
           </template>
-          <v-card class="mx-auto">
+          <v-sheet class="mx-auto" style="position: relative">
             <v-img :src="verseOfTheDay"></v-img>
             <v-btn
               color="grey lighten-2"
@@ -90,7 +90,33 @@
             >
               <v-icon>mdi-close</v-icon>
             </v-btn>
-          </v-card>
+            <v-speed-dial
+              v-model="openShare"
+              :style="speedDialStyle"
+              style="position: absolute"
+              :direction="isMobile ? 'right' : 'top'"
+              open-on-hover
+            >
+              <template v-slot:activator>
+                <v-btn v-model="openShare" color="blue darken-2" dark fab>
+                  <v-icon v-if="!openShare">mdi-share-variant</v-icon>
+                  <v-icon v-else>mdi-close</v-icon>
+                </v-btn>
+              </template>
+              <v-btn fab dark small color="#1877f2">
+                <v-icon>mdi-facebook</v-icon>
+              </v-btn>
+              <v-btn fab dark small color="#bd081c">
+                <v-icon>mdi-pinterest</v-icon>
+              </v-btn>
+              <v-btn fab dark small color="#1da1f2">
+                <v-icon>mdi-twitter</v-icon>
+              </v-btn>
+              <v-btn fab dark small color="#c32aa3">
+                <v-icon>mdi-instagram</v-icon>
+              </v-btn>
+            </v-speed-dial>
+          </v-sheet>
         </v-dialog>
       </v-col>
       <v-col cols="12" md="4">
@@ -134,6 +160,7 @@ export default {
     showVerse: false,
     showSnackbar: false,
     snackBarText: '',
+    openShare: false,
     slideShow: [
       {
         src: '05 new year.jpg',
@@ -164,7 +191,28 @@ export default {
       },
     ],
   }),
+  watch: {
+    isMobile(val) {
+      if (val) {
+        this.openShare = true;
+      }
+    },
+  },
+  mounted() {
+    if (this.isMobile) {
+      this.openShare = true;
+    }
+  },
   computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    speedDialStyle() {
+      if (this.isMobile) {
+        return 'top: -60px; left: 50%; transform: translate(-250%)';
+      }
+      return 'bottom: 0; right: -60px';
+    },
     verseOfTheDay() {
       let dateDigits = new Date().getDate();
       if (dateDigits === 29) {
@@ -191,6 +239,9 @@ export default {
 </script>
 
 <style>
+.v-dialog.v-dialog--active {
+  overflow-y: inherit !important;
+}
 .hover-text {
   font-size: 3.5vw;
   font-weight: 900;
