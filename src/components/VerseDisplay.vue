@@ -24,8 +24,20 @@
           <v-icon v-else>mdi-close</v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark small color="#1877f2">
-        <v-icon>mdi-facebook</v-icon>
+      <v-btn
+        fab
+        dark
+        small
+        color="#1877f2"
+        :data-href="`https://gwradio.netlify.com/verse/${$route.params.verseId}`"
+      >
+        <a
+          target="_blank"
+          :href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgwradio.netlify.com%2Fverse%2F${$route.params.verseId}&amp;src=sdkpreparse`"
+          style="text-decoration: none"
+        >
+          <v-icon color="white">mdi-facebook</v-icon>
+        </a>
       </v-btn>
       <v-btn fab dark small color="#bd081c">
         <v-icon>mdi-pinterest</v-icon>
@@ -58,7 +70,7 @@ export default {
         },
         { name: 'twitter:image', content: this.verseOfTheDay },
         // Facebook OpenGraph
-        { property: 'og:title', content: 'Graceway Radio - Verse of the day' },
+        { property: 'og:title', content: `Graceway Radio - Verse of the day ${this.todayDate}` },
         { property: 'og:site_name', content: 'Graceway Radio' },
         { property: 'og:type', content: 'website' },
         { property: 'og:image', content: this.verseOfTheDay },
@@ -70,6 +82,12 @@ export default {
     };
   },
   computed: {
+    todayDate() {
+      const today = new Date();
+      const dd = today.getDate();
+      const mm = today.getMonth() + 1;
+      return `${mm}-${dd}`;
+    },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
