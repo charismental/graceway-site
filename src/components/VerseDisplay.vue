@@ -122,13 +122,6 @@ export default {
       this.$refs.verseOfDay.src = `https://raw.githubusercontent.com/charismental/images/main/verse/verse00${random}.jpg`;
     },
   },
-  watch: {
-    isMobile(val) {
-      if (val) {
-        this.openShare = true;
-      }
-    },
-  },
 };
 </script>
 
