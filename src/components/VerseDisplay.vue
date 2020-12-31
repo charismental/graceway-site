@@ -19,7 +19,7 @@
       open-on-hover
     >
       <template v-slot:activator>
-        <v-btn v-model="openShare" color="blue darken-2" dark fab>
+        <v-btn color="blue darken-2" dark fab>
           <v-icon v-if="!openShare">mdi-share-variant</v-icon>
           <v-icon v-else>mdi-close</v-icon>
         </v-btn>
@@ -29,6 +29,7 @@
         dark
         small
         color="#1877f2"
+        @click.stop
         :data-href="`https://gwradio.netlify.com/verse/${$route.params.verseId}`"
       >
         <a
@@ -39,13 +40,13 @@
           <v-icon color="white">mdi-facebook</v-icon>
         </a>
       </v-btn>
-      <v-btn fab dark small color="#bd081c">
+      <v-btn @click.stop fab dark small color="#bd081c">
         <v-icon>mdi-pinterest</v-icon>
       </v-btn>
-      <v-btn fab dark small color="#1da1f2">
+      <v-btn @click.stop fab dark small color="#1da1f2">
         <v-icon>mdi-twitter</v-icon>
       </v-btn>
-      <v-btn fab dark small color="#c32aa3">
+      <v-btn @click.stop fab dark small color="#c32aa3">
         <v-icon>mdi-instagram</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -56,7 +57,7 @@
 export default {
   name: 'VerseDisplay',
   data: () => ({
-    openShare: false,
+    openSpeedDial: false,
   }),
   metaInfo() {
     return {
@@ -82,6 +83,17 @@ export default {
     };
   },
   computed: {
+    openShare: {
+      get() {
+        if (this.isMobile) {
+          return true;
+        }
+        return this.openSpeedDial;
+      },
+      set() {
+        this.openSpeedDial = !this.openSpeedDial;
+      },
+    },
     todayDate() {
       const today = new Date();
       const dd = today.getDate();
