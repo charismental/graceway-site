@@ -30,11 +30,11 @@
         small
         color="#1877f2"
         @click.stop
-        :data-href="`https://gwradio.netlify.com/verse/${$route.params.verseId}`"
+        :data-href="`https://gracewayradio.com/verse/${$route.params.verseId}`"
       >
         <a
           target="_blank"
-          :href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgwradio.netlify.com%2Fverse%2F${$route.params.verseId}&amp;src=sdkpreparse`"
+          :href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}&amp;src=sdkpreparse`"
           style="text-decoration: none"
         >
           <v-icon color="white">mdi-facebook</v-icon>
