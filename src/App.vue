@@ -84,7 +84,7 @@
             height="300"
             :src="itemImg(songInfo)"
             :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
-            onerror="this.src='https://cascadechapel.com/samHTMweb/customMissing.jpg'"
+            onerror="this.src='https://gracewayradio.com/artwork/customMissing.jpg'"
           >
           </v-img>
 
@@ -237,7 +237,7 @@ export default {
       return !!(el && el[att] && el[att].length > val);
     },
     itemImg(item) {
-      const url = 'https://cascadechapel.com/samHTMweb/';
+      const url = 'https://gracewayradio.com/artwork/';
       if (item?.picture) {
         return url + item.picture;
       }
