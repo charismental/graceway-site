@@ -111,7 +111,7 @@ export default {
     },
     verseOfTheDay() {
       const dayOfYear = this.$route.params.verseId;
-      const url = `https://raw.githubusercontent.com/charismental/images/main/verse/verse${dayOfYear}.jpg`;
+      const url = `https://gracewayradio.com/verse/verse${dayOfYear}.jpg`;
       return url;
     },
   },
@@ -119,7 +119,7 @@ export default {
     imgErrorHandler() {
       // this is overwritten by computed verseofTheDay, will trigger console error
       const random = Math.floor(Math.random() * 10);
-      this.$refs.verseOfDay.src = `https://raw.githubusercontent.com/charismental/images/main/verse/verse00${random}.jpg`;
+      this.$refs.verseOfDay.src = `https://gracewayradio.com/verse/verse00${random}.jpg`;
     },
   },
 };

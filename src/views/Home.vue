@@ -12,7 +12,7 @@
     >
       <v-carousel-item v-for="slide in slideShow" :key="slide.src" eager>
         <v-img
-          :src="`https://raw.githubusercontent.com/charismental/images/main/${slide.src}`"
+          :src="`https://gracewayradio.com/slide/${slide.src}`"
           height="100%"
           eager
         />
