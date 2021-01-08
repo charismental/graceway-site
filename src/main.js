@@ -9,6 +9,13 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  beforeCreate() {
+    const path = localStorage.getItem('path');
+    if (path && path.length) {
+      localStorage.removeItem('path');
+      this.$router.push(`/${path}`);
+    }
+  },
   vuetify,
   render: (h) => h(App),
 }).$mount('#app');

@@ -136,13 +136,13 @@ export default {
     snackBarText: '',
     slideShow: [
       {
-        src: '01 christmas.jpg',
+        src: '05 new year.jpg',
       },
       {
         src: '02.jpg',
       },
       {
-        src: '03 christmas.jpg',
+        src: '03 new year.jpg',
       },
       {
         src: '04.jpg',
@@ -150,9 +150,9 @@ export default {
       // {
       //   src: '04 donation.jpg',
       // },
-      {
-        src: '05 christmas.jpg',
-      },
+      // {
+      //   src: '05 new year.jpg',
+      // },
       {
         src: '06.jpg',
       },
@@ -166,12 +166,16 @@ export default {
   }),
   computed: {
     verseOfTheDay() {
-      let dateDigit = new Date().toISOString().charAt(9);
-      if (dateDigit === 0) {
-        dateDigit = 5;
+      let dateDigits = new Date().getDate();
+      if (dateDigits === 29) {
+        dateDigits = 12;
+      } else if (dateDigits === 30) {
+        dateDigits = 16;
+      } else if (dateDigits === 31) {
+        dateDigits = 19;
       }
       const url = 'https://raw.githubusercontent.com/charismental/images/main/verse/';
-      return `${url}verse00${dateDigit}.jpg`;
+      return `${url}verse0${dateDigits}.jpg`;
     },
   },
   methods: {
