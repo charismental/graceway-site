@@ -54,12 +54,12 @@ export default {
     date_created: '',
     tags: [],
     stars: 0,
-    category: null,
-    title: null,
-    author: null,
-    body: null,
-    extra_body: null,
-    picutre: null,
+    category: '',
+    title: '',
+    author: '',
+    body: '',
+    extra_body: '',
+    picture: '',
   }),
   methods: {
     getBlogs() {
