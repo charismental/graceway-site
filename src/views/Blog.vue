@@ -63,8 +63,9 @@ export default {
   }),
   methods: {
     getBlogs() {
+      const url = 'https://gwrapi.herokuapp.com/blogs/1';
       axios
-        .get('http://127.0.0.1:8000/blogs/1')
+        .get(url)
         .then((res) => {
           this.tags = res.data.tags;
           this.category = res.data.category;
