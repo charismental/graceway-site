@@ -1,6 +1,3 @@
-/* eslint-disable new-cap */
-/* eslint-disable new-cap */
-/* eslint-disable max-len */
 <template>
   <v-container>
     <v-card elevation=0>
@@ -22,7 +19,7 @@
           <hr>
           <v-row >
           <v-col class='mr-6'>By: {{author}}</v-col>
-          <v-col >{{date_created.slice(0,10)}}</v-col>
+          <v-col >{{dateCreated.slice(0,10)}}</v-col>
           <div v-for='s in stars' :key='s' class='mt-2 ml-1'>
             <!-- <v-img src='../assets/star.png'  contain position='left' width=15></v-img> -->
             <v-icon style='color:gold;'>mdi-star</v-icon>
@@ -37,8 +34,7 @@
       </v-col>
     </v-row>
     </v-card>
-        <v-card-text class="blog_text">
-              {{body}}{{extra_body}}
+        <v-card-text class="blog_text" v-html="blogText">
         </v-card-text>
   </v-container>
 </template>
@@ -51,16 +47,21 @@ export default {
   components: {},
   data: () => ({
     reveal: false,
-    date_created: '',
+    dateCreated: '',
     tags: [],
     stars: 0,
     category: '',
     title: '',
     author: '',
     body: '',
-    extra_body: '',
+    extraBody: '',
     picture: '',
   }),
+  computed: {
+    blogText() {
+      return this.body + this.extraBody;
+    },
+  },
   methods: {
     getBlogs() {
       const url = 'https://gwrapi.herokuapp.com/blogs/1';
@@ -72,9 +73,9 @@ export default {
           this.title = res.data.title;
           this.author = res.data.author;
           this.body = res.data.body;
-          this.extra_body = res.data.extra_body;
+          this.extraBody = res.data.extra_body;
           this.picture = res.data.picture;
-          this.date_created = res.data.date_created;
+          this.dateCreated = res.data.date_created;
           this.stars = res.data.stars;
         })
         .catch((err) => {
