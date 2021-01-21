@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Donate from '../views/Donate.vue';
+import Blogs from '../views/Blogs.vue';
 import Blog from '../views/Blog.vue';
 import Contact from '../views/Contact.vue';
 import VerseDisplay from '../components/VerseDisplay.vue';
@@ -29,8 +30,16 @@ const routes = [
   },
   {
     path: '/blog',
-    name: 'Blog',
-    component: Blog,
+    name: 'Blogs',
+    component: Blogs,
+    children: [
+      {
+        path: ':blogId',
+        name: 'Blog',
+        component: Blog,
+        props: true,
+      },
+    ],
   },
   {
     path: '/contact',

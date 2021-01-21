@@ -43,7 +43,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Blog',
+  name: 'Blogs',
   components: {},
   data: () => ({
     reveal: false,
@@ -63,8 +63,9 @@ export default {
     },
   },
   methods: {
-    getBlogs() {
-      const url = 'https://gwrapi.herokuapp.com/blogs/1';
+    getBlog() {
+      const { blogId } = this.$route.params;
+      const url = `https://gwrapi.herokuapp.com/blogs/${blogId}`;
       axios
         .get(url)
         .then((res) => {
@@ -84,8 +85,8 @@ export default {
         });
     },
   },
-  created() {
-    this.getBlogs();
+  mounted() {
+    this.getBlog();
   },
 };
 </script>
