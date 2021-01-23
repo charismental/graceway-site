@@ -7,7 +7,7 @@
       align='center'
     >
       <v-col class='main_row flex-grow-0 flex-shrink-1' md='5'>
-        <v-img src='https://rb.gy/vwzqov' contain ></v-img>
+        <v-img :src='picture' contain ></v-img>
       </v-col>
       <v-col >
           <v-card-title
