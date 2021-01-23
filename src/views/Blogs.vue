@@ -18,13 +18,13 @@ export default {
     blogs: [],
   }),
   computed: {
-    blogText() {
-      return this.body + this.extraBody;
-    },
+    // blogText() {
+    //   return this.body + this.extraBody;
+    // },
   },
   methods: {
     getBlogs() {
-      const url = 'https://gwrapi.herokuapp.com/blogs';
+      const url = 'https://gwrapi.herokuapp.com/simple/';
       axios
         .get(url)
         .then((res) => {

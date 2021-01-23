@@ -1,47 +1,36 @@
 <template>
   <v-container>
-    <v-card elevation=0>
+    <v-card>
       <v-row
-        class="d-flex flex-row justify-center"
-        no-gutters
-        align='center'
+        class="justify-center first_row align-center"
+        :style='{ backgroundImage: `url("${imageUrl}")` }'
       >
-        <v-col
-          class='main_row flex-grow-0 flex-shrink-1'
-          md='5'
-        >
-          <v-img
-            :src='picture'
-            contain
-          ></v-img>
-        </v-col>
-        <v-col>
+        <v-col style='width:auto;'>
           <v-card-title
-            text-center
-            primary-title
-            class='mb-2'
+            class='blog_title justify-center text-capitalize font-italic'
+            :style="$vuetify.breakpoint.mdAndDown ? 'font-size:1.5rem;' : 'font-size:2.5rem;'"
           >
-            {{title.toUpperCase()}}
+            {{title}}
           </v-card-title>
           <hr>
           <v-row>
-            <v-col>
-              <v-card-text>By: {{author}}</v-card-text>
+            <v-col
+              md=3
+              sm=6
+            >
+              <v-card-text class='ml-2 pa-0 info_text'>By: {{author}}</v-card-text>
+              <v-card-text class='mt-2 ml-2 pa-0 info_text'>{{dateCreated}}</v-card-text>
             </v-col>
-            <v-col>
-              <v-card-text>{{dateCreated}}</v-card-text>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-card-text>
-                <div class='mt-2'>Category: {{category.name}}</div>
+            <v-col
+              md=3
+              class='ml-auto'
+            >
+              <v-card-text class='mb-0 pa-0 info_text'>
+                <div>Category: {{category.name}}</div>
               </v-card-text>
-            </v-col>
-            <v-col>
-              <v-card-text>
+              <v-card-text class='mb-0 pa-0 info_text'>
                 <div
-                  class='d-inline-flex flex-row mr-4'
+                  class='d-inline-flex flex-row mr-2'
                   v-for='t in tags'
                   :key='t.id'
                 >
@@ -53,11 +42,13 @@
         </v-col>
       </v-row>
     </v-card>
-    <v-card-text
-      class="blog_text"
-      v-html="blogText"
-    >
-    </v-card-text>
+    <v-card elevation=0>
+      <v-card-text
+        class="blog_text"
+        v-html="body"
+      >
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
@@ -71,21 +62,15 @@ export default {
     reveal: false,
     dateCreated: '',
     tags: [],
-    stars: 0,
     category: '',
     title: '',
     author: '',
     body: '',
-    extraBody: '',
     picture: '',
   }),
   computed: {
-    blogText() {
-      let text = this.body;
-      if (this.extraBody && typeof this.extraBody === 'string' && this.extraBody.length > 0) {
-        text += this.extraBody;
-      }
-      return text;
+    imageUrl() {
+      return this.picture;
     },
   },
   methods: {
@@ -100,7 +85,6 @@ export default {
           this.title = res.data.title;
           this.author = res.data.author;
           this.body = res.data.body;
-          this.extraBody = res.data.extra_body;
           this.picture = res.data.picture;
           this.dateCreated = res.data.date_created;
           this.stars = res.data.stars;
@@ -118,14 +102,28 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.main_row {
-  clip-path: polygon(0 0, 35% 0, 100% 100%, 0% 100%);
+.info_text {
+  font-size: 1.3rem;
+  text-shadow: 2px 2px 2px rgba(150, 150, 150, 0.92);
+}
+.first_row {
+  max-height: 400px;
+  min-height: 300px;
+  background-size: cover;
+  background: silver;
+  background-position: left center;
+  background-blend-mode: exclusion;
+  background-repeat: no-repeat;
+  color: white;
+}
+.blog_title {
+  text-shadow: 2px 2px 2px rgba(150, 150, 150, 0.92);
+  backdrop-filter: brightness(120%) blur(5px);
 }
 .blog_text {
   font-size: 1.3rem;
   height: 100%;
   line-height: 2rem;
-  margin-top: 40px;
   margin-bottom: 100px;
 }
 </style>
