@@ -81,7 +81,11 @@ export default {
   }),
   computed: {
     blogText() {
-      return this.body + this.extraBody;
+      let text = this.body;
+      if (this.extraBody && typeof this.extraBody === 'string' && this.extraBody.length > 0) {
+        text += this.extraBody;
+      }
+      return text;
     },
   },
   methods: {
