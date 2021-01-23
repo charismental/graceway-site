@@ -20,7 +20,14 @@
     </v-carousel>
     <v-row>
       <v-col cols="12" md="4">
-        <v-card @click="triggerSnackbar('Blog Page is Coming Soon!')">
+        <v-card
+          @click="
+            $router.push({
+              name: 'Blog',
+              params: { blogSlug: 'pure-worship-pure-word-pure-radio' },
+            })
+          "
+        >
           <v-hover v-slot:default="{ hover }">
             <v-img src="~@/assets/blog.jpg">
               <v-expand-transition>
