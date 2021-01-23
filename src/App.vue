@@ -204,9 +204,9 @@ export default {
       },
       {
         name: 'Blog',
-        link: { name: 'Blog' },
+        link: { name: 'Blog', params: { blogSlug: 'pure-worship-pure-word-pure-radio' } },
         featured: false,
-        disabled: true,
+        // disabled: true,
       },
       {
         name: 'Contact',

@@ -64,8 +64,8 @@ export default {
   },
   methods: {
     getBlog() {
-      const { blogId } = this.$route.params;
-      const url = `https://gwrapi.herokuapp.com/blogs/${blogId}`;
+      const { blogSlug } = this.$route.params;
+      const url = `https://gwrapi.herokuapp.com/blogs/${blogSlug}`;
       axios
         .get(url)
         .then((res) => {

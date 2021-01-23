@@ -2,33 +2,7 @@
   <div>
     <router-view v-if="$route.name === 'Blog'"></router-view>
     <v-container v-else>
-      <v-card elevation="0">
-        <v-row class="d-flex flex-row justify-center" no-gutters align="center">
-          <v-col class="main_row flex-grow-0 flex-shrink-1" md="5">
-            <v-img src="https://rb.gy/vwzqov" contain></v-img>
-          </v-col>
-          <v-col>
-            <v-card-title primary-title class="display-1 mb-2">
-              {{ title.toUpperCase() }}
-            </v-card-title>
-            <hr />
-            <v-row>
-              <v-col class="mr-6">By: {{ author }}</v-col>
-              <v-col>{{ dateCreated.slice(0, 10) }}</v-col>
-              <div v-for="s in stars" :key="s" class="mt-2 ml-1">
-                <!-- <v-img src='../assets/star.png'  contain position='left' width=15></v-img> -->
-                <v-icon style="color: gold">mdi-star</v-icon>
-              </div>
-            </v-row>
-            <v-row> </v-row>
-            <div class="mt-2">Category: {{ category.name }}</div>
-            <div class="d-inline-flex flex-row" v-for="t in tags" :key="t.id">
-              <div class="pa-1">#{{ t.tag }}</div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-card>
-      <v-card-text class="blog_text" v-html="blogText"> </v-card-text>
+      <!-- <div v-for="(blog, i) in blogs" :key="i">{{ blog.author }}</div> -->
     </v-container>
   </div>
 </template>
@@ -41,15 +15,7 @@ export default {
   components: {},
   data: () => ({
     reveal: false,
-    dateCreated: '',
-    tags: [],
-    stars: 0,
-    category: '',
-    title: '',
-    author: '',
-    body: '',
-    extraBody: '',
-    picture: '',
+    blogs: [],
   }),
   computed: {
     blogText() {
@@ -58,19 +24,13 @@ export default {
   },
   methods: {
     getBlogs() {
-      const url = 'https://gwrapi.herokuapp.com/blogs/1';
+      const url = 'https://gwrapi.herokuapp.com/blogs';
       axios
         .get(url)
         .then((res) => {
-          this.tags = res.data.tags;
-          this.category = res.data.category;
-          this.title = res.data.title;
-          this.author = res.data.author;
-          this.body = res.data.body;
-          this.extraBody = res.data.extra_body;
-          this.picture = res.data.picture;
-          this.dateCreated = res.data.date_created;
-          this.stars = res.data.stars;
+          if (res?.data) {
+            this.blogs = res.data;
+          }
         })
         .catch((err) => {
           // eslint-disable-next-line no-console

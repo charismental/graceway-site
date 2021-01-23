@@ -34,7 +34,7 @@ const routes = [
     component: Blogs,
     children: [
       {
-        path: ':blogId',
+        path: ':blogSlug',
         name: 'Blog',
         component: Blog,
         props: true,
