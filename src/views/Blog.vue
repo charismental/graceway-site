@@ -1,41 +1,63 @@
 <template>
   <v-container>
     <v-card elevation=0>
-    <v-row
-      class="d-flex flex-row justify-center"
-      no-gutters
-      align='center'
-    >
-      <v-col class='main_row flex-grow-0 flex-shrink-1' md='5'>
-        <v-img :src='picture' contain ></v-img>
-      </v-col>
-      <v-col >
+      <v-row
+        class="d-flex flex-row justify-center"
+        no-gutters
+        align='center'
+      >
+        <v-col
+          class='main_row flex-grow-0 flex-shrink-1'
+          md='5'
+        >
+          <v-img
+            :src='picture'
+            contain
+          ></v-img>
+        </v-col>
+        <v-col>
           <v-card-title
+            text-center
             primary-title
-            class='display-1 mb-2'
+            class='mb-2'
           >
             {{title.toUpperCase()}}
           </v-card-title>
           <hr>
-          <v-row >
-          <v-col class='mr-6'>By: {{author}}</v-col>
-          <v-col >{{dateCreated.slice(0,10)}}</v-col>
-          <div v-for='s in stars' :key='s' class='mt-2 ml-1'>
-            <!-- <v-img src='../assets/star.png'  contain position='left' width=15></v-img> -->
-            <v-icon style='color:gold;'>mdi-star</v-icon>
-          </div>
+          <v-row>
+            <v-col>
+              <v-card-text>By: {{author}}</v-card-text>
+            </v-col>
+            <v-col>
+              <v-card-text>{{dateCreated}}</v-card-text>
+            </v-col>
           </v-row>
           <v-row>
+            <v-col>
+              <v-card-text>
+                <div class='mt-2'>Category: {{category.name}}</div>
+              </v-card-text>
+            </v-col>
+            <v-col>
+              <v-card-text>
+                <div
+                  class='d-inline-flex flex-row mr-4'
+                  v-for='t in tags'
+                  :key='t.id'
+                >
+                  <div class='pa-1'>{{t.tag_hash}}</div>
+                </div>
+              </v-card-text>
+            </v-col>
           </v-row>
-          <div class='mt-2'>Category: {{category.name}}</div>
-          <div class='d-inline-flex flex-row' v-for='t in tags' :key='t.id'>
-            <div class='pa-1'>#{{t.tag}}</div>
-          </div>
-      </v-col>
-    </v-row>
+        </v-col>
+      </v-row>
     </v-card>
-        <v-card-text class="blog_text" v-html="blogText">
-        </v-card-text>
+    <v-card-text
+      class="blog_text"
+      v-html="blogText"
+    >
+    </v-card-text>
   </v-container>
 </template>
 
@@ -97,10 +119,9 @@ export default {
 }
 .blog_text {
   font-size: 1.3rem;
-  height:100%;
+  height: 100%;
   line-height: 2rem;
   margin-top: 40px;
   margin-bottom: 100px;
 }
-
 </style>
