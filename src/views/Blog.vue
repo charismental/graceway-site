@@ -1,11 +1,12 @@
 <template>
-  <v-container>
+  <v-container :class=" $vuetify.breakpoint.xl ? 'px-12' : ''">
     <v-card>
       <v-row
         class="justify-center first_row align-center"
-        :style='{ backgroundImage: `url("${imageUrl}")` }'
       >
+        <!-- :style='{ backgroundImage: `url("${imageUrl}")` }' -->
         <v-col style='width:auto;'>
+        <v-img :src="picture" max-height="240">
           <v-card-title
             class='blog_title justify-center text-capitalize font-italic'
             :style="$vuetify.breakpoint.mdAndDown ? 'font-size:1.5rem;' : 'font-size:2.5rem;'"
@@ -39,6 +40,7 @@
               </v-card-text>
             </v-col>
           </v-row>
+        </v-img>
         </v-col>
       </v-row>
     </v-card>
