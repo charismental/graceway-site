@@ -113,8 +113,44 @@
             </div>
           </div>
         </div>
-        <v-list two-line>
-          <div v-for="(song, i) in songQueue.slice(0,-1)" :key="`${song.artist}_${song.title}`">
+        <v-list dense>
+          <v-list-item>
+            <v-btn-toggle
+              dense
+              class="mx-auto"
+              v-model="historyUpcoming"
+              color="primary accent-3"
+              group
+            >
+              <v-btn class="text-body-1 font-weight-bold text-capitalize" value="upcoming"
+                >Upcoming</v-btn
+              >
+              <v-btn class="text-body-1 font-weight-bold text-capitalize" value="history"
+                >History</v-btn
+              >
+            </v-btn-toggle>
+          </v-list-item>
+        </v-list>
+        <v-divider></v-divider>
+        <v-list two-line v-if="historyUpcoming === 'upcoming'">
+          <div
+            v-for="(song, i) in songQueue.slice(0, -1)"
+            :key="`${song.artist}_${song.title}`"
+          >
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ song.title }}</v-list-item-title>
+                <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+            <v-divider v-if="i !== songQueue.length - 1"></v-divider>
+          </div>
+        </v-list>
+        <v-list two-line v-else>
+          <div
+            v-for="(song, i) in songHistory.slice(0, -1)"
+            :key="`${song.artist}_${song.title}`"
+          >
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
@@ -185,6 +221,7 @@ export default {
     loadingSongInfo: false,
     openPlayer: false,
     radioIsPlaying: false,
+    historyUpcoming: 'upcoming',
     navItems: [
       {
         name: 'Home',
