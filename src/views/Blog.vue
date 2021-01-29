@@ -36,7 +36,11 @@
           </v-img>
         </v-col>
       </v-row>
-      <v-card-text class="blog-text pb-16" :class="isMobile ? 'px-4' : 'px-16'" v-html="body">
+      <v-card-text
+        class="blog-text pb-16 text-center"
+        :class="isMobile ? 'px-4' : 'px-16'"
+        v-html="body"
+      >
       </v-card-text>
     </v-card>
   </v-container>
