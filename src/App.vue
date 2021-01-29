@@ -114,7 +114,7 @@
           </div>
         </div>
         <v-list two-line>
-          <div v-for="(song, i) in songQueue" :key="`${song.artist}_${song.title}`">
+          <div v-for="(song, i) in songQueue.slice(0,-1)" :key="`${song.artist}_${song.title}`">
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
