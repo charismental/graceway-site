@@ -12,7 +12,9 @@
                 $vuetify.breakpoint.mdAndDown ? 'font-size:1.5rem;' : 'font-size:2.5rem;'
               "
             >
-              {{ title }}
+              <div class="text-center mx-auto">
+                {{ title }}
+              </div>
             </v-card-title>
             <hr />
             <v-row>
