@@ -1,54 +1,42 @@
 <template>
-  <v-container :class=" $vuetify.breakpoint.xl ? 'px-12' : ''">
+  <v-container>
     <v-card>
-      <v-row
-        class="justify-center first_row align-center"
-      >
+      <!-- first-row  -->
+      <v-row class="justify-center align-center">
         <!-- :style='{ backgroundImage: `url("${imageUrl}")` }' -->
-        <v-col style='width:auto;'>
-        <v-img :src="picture" max-height="240">
-          <v-card-title
-            class='blog_title justify-center text-capitalize font-italic'
-            :style="$vuetify.breakpoint.mdAndDown ? 'font-size:1.5rem;' : 'font-size:2.5rem;'"
-          >
-            {{title}}
-          </v-card-title>
-          <hr>
-          <v-row>
-            <v-col
-              md=3
-              sm=6
+        <v-col cols="12" class="pt-0">
+          <v-img :src="picture" class="rounded-t-lg" max-height="240">
+            <v-card-title
+              class="blog-title justify-center text-capitalize font-italic white--text"
+              :style="
+                $vuetify.breakpoint.mdAndDown ? 'font-size:1.5rem;' : 'font-size:2.5rem;'
+              "
             >
-              <v-card-text class='ml-2 pa-0 info_text'>By: {{author}}</v-card-text>
-              <v-card-text class='mt-2 ml-2 pa-0 info_text'>{{dateCreated}}</v-card-text>
-            </v-col>
-            <v-col
-              md=3
-              class='ml-auto'
-            >
-              <v-card-text class='mb-0 pa-0 info_text'>
-                <div>Category: {{category.name}}</div>
-              </v-card-text>
-              <v-card-text class='mb-0 pa-0 info_text'>
-                <div
-                  class='d-inline-flex flex-row mr-2'
-                  v-for='t in tags'
-                  :key='t.id'
-                >
-                  <div class='pa-1'>{{t.tag_hash}}</div>
-                </div>
-              </v-card-text>
-            </v-col>
-          </v-row>
-        </v-img>
+              {{ title }}
+            </v-card-title>
+            <hr />
+            <v-row>
+              <v-col md="3" sm="6">
+                <v-card-text class="ml-2 pa-0 info-text">By: {{ author }}</v-card-text>
+                <v-card-text class="mt-2 ml-2 pa-0 info-text">{{
+                  dateCreated
+                }}</v-card-text>
+              </v-col>
+              <v-col md="3" class="ml-auto">
+                <v-card-text class="mb-0 pa-0 info-text">
+                  <div>Category: {{ category.name }}</div>
+                </v-card-text>
+                <v-card-text class="mb-0 pa-0 info-text">
+                  <div class="d-inline-flex flex-row mr-2" v-for="t in tags" :key="t.id">
+                    <div class="pa-1">{{ t.tag_hash }}</div>
+                  </div>
+                </v-card-text>
+              </v-col>
+            </v-row>
+          </v-img>
         </v-col>
       </v-row>
-    </v-card>
-    <v-card elevation=0>
-      <v-card-text
-        class="blog_text"
-        v-html="body"
-      >
+      <v-card-text class="blog-text" :class="isMobile ? 'px-4' : 'px-12'" v-html="body">
       </v-card-text>
     </v-card>
   </v-container>
@@ -71,8 +59,8 @@ export default {
     picture: '',
   }),
   computed: {
-    imageUrl() {
-      return this.picture;
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
   methods: {
@@ -103,12 +91,13 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-.info_text {
+<style lang="scss" scoped>
+.info-text {
   font-size: 1.3rem;
   text-shadow: 2px 2px 2px rgba(150, 150, 150, 0.92);
+  color: white;
 }
-.first_row {
+.first-row {
   max-height: 400px;
   min-height: 300px;
   background-size: cover;
@@ -118,11 +107,11 @@ export default {
   background-repeat: no-repeat;
   color: white;
 }
-.blog_title {
+.blog-title {
   text-shadow: 2px 2px 2px rgba(150, 150, 150, 0.92);
   backdrop-filter: brightness(120%) blur(5px);
 }
-.blog_text {
+.blog-text {
   font-size: 1.3rem;
   height: 100%;
   line-height: 2rem;
