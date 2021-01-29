@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card :width="isMobile ? '90vw' : '50vw'" class="mx-auto">
       <!-- first-row  -->
       <v-row class="justify-center align-center">
         <!-- :style='{ backgroundImage: `url("${imageUrl}")` }' -->
@@ -36,7 +36,7 @@
           </v-img>
         </v-col>
       </v-row>
-      <v-card-text class="blog-text" :class="isMobile ? 'px-4' : 'px-12'" v-html="body">
+      <v-card-text class="blog-text pb-16" :class="isMobile ? 'px-4' : 'px-16'" v-html="body">
       </v-card-text>
     </v-card>
   </v-container>
