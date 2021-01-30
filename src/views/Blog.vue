@@ -117,6 +117,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .blog-text >  {
+
+  h2 {
+    margin-bottom:0.5em;
+  }
+  hr {
+    margin-bottom:1em;
+  }
+
+  blockquote {
+    background: #f9f9f9;
+    font-weight: bold;
+    border-left: .8em solid darkgrey;
+    margin: 1.6em 2em;
+    padding: 1em 2em;
+    quotes: "\201C""\201D""\2018""\2019";
+
+      &::before {
+      color: #ccc;
+      content: open-quote;
+      font-size: 4em;
+      line-height: 0.1em;
+      margin-right: 0.25em;
+      vertical-align: -0.4em;
+    }
+    p {
+      display: inline;
+    }
+  }
+}
 .info-text {
   color: darkgray;
 }
