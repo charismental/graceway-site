@@ -46,7 +46,7 @@ export default {
         name: 'Alistair Begg',
         photo: 'alistair_begg.jpg',
         times: 'Weekdays @ 1:00AM/PM',
-        about: '<p><span>Alistair Begg has been in pastoral ministry since 1975.
+        about: `<p><span>Alistair Begg has been in pastoral ministry since 1975.
         Following graduation from The London School of Theology, he served eight years
         in Scotland at both Charlotte Chapel in Edinburgh and Hamilton Baptist Church.
         </span></span></p>
@@ -83,13 +83,13 @@ export default {
         Begg and overseen by an independent, volunteer board of trustees, Truth For
         Life is a Bible-teaching ministry seeking to faithfully proclaim the Word of
         God and is committed to highest level of financial stewardship. Over 95% of
-        donated funds go directly to ministry expenses.</span></p>',
+        donated funds go directly to ministry expenses.</span></p>`,
       },
       {
         name: 'David Pawson',
         photo: 'david_pawson.png',
         times: 'Mon, Wed, Fri @ 2:30AM/PM',
-        about: '<p><span>A
+        about: `<p><span>A
         speaker cum author with uncompromising faithfulness to the Holy Scriptures,
         David brings clarity and a message of urgency to Christians to uncover hidden
         treasures in God’s Word.</span></p><p><span >Born
@@ -123,7 +123,7 @@ export default {
         series David gives us the keys to unlock the Bible for ourselves.</span></p>
         <p><span >He was an advocate that the solution to every situation in life can be found by
         reading the scriptures.</span></p>
-        <p><span>David Passedaway in 2020. His ministry continues.</span></p>',
+        <p><span>David Passedaway in 2020. His ministry continues.</span></p>`,
       },
       {
         name: 'John Casteel',
@@ -134,17 +134,17 @@ export default {
         name: 'Paul Washer',
         photo: 'paul_washer.jpg',
         times: 'Mon, Wed, Fri - 8:30AM, 9:00PM',
-        about: '<p>Paul Washer became a believer while
+        about: `<p>Paul Washer became a believer while
         studying at the University of Texas. He completed his undergraduate studies and
         enrolled at Southwestern Theological Seminary, where he received his Master of
         Divinity degree. After graduating, he moved to Peru and served there as a
         missionary for ten years, during which time he founded the HeartCry Missionary
-        Society to support Peruvian church planters. HeartCry\'s work now supports
+        Society to support Peruvian church planters. HeartCry's work now supports
         indigenous missionaries throughout Africa, Asia, Europe, the Middle East,
         Eurasia, and Latin America.</p><p><span>Anyone
-        unfamiliar with the burden of Paul Washer\'s ministry should become so. Any
+        unfamiliar with the burden of Paul Washer's ministry should become so. Any
         believer already familiar with his ministry will know why we say that and will
-        likely agree. If we could&nbsp;sum up Paul\'s ministry in a few words&nbsp;they
+        likely agree. If we could&nbsp;sum up Paul's ministry in a few words&nbsp;they
         would be as follows:</span></p><p><span>Paul Washer has been used of God in
         our time for a widespread recovery of&nbsp;</span><em><span>(1)</span></em><span>&nbsp;the true Gospel and
         a biblical basis for Christian assurance,&nbsp;</span><em><span>(2)&nbsp;</span></em><span>an evangelistic
@@ -156,13 +156,13 @@ export default {
         demonstrating to everyone what we’ve done for the Lord.</span>”</span></p>
         <p>Paul now serves as one of the
         laborers with the HeartCry Missionary Society. He and his wife Charo have three
-        children: Ian, Evan, and Rowan.</p>'
+        children: Ian, Evan, and Rowan.</p>`,
       },
       {
         name: 'Chuck Missler',
         photo: 'chuch_missler.jpg',
         times: 'Weekdays - 10:30AM, 11:00PM',
-        about: '<p>As a child, he developed an intense
+        about: `<p>As a child, he developed an intense
         interest in the Bible; studying it became a favorite pastime. In the 1970s,
         while still in the corporate world, Chuck began leading weekly Bible studies at
         the 30,000-member Calvary Chapel Costa Mesa, in California where thousands of
@@ -180,8 +180,8 @@ export default {
         purchased by OnePlace.com, part of the Salem Radio Network.</p>
         <p>After a devastating&nbsp;<span>Earthquake</span>&nbsp;in
         1992 demolished their home in Big Bear, California, Chuck, and Nan moved
-        Koinonia House to Coeur d\'Alene, Idaho.</p>
-        <p>On the topic of radio, Chuck\'s thirty-minute 66/40 radio
+        Koinonia House to Coeur d'Alene, Idaho.</p>
+        <p>On the topic of radio, Chuck's thirty-minute 66/40 radio
         program airs on more than 3,000 radio stations worldwide and is one of the only
         ad-free teaching segments on Christian radio.</p>
         <p>Chuck is a prominent speaker about bible prophecy. Chuck has
@@ -195,7 +195,7 @@ export default {
         <p><span>In May 2018, Chuck&nbsp;passed away peacefully at his home in
         Reporoa, New Zealand. He was preceded in death by his wife Nancy and his two
         sons, Charles “Chip” and Mark. He is survived by two daughters, Lisa Bright and
-        Meshell Missler, and eight grandchildren.</span></span></p>'
+        Meshell Missler, and eight grandchildren.</span></span></p>`,
       },
       {
         name: 'Curtis Dougherty',
@@ -206,7 +206,7 @@ export default {
         name: 'Ern Baxter',
         photo: 'ern_baxter.jpg',
         times: 'Tues, Thur @ 2:30AM/PM',
-        about: '<p>Ern Baxter (1914-1993) is
+        about: `<p>Ern Baxter (1914-1993) is
         remembered as one of the greatest Christian preachers of the 20th Century, and
         he served the Lord for more than 60 years as evangelist, teacher, worship
         leader, and prophetic teacher. William John Ernest Baxter was born on the prairies
@@ -246,7 +246,7 @@ export default {
         was stewarded and owned by Charles Simpson Ministries in Mobile. In February,
         CSM donated the entire library to The King’s University at Gateway in
         Southlake, Texas, where it will be a treasured resource for a new generation of
-        Christian leaders.</p>'
+        Christian leaders.</p>`,
       },
       {
         name: 'Jamie Buckingham',
@@ -257,7 +257,7 @@ export default {
         name: 'David Wilkerson',
         photo: 'david_wilkerson.jpg',
         times: 'Tues, Thur - 8:30AM, 9:00PM',
-        about: '<p><span>David Ray
+        about: `<p><span>David Ray
         Wilkerson was born on May 19, 1931, in Hammond, Ind.; his father, Kenneth, was
         a Pentecostal minister, as was his paternal grandfather. David Wilkerson
         studied at&nbsp;</span>Central Bible College&nbsp;in Springfield, Mo.,
@@ -291,26 +291,26 @@ export default {
         strengthen church leaders.</span></span></p>
         <p><span><span>Hispassion to support believers, build up leaders and care
          for the poor is still
-        at the heart of World Challenge’s ministries to this day.</span></span></p>'
+        at the heart of World Challenge’s ministries to this day.</span></span></p>`,
       },
       {
         name: 'Derek Prince',
         photo: 'derek_prince.jpg',
         times: 'Tues, Thur - 6:30AM, 7:00PM',
-        about: '<p><span>Derek Prince was
+        about: `<p><span>Derek Prince was
         born into a British military family in Bangalore, India in 1915. At the age of
         14 he won a scholarship to Eton College where he studied Greek and Latin.</span>
         Derek additionally studied several modern languages including Hebrew and
         Aramaic, which he later refined at the Hebrew University in Jerusalem.</span></span></p>
         <p><span>To this day, the
         name Derek Prince remains synonymous with sound theology and the clear yet
-        systematic teaching of God\'s Word. His steadfast faith and devotion to studying
+        systematic teaching of God's Word. His steadfast faith and devotion to studying
         the scriptures turned him into one of the most respected and admired Bible
         teachers of his time.</span></span><br>
         <span>&#8205;</span><br>
         <span><span>Derek is the author of over 80 books and an
         invaluable trove of articles, letters, audio and visual recordings that immortalize
-        his life\'s work and passion. Translated into more than 100 languages, they
+        his life's work and passion. Translated into more than 100 languages, they
         remain a source of inspiration and study for millions of Christians around the
         world.</span></span></p>
         <p><span>In May 1971,
@@ -337,7 +337,7 @@ export default {
         <p><span>Derek Prince died
         of natural causes on the 24th September 2003, at the age of 88. He had suffered
         a prolonged period of declining health and passed away in his sleep at his home
-        in Jerusalem.</span></span></p>'
+        in Jerusalem.</span></span></p>`,
       },
     ],
   }),
