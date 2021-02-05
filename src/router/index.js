@@ -8,6 +8,7 @@ import Contact from '../views/Contact.vue';
 import VerseDisplay from '../components/VerseDisplay.vue';
 import HowToListen from '../views/HowToListen.vue';
 import ProgramSchedule from '../views/ProgramSchedule.vue';
+import SpeakerCalendar from '../views/Calendar.vue';
 
 Vue.use(VueRouter);
 
@@ -60,6 +61,11 @@ const routes = [
     path: '/program-schedule',
     name: 'ProgramSchedule',
     component: ProgramSchedule,
+  },
+  {
+    path: '/speaker-calendar',
+    name: 'SpeakerCalendar',
+    component: SpeakerCalendar,
   },
   {
     path: '/about',
