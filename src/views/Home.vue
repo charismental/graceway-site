@@ -133,15 +133,15 @@ export default {
     showSnackbar: false,
     snackBarText: '',
     slideShow: [
-      {
-        src: '05 new year.jpg',
-      },
+      // {
+      //   src: '05 new year.jpg',
+      // },
       {
         src: '02.jpg',
       },
-      {
-        src: '03 new year.jpg',
-      },
+      // {
+      //   src: '03 new year.jpg',
+      // },
       {
         src: '04.jpg',
       },
