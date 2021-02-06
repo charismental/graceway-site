@@ -213,7 +213,8 @@ export default {
   name: 'App',
   components: { CFooter, BottomPlayer },
   data: () => ({
-    stream: 'https://rcast.live/stream/64776',
+    stream: 'https://streamingv2.shoutcast.com/gwradio',
+    // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
     songInfo: null,
     songHistory: [],
