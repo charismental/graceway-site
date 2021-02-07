@@ -4,10 +4,11 @@
       <v-sheet height="400">
         <v-calendar
           ref='calendar'
-          :today='today'
           :events="events"
-          :type="$vuetify.breakpoint.smAndDown ? 'day' : 'week'"
-          :weekdays='weekday'
+          :type="calendarType"
+          :weekdays="[1,2,3,4,5]"
+          :start="dailyStartDay"
+          end="2021-02-05"
           :event-color='getEventColor'
         ></v-calendar>
       </v-sheet>
@@ -19,7 +20,6 @@
 export default {
   data: () => ({
     weekday: [1, 2, 3, 4, 5],
-    today: Date('2021', '02', '01'),
     events: [
       {
         name: 'Alistair Begg',
@@ -383,12 +383,27 @@ export default {
       },
     ],
   }),
+  computed: {
+    calendarType() {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return 'day';
+      }
+      return 'custom-daily';
+    },
+    dailyStartDay() {
+      const d = new Date();
+      const today = d.getDay();
+      if (today >= 1 && today <= 5) {
+        return d.toISOString().substring(0, 10);
+      }
+      return '2021-02-01'; // monday
+    },
+  },
   methods: {
     getEventColor(event) {
       return event.color;
     },
   },
-  mounted() {},
 };
 </script>
 
