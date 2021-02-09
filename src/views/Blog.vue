@@ -14,7 +14,7 @@
             :src="picture"
             class="rounded-t-lg"
             max-height="240"
-            position='top center'
+            position='center center'
             cover
           >
             <v-card-title class="blog-title
