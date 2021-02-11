@@ -3,22 +3,22 @@
     <v-container>
       <v-row align="center" justify="center">
         <v-col v-for="(s, index) in speakers" :key="s.name"
-        :cols="$vuetify.breakpoint.smallAndDown ? '11' : '6'">
+        :cols="$vuetify.breakpoint.smAndDown ? '12' : '6'">
           <v-card outlined>
             <v-row justify="space-between">
-              <v-col align-self="start" cols="3">
+              <v-col>
                 <v-avatar tile size="150" :class="$vuetify.breakpoint.xs ? 'ma-1' : 'pa-2'">
                   <v-img :src="require('@/assets/' + s.photo)" cover></v-img>
                 </v-avatar>
               </v-col>
-              <v-col align-self="end">
-                <v-list-item class="ml-auto">
+              <v-col align-self="center">
+                <v-list-item >
                   <v-list-item-content>
-                    <v-list-item-title title>
+                    <v-list-item-title title :style="fontSize">
                       {{ s.name }}
                     </v-list-item-title>
                     <v-list-item-subtitle
-                      :style="$vuetify.breakpoint.xs ? 'font-size:0.8rem;' : ''"
+                      :style="fontSize"
                     >
                       <!-- TIMES NEEDS TO BE SPLIT AND WRAPPED IN FLEXBOX -->
                       {{ s.times }}
@@ -371,5 +371,13 @@ export default {
     ],
   }),
   components: {},
+  computed: {
+    fontSize() {
+      if (this.$vuetify.breakpoint.xs) {
+        return 'font-size:0.8rem;';
+      }
+      return 'font-size:1.3rem';
+    },
+  },
 };
 </script>
