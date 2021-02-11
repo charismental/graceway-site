@@ -11,10 +11,10 @@
           end="2021-02-05"
           :event-color='getEventColor'
         >
-        <template v-slot:day-body="{ date, week }">
+        <template v-slot:day-body="{ day }">
           <div
           class="v-current-time"
-          :class="{ first: date === week[0].date }"
+          :class="{ first: day === 1 }"
           :style="{ top: nowY }"
           ></div>
         </template>
