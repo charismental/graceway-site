@@ -2,11 +2,12 @@
   <div class="program-schedule">
     <v-container>
       <v-row align="center" justify="center">
-        <v-col v-for="(s, index) in speakers" :key="s.name" cols="8">
+        <v-col v-for="(s, index) in speakers" :key="s.name"
+        :cols="$vuetify.breakpoint.smallAndDown ? '11' : '6'">
           <v-card outlined>
             <v-row justify="space-between">
               <v-col align-self="start" cols="3">
-                <v-avatar tile size="150" :class="$vuetify.breakpoint.xs ? 'ma-1' : 'pa-4'">
+                <v-avatar tile size="150" :class="$vuetify.breakpoint.xs ? 'ma-1' : 'pa-2'">
                   <v-img :src="require('@/assets/' + s.photo)" cover></v-img>
                 </v-avatar>
               </v-col>
