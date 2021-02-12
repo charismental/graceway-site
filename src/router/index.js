@@ -9,6 +9,8 @@ import VerseDisplay from '../components/VerseDisplay.vue';
 import HowToListen from '../views/HowToListen.vue';
 import ProgramSchedule from '../views/ProgramSchedule.vue';
 import SpeakerCalendar from '../views/Calendar.vue';
+import Success from '../views/Success.vue';
+import Cancel from '../views/Cancel.vue';
 
 Vue.use(VueRouter);
 
@@ -28,6 +30,16 @@ const routes = [
         },
       },
     ],
+  },
+  {
+    path: '/success',
+    name: 'Success',
+    component: Success,
+  },
+  {
+    path: '/cancel',
+    name: 'Cancel',
+    component: Cancel,
   },
   {
     path: '/blog',
