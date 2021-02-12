@@ -1,34 +1,19 @@
 <template>
   <div class="program-schedule">
-    <v-container>
-      <v-row align="center" justify="center">
+    <v-container width="700">
+      <v-row align="end" justify="center">
         <v-col v-for="(s, index) in speakers" :key="s.name"
-        :cols="$vuetify.breakpoint.smAndDown ? '12' : '6'">
-          <v-card outlined>
-            <v-row justify="space-between">
-              <v-col>
-                <v-avatar tile size="150" :class="$vuetify.breakpoint.xs ? 'ma-1' : 'pa-2'">
-                  <v-img :src="require('@/assets/' + s.photo)" cover></v-img>
-                </v-avatar>
-              </v-col>
-              <v-col align-self="center">
-                <v-list-item >
-                  <v-list-item-content>
-                    <v-list-item-title title :style="fontSize">
-                      {{ s.name }}
-                    </v-list-item-title>
-                    <v-list-item-subtitle
-                      :style="fontSize"
-                    >
-                      <!-- TIMES NEEDS TO BE SPLIT AND WRAPPED IN FLEXBOX -->
-                      {{ s.times }}
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-col>
-              <v-col align-self="center">
-                <v-btn color="primary" dark @click.stop="$set(dialog, index, true)">
-                  Read More</v-btn>
+        lg="3" md="4" sm="6" xs="12" min-width="300" max-width="350">
+          <v-card rounded="xl" elevation="24" width="350">
+          <v-img :src="require('@/assets/' + s.photo)"
+          height="350" class="white--text">
+                  <v-card-title>{{ s.name }}</v-card-title>
+            </v-img>
+                <div class="text-center ma-2">{{s.times}}</div>
+               <div class="text-center"><v-btn color="primary" dark
+               @click.stop="$set(dialog, index, true)"
+                class="ma-2">
+                  Read More</v-btn></div>
                 <v-dialog v-model="dialog[index]" max-width="800" :key="s.name" scrollable>
                 <v-card>
                   <v-card-title class="headline">{{ s.name }}</v-card-title>
@@ -39,8 +24,7 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-              </v-col>
-            </v-row>
+
           </v-card>
         </v-col>
       </v-row>
@@ -57,7 +41,7 @@ export default {
       {
         name: 'Alistair Begg',
         photo: 'alistair_begg.jpg',
-        times: 'Weekdays @ 1:00AM/PM',
+        times: 'Monday-Friday @ 1:00AM, 1:00PM',
         about: `<p >Alistair Begg has been
         in pastoral ministry since 1975. Following graduation from The
         London School of Theology, he served eight years in Scotland at
@@ -89,7 +73,7 @@ export default {
       {
         name: 'David Pawson',
         photo: 'david_pawson.png',
-        times: 'Mon, Wed, Fri @ 2:30AM/PM',
+        times: 'Mon, Wed, Fri @ 2:30AM, 2:30PM',
         about: `<p class="c2 c4">Born in England in 1930,
         David began his career with a degree in Agriculture from Durham University.
         When God intervened and called him to become a Minister, he completed an MA
@@ -128,13 +112,13 @@ export default {
       {
         name: 'John Casteel',
         photo: 'john_casteel.jpg',
-        times: 'Mon, Wed, Fri - 6:30AM, 7:00PM',
+        times: 'Mon, Wed, Fri @ 6:30AM, 7:00PM',
         about: '',
       },
       {
         name: 'Paul Washer',
         photo: 'paul_washer.jpg',
-        times: 'Mon, Wed, Fri - 8:30AM, 9:00PM',
+        times: 'Mon, Wed, Fri @ 8:30AM, 9:00PM',
         about: `<p >Paul Washer became a believer
         while studying at the University of Texas. He completed his undergraduate
         studies and enrolled at Southwestern Theological Seminary, where he
@@ -168,7 +152,7 @@ export default {
       {
         name: 'Chuck Missler',
         photo: 'chuch_missler.jpg',
-        times: 'Weekdays - 10:30AM, 11:00PM',
+        times: 'Monday-Friday @ 10:30AM, 11:00PM',
         about: `<p >As a child, Chuck Missler
         developed an intense interest in the Bible; studying it became a favorite
         pastime. In the 1970s, while still in the corporate world, Chuck began leading
@@ -197,7 +181,7 @@ export default {
       {
         name: 'Curtis Dougherty',
         photo: 'curtis_dougherty.jpg',
-        times: 'Mon, Wed, Fri @ 4:30AM/PM',
+        times: 'Mon, Wed, Fri @ 4:30AM, 4:30PM',
         about: `<p >Born in Los Angeles, California in 1953,
         Curtis Dougherty began his walk with the Lord at the tender age of 5 years old.
         His family was quite poor and moved numerous times a year until he reached High
@@ -248,7 +232,7 @@ export default {
       {
         name: 'Ern Baxter',
         photo: 'ern_baxter.jpg',
-        times: 'Tues, Thur @ 2:30AM/PM',
+        times: 'Tuesday, Thurday @ 2:30AM, 2:30PM',
         about: `<p >Ern Baxter, born in 1914,
         is remembered as one of the greatest Christian preachers of the 20th
         Century, and he served the Lord for more than 60 years as evangelist,
@@ -288,12 +272,12 @@ export default {
       {
         name: 'Jamie Buckingham',
         photo: 'jamie_buckingham.jpg',
-        times: 'Tues, Thur @ 4:30AM/PM',
+        times: 'Tuesday, Thursday @ 4:30AM, 4:30PM',
       },
       {
         name: 'David Wilkerson',
         photo: 'david_wilkerson.jpg',
-        times: 'Tues, Thur - 8:30AM, 9:00PM',
+        times: 'Tuesday, Thursday @ 8:30AM, 9:00PM',
         about: `<p ><span class="c1 c3">David Ray Wilkerson was born
         in <span class="c1 c3">1931, in Hammond,
         Indiana<span class="c1 c3">; his father,
@@ -337,7 +321,7 @@ export default {
       {
         name: 'Derek Prince',
         photo: 'derek_prince.jpg',
-        times: 'Tues, Thur - 6:30AM, 7:00PM',
+        times: 'Tuesday, Thursday @ 6:30AM, 7:00PM',
         about: `<p ><span class="c2 c3">Derek Prince was born into a
         British military family in Bangalore, India in 1915. At the age of 14 he
         won a scholarship to Eton College where he studied Greek and Latin. Derek
@@ -376,7 +360,7 @@ export default {
       if (this.$vuetify.breakpoint.xs) {
         return 'font-size:0.8rem;';
       }
-      return 'font-size:1.3rem';
+      return 'font-size:1.2rem';
     },
   },
 };
