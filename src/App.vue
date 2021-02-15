@@ -242,7 +242,7 @@ export default {
       },
       {
         name: 'Blog',
-        link: { name: 'Blog', params: { blogSlug: 'pure-worship-pure-word-pure-radio' } },
+        link: { name: 'Blogs' },
         featured: false,
         // disabled: true,
       },

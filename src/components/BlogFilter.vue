@@ -13,8 +13,9 @@
                   v-for="b in blogs"
                   :key="b.slug"
                   label
+                  @click="selectCategory(b.category.name)"
                 >
-                  {{c.category}}
+                  {{b.category.name}}
                 </v-chip>
               </v-chip-group>
         </v-col>
@@ -38,6 +39,11 @@ export default {
     },
   },
   components: {},
+  methods: {
+    selectCategory(category) {
+      this.$emit('select-category', category);
+    },
+  },
   // methods: {
   //   getAllCategories() {
   //     const categoryUrl = 'https://gwrapi.herokuapp.com/category';

@@ -1,8 +1,11 @@
 <template>
   <div>
-    <!-- <blog-filter></blog-filter> -->
+    <blog-filter :blogs="blogs" @select-category="filterCategory"></blog-filter>
     <router-view v-if="$route.name === 'Blog'"></router-view>
     <v-container v-else>
+      <v-chip @click="selectBlog(blog.slug)" v-for="blog in filteredBlogs" :key="blog.slug">
+        {{ blog.title }}
+      </v-chip>
       <!-- <div v-for="(blog, i) in blogs" :key="i">{{ blog.author }}</div> -->
     </v-container>
   </div>
@@ -10,23 +13,46 @@
 
 <script>
 import axios from 'axios';
-// import BlogFilter from '../components/BlogFilter.vue';
+import BlogFilter from '../components/BlogFilter.vue';
 
 export default {
   name: 'Blogs',
-  // components: { BlogFilter },
+  components: { BlogFilter },
   data: () => ({
     reveal: false,
     blogs: [],
+    selectedCategory: '',
   }),
+  watch: {
+    selectedCategory(newVal, oldVal) {
+      if (!oldVal && this.$route.name !== 'Blogs') {
+        this.$router.push({ name: 'Blogs' });
+      }
+    },
+  },
   computed: {
-    // blogText() {
-    //   return this.body + this.extraBody;
-    // },
+    filteredBlogs() {
+      if (this.selectedCategory) {
+        return this.blogs.filter((blog) => blog.category?.name === this.selectedCategory);
+      }
+      return this.blogs;
+    },
   },
   methods: {
+    selectBlog(slug) {
+      this.$router.push({ name: 'Blog', params: { blogSlug: slug } });
+    },
+    filterCategory(category) {
+      if (category === this.selectedCategory) {
+        this.selectedCategory = '';
+      } else {
+        this.selectedCategory = category;
+      }
+      // this.$router.push({ name: 'Blog', params: { slug: blogSlug } })
+      // this.blogsThatAreInTheSelectedCategory = someMethodToFilter(category)
+    },
     getBlogs() {
-      const url = 'https://gwrapi.herokuapp.com/simple/';
+      const url = 'https://gwrapi.herokuapp.com/blogs';
       axios
         .get(url)
         .then((res) => {
