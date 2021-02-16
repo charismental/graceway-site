@@ -1,29 +1,29 @@
 <template>
-<v-container>
-  <p class="text-center pa-0">All times are in PST</p>
-  <v-row class="mt-4 mb-4 justify-center align-center">
-    <v-col lg="8" md="9" sm="10" xs="12">
-      <v-sheet height="600">
-        <v-calendar
-          ref="calendar"
-          :events="events"
-          :type="calendarType"
-          :weekdays="weekday"
-          :start="dailyStartDay"
-          :end="dailyEndDay"
-          :event-color="getEventColor"
-        >
-          <template v-slot:day-body="{ day }">
-            <div
-              class="v-current-time"
-              :class="{ first: day === 1 }"
-              :style="{ top: nowY }"
-            ></div>
-          </template>
-        </v-calendar>
-      </v-sheet>
-    </v-col>
-  </v-row>
+  <v-container>
+    <p class="text-center pa-0">All times are in PST</p>
+    <v-row class="mt-4 mb-4 justify-center align-center">
+      <v-col lg="8" md="9" sm="10" xs="12">
+        <v-sheet height="600">
+          <v-calendar
+            ref="calendar"
+            :events="events"
+            :type="calendarType"
+            :weekdays="weekday"
+            :start="dailyStartDay"
+            :end="dailyEndDay"
+            :event-color="getEventColor"
+          >
+            <template v-slot:day-body="{ day }">
+              <div
+                class="v-current-time"
+                :class="{ first: day === 1 }"
+                :style="{ top: nowY }"
+              ></div>
+            </template>
+          </v-calendar>
+        </v-sheet>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -419,7 +419,13 @@ export default {
         // eslint-disable-next-line max-len
         // const friendlyDate = d.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).substring(0, 9);
       }
-      return this.getNextDayOfTheWeek('monday');
+      return this.getPreviousMonday;
+    },
+    getPreviousMonday() {
+      const prevMonday = new Date();
+      const timeStamp = prevMonday.setDate(prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7));
+      const friendlyDate = new Date(timeStamp).toISOString().substring(0, 10);
+      return friendlyDate;
     },
     dailyEndDay() {
       return this.getNextDayOfTheWeek('friday');
