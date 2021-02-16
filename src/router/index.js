@@ -7,8 +7,8 @@ import Blog from '../views/Blog.vue';
 import Contact from '../views/Contact.vue';
 import VerseDisplay from '../components/VerseDisplay.vue';
 import HowToListen from '../views/HowToListen.vue';
-import ProgramSchedule from '../views/ProgramSchedule.vue';
-import SpeakerCalendar from '../views/Calendar.vue';
+import FeaturedSpeakers from '../views/FeaturedSpeakers.vue';
+import ProgramSchedule from '../views/Calendar.vue';
 import Success from '../views/Success.vue';
 import Cancel from '../views/Cancel.vue';
 
@@ -70,14 +70,14 @@ const routes = [
     component: HowToListen,
   },
   {
+    path: '/featured-speakers',
+    name: 'FeaturedSpeakers',
+    component: FeaturedSpeakers,
+  },
+  {
     path: '/program-schedule',
     name: 'ProgramSchedule',
     component: ProgramSchedule,
-  },
-  {
-    path: '/speaker-calendar',
-    name: 'SpeakerCalendar',
-    component: SpeakerCalendar,
   },
   {
     path: '/about',

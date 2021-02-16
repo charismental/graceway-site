@@ -66,7 +66,7 @@ export default {
     StripeCheckout,
   },
   data: () => ({
-    publishableKey: process.env.PUBLISH_KEY,
+    publishableKey: 'pk_live_rgO4Hlt3GXvvxcZ2K3k8THzV',
     model: '',
     selected: [],
     selectedLineItem: null,

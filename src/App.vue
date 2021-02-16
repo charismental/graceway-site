@@ -230,6 +230,12 @@ export default {
         featured: false,
       },
       {
+        name: 'Featured Speakers',
+        link: { name: 'FeaturedSpeakers' },
+        featured: false,
+        disabled: false,
+      },
+      {
         name: 'Program Schedule',
         link: { name: 'ProgramSchedule' },
         featured: false,
@@ -256,7 +262,7 @@ export default {
         name: 'Make A Donation',
         link: { name: 'Donate' },
         featured: true,
-        disabled: true,
+        disabled: false,
       },
     ],
   }),
