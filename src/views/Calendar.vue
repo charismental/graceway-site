@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <p class="text-center pa-0">All times are in PST</p>
     <v-row class="mt-4 mb-4 justify-center align-center">
-      <v-col lg="8" md="9" sm="10" xs="12">
+      <v-col lg="8">
         <v-sheet height="600">
           <v-calendar
             ref="calendar"
