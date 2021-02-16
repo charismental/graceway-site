@@ -23,8 +23,7 @@
         <v-card
           @click="
             $router.push({
-              name: 'Blog',
-              params: { blogSlug: 'pure-worship-pure-word-pure-radio' },
+              name: 'Blogs',
             })
           "
         >

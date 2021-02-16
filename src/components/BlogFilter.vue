@@ -1,27 +1,37 @@
 <template>
-  <div class="blogfilter">
-    <v-container rounded="xl">
-      <v-row justify="center">
-        <v-col cols="12">
-          <v-card>
-            <v-card-title>
-              Search for blogs based on Category
-            </v-card-title>
-          </v-card>
-              <v-chip-group>
-                <v-chip
-                  v-for="b in blogs"
-                  :key="b.slug"
-                  label
-                  @click="selectCategory(b.category.name)"
-                >
-                  {{b.category.name}}
-                </v-chip>
-              </v-chip-group>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container
+    rounded="xl"
+    class="blogfilter"
+    elevation="10"
+  >
+    <v-row justify="center">
+      <v-col cols="12">
+          <div class="text-center text-xl-h2 text-md-h3 text-sm-h4">
+            Welcome To Our Blog Page
+          </div>
+          <v-divider></v-divider>
+          <div class="subtitle font-weight-light mt-3 mb-0">Search By Category</div>
+      </v-col>
+    </v-row >
+    <v-row class="row_two" justify="center" align="center">
+      <v-col>
+        <v-chip-group>
+          <v-chip
+            :disabled="$route.name === 'Blog' ? true : false"
+            v-for="b in blogs"
+            :key="b.id"
+            label
+            color="primary"
+            @click="selectCategory(b.category.name)"
+          >
+            {{b.category.name}}
+          </v-chip>
+        </v-chip-group>
+        <v-chip color="accent" to="/blog" v-if="$route.name === 'Blog'">
+        <v-icon class="pr-2">mdi-arrow-left-bold-outline</v-icon>Go Back</v-chip>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -30,8 +40,6 @@
 export default {
   name: 'BlogFilter',
   data: () => ({
-    // blogs: [],
-    // categories: [],
   }),
   props: {
     blogs: {
@@ -44,39 +52,19 @@ export default {
       this.$emit('select-category', category);
     },
   },
-  // methods: {
-  //   getAllCategories() {
-  //     const categoryUrl = 'https://gwrapi.herokuapp.com/category';
-  //     axios
-  //       .get(categoryUrl)
-  //       .then((res) => {
-  //         if (res?.data) {
-  //           this.categories = res.data;
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         // eslint-disable-next-line no-console
-  //         console.error(err);
-  //       });
-  //   },
-  //   getCategoryBlogs(category) {
-  //     if (typeof category === 'object' && category.blogs) {
-  //       category.blogs.forEach((b) => {
-  //         this.blogs.push(b);
-  //       });
-  //     }
-  //   },
-  // },
-  // created() {
-  //   this.getCategoryBlogs();
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
 .blogfilter {
-  background: blue;
   max-height: 20em;
   min-height: 10em;
+  max-width: calc(100vw - 20%);
+
+  > .row_two {
+    background: blue;
+    opacity: 0.8;
+    border-radius: 10px;
+  }
 }
 </style>

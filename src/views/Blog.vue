@@ -64,6 +64,12 @@
       </v-col>
       </v-row>
     </v-card>
+    <v-row class="justify-center align-end">
+      <v-col cols="4">
+        <v-btn block color="accent" elevation="2" to="/blog">
+        <v-icon class="pr-2">mdi-arrow-left-bold-outline</v-icon>Go Back</v-btn>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

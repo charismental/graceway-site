@@ -1,22 +1,35 @@
 <template>
-  <div class="donate">
     <v-container>
+      <v-row>
+        <v-col class="text-center">
+          <h3>Donate To GraceWay Radio</h3>
+        </v-col>
+      </v-row>
       <v-row justify="center">
         <v-col align="center" :cols="$vuetify.breakpoint.smAndDown ? '11' : '4'">
           <v-card>
-            <v-list>
-              <v-list-item v-for="l in lineItems" :key="l.price">
+            <v-list dense>
+              <v-subheader>Donation Options</v-subheader>
+              <v-list-item-group v-model="max" color="primary">
+              <v-list-item
+              v-for="l in lineItems"
+              :key="l.price"
+              :active="isSelected(l.price)"
+              >
                 <v-list-item-icon>
-                  <v-icon>mdi-cash</v-icon>
+                  <v-icon class="mr-2">mdi-cash</v-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="l.value"></v-list-item-title>
+                </v-list-item-content>
                 </v-list-item-icon>
                 <v-spacer> </v-spacer>
                 <v-checkbox
                   :value="isSelected(l.price)"
                   @click="toggleSelected(l)"
-                  :label="l.value.toString()"
                 >
                 </v-checkbox>
               </v-list-item>
+              </v-list-item-group>
             </v-list>
           </v-card>
           <stripe-checkout
@@ -29,6 +42,8 @@
             @loading="(v) => (loading = v)"
           />
           <v-btn
+            class="mt-4"
+            block
             :disabled="!selectedLineItem"
             @click="submit"
             :dark="!!selectedLineItem"
@@ -37,8 +52,9 @@
           >
         </v-col>
       </v-row>
+      <p class="text-center text-weak">Donations are handled by Stripe Checkout.</p>
+      <p class="text-center text-weak">You will return after the transaction.</p>
     </v-container>
-  </div>
 </template>
 
 <script>
@@ -51,7 +67,7 @@ export default {
   },
   data: () => ({
     // publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    publishableKey: '1539393040rdkdoi', // nonsense key
+    publishableKey: 'pk_live_rgO4Hlt3GXvvxcZ2K3k8THzV', // nonsense key
     model: '',
     selected: [],
     selectedLineItem: null,
@@ -65,17 +81,17 @@ export default {
       },
       {
         price: 'price_1HzWmIDgTT4Ywrr98bJehBdg',
-        value: 15,
+        value: 20,
         quantity: 1,
       },
       {
         price: 'price_1HzWmIDgTT4Ywrr9MPhFJ2Nj',
-        value: 100,
+        value: 50,
         quantity: 1,
       },
       {
         price: 'price_1IBijzDgTT4Ywrr967oDZz9A',
-        value: 50,
+        value: 100,
         quantity: 1,
       },
     ],
@@ -86,8 +102,10 @@ export default {
     toggleSelected(lineItemObject) {
       if (this.selectedLineItem?.price === lineItemObject.price) {
         this.selectedLineItem = null;
+        this.selected = [];
       } else {
         this.selectedLineItem = lineItemObject;
+        this.selected.push({ price: lineItemObject.price, quantity: lineItemObject.quantity });
       }
     },
     isSelected(priceHash) {

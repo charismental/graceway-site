@@ -1,11 +1,39 @@
 <template>
   <div>
-    <blog-filter :blogs="blogs" @select-category="filterCategory"></blog-filter>
+    <blog-filter
+      :blogs="blogs"
+      @select-category="filterCategory"
+    ></blog-filter>
     <router-view v-if="$route.name === 'Blog'"></router-view>
     <v-container v-else>
-      <v-chip @click="selectBlog(blog.slug)" v-for="blog in filteredBlogs" :key="blog.slug">
-        {{ blog.title }}
-      </v-chip>
+      <v-row justify="center" align="center">
+        <v-col v-for="blog in filteredBlogs"
+        :key="blog.slug" lg="5" sm="10" md="6" >
+          <v-card @click="selectBlog(blog.slug)"
+          elevation="10"
+          class="mx-auto">
+            <v-img
+              height="200"
+              :src="blog.picture"
+              cover
+            >
+            </v-img>
+            <v-card-title>
+              {{ blog.title }}
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text class="text-center" >
+              {{blog.intro_text}}
+            </v-card-text>
+            <v-row class="justify-end align-end">
+              <v-col lg="3" md="4" sm="5">
+                {{ blog.date_created}}
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+      </v-row>
+
       <!-- <div v-for="(blog, i) in blogs" :key="i">{{ blog.author }}</div> -->
     </v-container>
   </div>
@@ -19,21 +47,15 @@ export default {
   name: 'Blogs',
   components: { BlogFilter },
   data: () => ({
-    reveal: false,
     blogs: [],
     selectedCategory: '',
   }),
-  watch: {
-    selectedCategory(newVal, oldVal) {
-      if (!oldVal && this.$route.name !== 'Blogs') {
-        this.$router.push({ name: 'Blogs' });
-      }
-    },
-  },
   computed: {
     filteredBlogs() {
       if (this.selectedCategory) {
-        return this.blogs.filter((blog) => blog.category?.name === this.selectedCategory);
+        return this.blogs.filter(
+          (blog) => blog.category?.name === this.selectedCategory,
+        );
       }
       return this.blogs;
     },
@@ -48,8 +70,6 @@ export default {
       } else {
         this.selectedCategory = category;
       }
-      // this.$router.push({ name: 'Blog', params: { slug: blogSlug } })
-      // this.blogsThatAreInTheSelectedCategory = someMethodToFilter(category)
     },
     getBlogs() {
       const url = 'https://gwrapi.herokuapp.com/blogs';
@@ -73,14 +93,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.main_row {
-  clip-path: polygon(0 0, 35% 0, 100% 100%, 0% 100%);
-}
-.blog_text {
-  font-size: 1.3rem;
-  height: 100%;
-  line-height: 2rem;
-  margin-top: 40px;
-  margin-bottom: 100px;
-}
 </style>
