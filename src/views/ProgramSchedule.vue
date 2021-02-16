@@ -74,7 +74,7 @@ export default {
         name: 'David Pawson',
         photo: 'david_pawson.png',
         times: 'Mon, Wed, Fri @ 2:30AM, 2:30PM',
-        about: `<p class="c2 c4">Born in England in 1930,
+        about: `<p>Born in England in 1930,
         David began his career with a degree in Agriculture from Durham University.
         When God intervened and called him to become a Minister, he completed an MA
         in Theology at Cambridge University and served as a Chaplain in the Royal Air
@@ -82,27 +82,27 @@ export default {
         Centre in Guildford which became a model for many UK church leaders. In 1979, the
         Lord led him into an international ministry&nbsp;and in his
         later years in an itinerant ministry
-        &nbsp;<span class="c3 c1">predominantly to church leaders. </p>
-        <p class="c2 c4">David was considered to be one of the world&rsquo;s
+        &nbsp;<span>predominantly to church leaders. </p>
+        <p>David was considered to be one of the world&rsquo;s
         finest biblical expositors. Over the years, he
-        wrote<span class="c1 c3">&nbsp;many books, booklets, and daily
+        wrote<span">&nbsp;many books, booklets, and daily
         reading notes. His extensive and very accessible overviews of the books of the Bible
         have been published and recorded. Millions of copies of his teachings have been
         distributed in more than 120 countries, providing a solid biblical foundation.&nbsp;
-        </p><p class="c2 c4">David was passionate about teaching the
+        </p><p>David was passionate about teaching the
         Bible and believed every teacher has a responsibility to expound the truth and expose
         error. He encouraged&nbsp;everyone to
         read the Bible for themselves, not verse by verse but to read each verse in the context
         in which they were written. He believed too
         many people misquote Bible verses by taking them out of context. David teache
-        d<span class="c3 c1">&nbsp;that a &lsquo;text out of context
+        d<span>&nbsp;that a &lsquo;text out of context
         becomes a pretext&rsquo; to a whole new and wrong meaning to that for which the
-         verse was written.</p><p class="c2 c4">Best known for his
+         verse was written.</p><p>Best known for his
          series Unlocking the Bible, David taught that the Bible Is not one book but a library
          of books. He taught each book
          is different, written by many different writers. To understand each book of the
          Bible you first need to understand
-         <span class="c3 c1">&nbsp;&lsquo;Who&rsquo; wrote the book, and second &lsquo;Why&rsquo;
+         <span>&nbsp;&lsquo;Who&rsquo; wrote the book, and second &lsquo;Why&rsquo;
          the book was written. He was an advocate that the solution to every situation in life can
          be found by reading the scriptures.</p><p >&nbsp;&nbsp;
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;David Passed away in 2020
@@ -273,18 +273,53 @@ export default {
         name: 'Jamie Buckingham',
         photo: 'jamie_buckingham.jpg',
         times: 'Tuesday, Thursday @ 4:30AM, 4:30PM',
+        about: `<p class="c6"><span class="c8 c5">A master storyteller 
+        and Bible teacher, Jamie Buckingham inspired and delighted 
+        millions around the world both in person and in print. He 
+        was recognized as one of the top Christian authors and 
+        speakers of the charismatic movement from the early 1970s 
+        until his death in 1992.</span></p><p>
+        <span class="c8 c5"></span></p><p class="c6"><span class="c8 c5">
+        As a distinguished Bible scholar with graduate degrees in English 
+        Literature and Theology, Jamie was respected among liturgical, 
+        evangelical, and Pentecostal Christians. He was considered a close 
+        friend and confidant of many key Christian leaders of the late 20th 
+        century.</span></p><p><span class="c5 c8"></span></p>
+        <p class="c6"><span class="c5">Jamie was more than an author of books. 
+        He was an award-winning columnist for </span><span class="c5 c9">
+        Charisma Magazine, </span><span class="c5">an editor at </span>
+        <span class="c5 c9">Guideposts Magazine </span><span class="c5">and 
+        editor-in-chief of </span><span class="c5 c9">Ministries Today Magazine</span>
+        <span class="c8 c5">. A popular conference speaker, he was known as one of 
+        America&rsquo;s foremost authorities on the Sinai and Israel. He wrote and 
+        produced more than 100 video teachings on location in the Holy Land.</span>
+        </p><p><span class="c8 c5"></span></p><p class="c0">
+        <span class="c7">Many of Jamie Buckingham&rsquo;s best teachings are 
+        again available on his website, &nbsp;</span><span">
+        <a" href="https://www.jamiebuckinghamministries.com">
+        www.JamieBuckinghamMinistries.com</a></span><span class="c7 c10">, 
+        in audio, video, electronic and print formats. They provide comprehensive 
+        insight into Jamie&rsquo;s life, his family, and his church; the priorities 
+        of his heart and the focus of his ministry; his personal teaching style, 
+        which was marked by humility, transparency and authenticity; and his unique 
+        gifting as a storyteller and teacher of the Word of God flowing in the power 
+        of the Holy Spirit.</span></p><p class="c0"><span class="c7">Jamie&rsquo;s 
+        wisdom, insight, and penetrating observations about living life in the fulness 
+        of the Spirit are as relevant today as they were when they were first spoken, 
+        taped, or penned. His ministry continues to be a blessing to believers in the 
+        U.S. and beyond. </span></p>`,
       },
       {
         name: 'David Wilkerson',
         photo: 'david_wilkerson.jpg',
         times: 'Tuesday, Thursday @ 8:30AM, 9:00PM',
-        about: `<p ><span class="c1 c3">David Ray Wilkerson was born
-        in <span class="c1 c3">1931, in Hammond,
-        Indiana<span class="c1 c3">; his father,
+        about: `<p ><span">David Ray Wilkerson was born
+        in <span">1931, in Hammond,
+        Indiana<span">; his father,
         Kenneth, was a Pentecostal minister, as was his paternal grandfather.
-        He <span class="c1 c3">studied at&nbsp;
+        He <span">studied at&nbsp;
         Central Bible College&nbsp;in Springfield, Missouri
-        <span class="c1 c3">, affiliated with the Assemblies of God.
+        <span">, affiliated with the Assemblies of God.
         After his ordination in 1952, Mr. Wilkerson took a pulpit in Philipsburg,
         in central Pennsylvania.</p><p >David
         was called to New York City in 1958 to minister to gang members and drug
@@ -296,11 +331,11 @@ export default {
           Pastor David cried out for God to do something&mdash;anything&mdash;to
           help the physically destitute and spiritually dead people he saw.
           </p><p >In 1987, he established Times Square
-          Church<span class="c1 c3">&nbsp;to minister to the downtrodden
+          Church<span">&nbsp;to minister to the downtrodden
           in one of Manhattan&rsquo;s seedier precincts.
           As its founding pastor, he faithfully led this congregation, delivering
           powerful biblical messages that encourage righteous living and complete
-          reliance on God. <span class="c1 c5">Wilkerson&#39;s widely
+          reliance on God. <span>Wilkerson&#39;s widely
           distributed sermons are known for being direct and frank against apostasy
           and serious about making the commitment to obey Jesus&#39; teachings.
           </p><p >He went on to create Teen Challenge and
@@ -322,7 +357,7 @@ export default {
         name: 'Derek Prince',
         photo: 'derek_prince.jpg',
         times: 'Tuesday, Thursday @ 6:30AM, 7:00PM',
-        about: `<p ><span class="c2 c3">Derek Prince was born into a
+        about: `<p ><span>Derek Prince was born into a
         British military family in Bangalore, India in 1915. At the age of 14 he
         won a scholarship to Eton College where he studied Greek and Latin. Derek
         additionally studied several modern languages including Hebrew and Aramaic,
@@ -331,8 +366,8 @@ export default {
         synonymous with sound theology and the clear yet systematic teaching of
         God&#39;s Word. His steadfast faith and devotion to studying the scriptures
         turned him into one of the most respected and admired Bible teachers of his
-        time.<br><span class="c3 c4">&zwj;<br>&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c2 c3">Derek
+        time.<br><span>&zwj;<br>&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Derek
         is the author of over 80 books and an invaluable trove of articles, letters,
         audio and visual recordings that immortalize his life&#39;s work and passion.
         Translated into more than 100 languages, they remain a source of inspiration
@@ -342,10 +377,10 @@ export default {
         Prince Publications, operations gradually expanded, and in December 1990 was
         renamed Derek Prince Ministries.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;Today, Derek Prince Ministries
-        has offices in over 45 countries across the world. <span class="c2 c3">
+        has offices in over 45 countries across the world. <span>
         It remains steadfastly committed to resourcing the spiritually hungry, and
         in doing so, upholding the vision Derek shared in July 2002:</p>
-        <p ><span class="c2 c3">&ldquo;It is my desire, and I believe the
+        <p ><span>&ldquo;It is my desire, and I believe the
         Lord&rsquo;s desire, that this ministry continue the work, which God has
         begun through me over sixty years ago, until Jesus returns.&rdquo;</p>
         <p >Derek Prince died of natural causes on the
