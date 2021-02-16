@@ -3,21 +3,21 @@
     <v-col>
       <v-sheet height="400">
         <v-calendar
-          ref='calendar'
+          ref="calendar"
           :events="events"
           :type="calendarType"
-          :weekdays="[1,2,3,4,5]"
+          :weekdays="weekday"
           :start="dailyStartDay"
-          end="2021-02-05"
-          :event-color='getEventColor'
+          :end="dailyEndDay"
+          :event-color="getEventColor"
         >
-        <template v-slot:day-body="{ day }">
-          <div
-          class="v-current-time"
-          :class="{ first: day === 1 }"
-          :style="{ top: nowY }"
-          ></div>
-        </template>
+          <template v-slot:day-body="{ day }">
+            <div
+              class="v-current-time"
+              :class="{ first: day === 1 }"
+              :style="{ top: nowY }"
+            ></div>
+          </template>
         </v-calendar>
       </v-sheet>
     </v-col>
@@ -28,372 +28,373 @@
 export default {
   data: () => ({
     weekday: [1, 2, 3, 4, 5],
-    value: '',
     ready: false,
-    events: [
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-01 01:00',
-        end: '2021-02-01 01:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-02 01:00',
-        end: '2021-02-02 01:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-03 01:00',
-        end: '2021-02-03 01:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-04 01:00',
-        end: '2021-02-04 01:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-05 01:00',
-        end: '2021-02-05 01:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-01 13:00',
-        end: '2021-02-01 13:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-02 13:00',
-        end: '2021-02-02 13:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-03 13:00',
-        end: '2021-02-03 13:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-04 13:00',
-        end: '2021-02-04 13:30',
-        color: 'red',
-      },
-      {
-        name: 'Alistair Begg',
-        start: '2021-02-05 13:00',
-        end: '2021-02-05 13:30',
-        color: 'red',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-01 02:30',
-        end: '2021-02-01 03:30',
-        color: 'green',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-01 14:30',
-        end: '2021-02-01 15:30',
-        color: 'green',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-03 02:30',
-        end: '2021-02-03 03:30',
-        color: 'green',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-03 14:30',
-        end: '2021-02-03 15:30',
-        color: 'green',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-05 02:30',
-        end: '2021-02-05 03:30',
-        color: 'green',
-      },
-      {
-        name: 'David Pawson',
-        start: '2021-02-05 14:30',
-        end: '2021-02-05 15:30',
-        color: 'green',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-01 06:30',
-        end: '2021-02-01 07:30',
-        color: 'blue',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-01 19:00',
-        end: '2021-02-01 20:00',
-        color: 'blue',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-03 06:30',
-        end: '2021-02-03 07:30',
-        color: 'blue',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-03 19:00',
-        end: '2021-02-03 20:00',
-        color: 'blue',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-05 06:30',
-        end: '2021-02-05 07:30',
-        color: 'blue',
-      },
-      {
-        name: 'John Casteel',
-        start: '2021-02-05 19:00',
-        end: '2021-02-05 20:00',
-        color: 'blue',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-01 08:30',
-        end: '2021-02-01 09:30',
-        color: 'purple',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-01 21:00',
-        end: '2021-02-01 22:00',
-        color: 'purple',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-03 08:30',
-        end: '2021-02-03 09:30',
-        color: 'purple',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-03 21:00',
-        end: '2021-02-03 22:00',
-        color: 'purple',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-05 08:30',
-        end: '2021-02-05 09:30',
-        color: 'purple',
-      },
-      {
-        name: 'Paul Washer',
-        start: '2021-02-05 21:00',
-        end: '2021-02-05 22:00',
-        color: 'purple',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-01 10:30',
-        end: '2021-02-01 11:00',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-01 23:00',
-        end: '2021-02-01 23:30',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-02 10:30',
-        end: '2021-02-02 11:00',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-02 23:00',
-        end: '2021-02-02 23:30',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-03 10:30',
-        end: '2021-02-03 11:00',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-03 23:00',
-        end: '2021-02-03 23:30',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-04 10:30',
-        end: '2021-02-04 11:00',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-04 23:00',
-        end: '2021-02-04 23:30',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-05 10:30',
-        end: '2021-02-05 11:00',
-        color: 'teal',
-      },
-      {
-        name: 'Chuck Missler',
-        start: '2021-02-05 23:00',
-        end: '2021-02-05 23:30',
-        color: 'teal',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-01 04:30',
-        end: '2021-02-01 05:30',
-        color: 'amber',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-01 16:30',
-        end: '2021-02-01 17:30',
-        color: 'amber',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-03 04:30',
-        end: '2021-02-03 05:30',
-        color: 'amber',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-03 16:30',
-        end: '2021-02-03 17:30',
-        color: 'amber',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-05 04:30',
-        end: '2021-02-05 05:30',
-        color: 'amber',
-      },
-      {
-        name: 'Curtis Dougherty',
-        start: '2021-02-05 16:30',
-        end: '2021-02-05 17:30',
-        color: 'amber',
-      },
-      {
-        name: 'Ern Baxter',
-        start: '2021-02-02 02:30',
-        end: '2021-02-02 03:30',
-        color: 'blue-grey',
-      },
-      {
-        name: 'Ern Baxter',
-        start: '2021-02-02 14:30',
-        end: '2021-02-02 15:30',
-        color: 'blue-grey',
-      },
-      {
-        name: 'Ern Baxter',
-        start: '2021-02-04 02:30',
-        end: '2021-02-04 03:30',
-        color: 'blue-grey',
-      },
-      {
-        name: 'Ern Baxter',
-        start: '2021-02-04 14:30',
-        end: '2021-02-04 15:30',
-        color: 'blue-grey',
-      },
-      {
-        name: 'Jamie Buckingham',
-        start: '2021-02-02 04:30',
-        end: '2021-02-02 05:30',
-        color: 'brown',
-      },
-      {
-        name: 'Jamie Buckingham',
-        start: '2021-02-02 16:30',
-        end: '2021-02-02 17:30',
-        color: 'brown',
-      },
-      {
-        name: 'Jamie Buckingham',
-        start: '2021-02-04 04:30',
-        end: '2021-02-04 05:30',
-        color: 'brown',
-      },
-      {
-        name: 'Jamie Buckingham',
-        start: '2021-02-04 16:30',
-        end: '2021-02-04 17:30',
-        color: 'brown',
-      },
-      {
-        name: 'David Wilkerson',
-        start: '2021-02-02 08:30',
-        end: '2021-02-02 09:30',
-        color: 'lime',
-      },
-      {
-        name: 'David Wilkerson',
-        start: '2021-02-02 21:00',
-        end: '2021-02-02 22:00',
-        color: 'lime',
-      },
-      {
-        name: 'David Wilkerson',
-        start: '2021-02-04 08:30',
-        end: '2021-02-04 09:30',
-        color: 'lime',
-      },
-      {
-        name: 'David Wilkerson',
-        start: '2021-02-04 21:00',
-        end: '2021-02-04 22:00',
-        color: 'lime',
-      },
-      {
-        name: 'Derek Prince',
-        start: '2021-02-02 06:30',
-        end: '2021-02-02 07:30',
-        color: 'cyan',
-      },
-      {
-        name: 'Derek Prince',
-        start: '2021-02-02 19:00',
-        end: '2021-02-02 20:00',
-        color: 'cyan',
-      },
-      {
-        name: 'Derek Prince',
-        start: '2021-02-04 06:30',
-        end: '2021-02-04 07:30',
-        color: 'cyan',
-      },
-      {
-        name: 'Derek Prince',
-        start: '2021-02-04 19:00',
-        end: '2021-02-04 20:00',
-        color: 'cyan',
-      },
-    ],
   }),
   computed: {
+    events() {
+      return [
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('monday', '01:00'),
+          end: this.getNextDayOfTheWeek('monday', '01:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('tuesday', '01:00'),
+          end: this.getNextDayOfTheWeek('tuesday', '01:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('wednesday', '01:00'),
+          end: this.getNextDayOfTheWeek('wednesday', '01:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('thursday', '01:00'),
+          end: this.getNextDayOfTheWeek('thursday', '01:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('friday', '01:00'),
+          end: this.getNextDayOfTheWeek('friday', '01:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('monday', '13:00'),
+          end: this.getNextDayOfTheWeek('monday', '13:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('tuesday', '13:00'),
+          end: this.getNextDayOfTheWeek('tuesday', '13:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('wednesday', '13:00'),
+          end: this.getNextDayOfTheWeek('wednesday', '13:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('thursday', '13:00'),
+          end: this.getNextDayOfTheWeek('thursday', '13:30'),
+          color: 'red',
+        },
+        {
+          name: 'Alistair Begg',
+          start: this.getNextDayOfTheWeek('friday', '13:00'),
+          end: this.getNextDayOfTheWeek('friday', '13:30'),
+          color: 'red',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('monday', '02:30'),
+          end: this.getNextDayOfTheWeek('monday', '03:30'),
+          color: 'green',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('monday', '14:30'),
+          end: this.getNextDayOfTheWeek('monday', '15:30'),
+          color: 'green',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('wednesday', '02:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '03:30'),
+          color: 'green',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('wednesday', '14:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '15:30'),
+          color: 'green',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('friday', '02:30'),
+          end: this.getNextDayOfTheWeek('friday', '03:30'),
+          color: 'green',
+        },
+        {
+          name: 'David Pawson',
+          start: this.getNextDayOfTheWeek('friday', '14:30'),
+          end: this.getNextDayOfTheWeek('friday', '15:30'),
+          color: 'green',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('monday', '06:30'),
+          end: this.getNextDayOfTheWeek('monday', '07:30'),
+          color: 'blue',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('monday', '19:00'),
+          end: this.getNextDayOfTheWeek('monday', '20:00'),
+          color: 'blue',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('wednesday', '06:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '07:30'),
+          color: 'blue',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('wednesday', '19:00'),
+          end: this.getNextDayOfTheWeek('wednesday', '20:00'),
+          color: 'blue',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('friday', '06:30'),
+          end: this.getNextDayOfTheWeek('friday', '07:30'),
+          color: 'blue',
+        },
+        {
+          name: 'John Casteel',
+          start: this.getNextDayOfTheWeek('friday', '19:00'),
+          end: this.getNextDayOfTheWeek('friday', '20:00'),
+          color: 'blue',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('monday', '08:30'),
+          end: this.getNextDayOfTheWeek('monday', '09:30'),
+          color: 'purple',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('monday', '21:00'),
+          end: this.getNextDayOfTheWeek('monday', '22:00'),
+          color: 'purple',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('wednesday', '08:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '09:30'),
+          color: 'purple',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('wednesday', '21:00'),
+          end: this.getNextDayOfTheWeek('wednesday', '22:00'),
+          color: 'purple',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('friday', '08:30'),
+          end: this.getNextDayOfTheWeek('friday', '09:30'),
+          color: 'purple',
+        },
+        {
+          name: 'Paul Washer',
+          start: this.getNextDayOfTheWeek('friday', '21:00'),
+          end: this.getNextDayOfTheWeek('friday', '22:00'),
+          color: 'purple',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('monday', '10:30'),
+          end: this.getNextDayOfTheWeek('monday', '11:00'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('monday', '23:00'),
+          end: this.getNextDayOfTheWeek('monday', '23:30'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('tuesday', '10:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '11:00'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('tuesday', '23:00'),
+          end: this.getNextDayOfTheWeek('tuesday', '23:30'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('wednesday', '10:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '11:00'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('wednesday', '23:00'),
+          end: this.getNextDayOfTheWeek('wednesday', '23:30'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('thursday', '10:30'),
+          end: this.getNextDayOfTheWeek('thursday', '11:00'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('thursday', '23:00'),
+          end: this.getNextDayOfTheWeek('thursday', '23:30'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('friday', '10:30'),
+          end: this.getNextDayOfTheWeek('friday', '11:00'),
+          color: 'teal',
+        },
+        {
+          name: 'Chuck Missler',
+          start: this.getNextDayOfTheWeek('friday', '23:00'),
+          end: this.getNextDayOfTheWeek('friday', '23:30'),
+          color: 'teal',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('monday', '04:30'),
+          end: this.getNextDayOfTheWeek('monday', '05:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('monday', '16:30'),
+          end: this.getNextDayOfTheWeek('monday', '17:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('wednesday', '04:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '05:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('wednesday', '16:30'),
+          end: this.getNextDayOfTheWeek('wednesday', '17:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('friday', '04:30'),
+          end: this.getNextDayOfTheWeek('friday', '05:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.getNextDayOfTheWeek('friday', '16:30'),
+          end: this.getNextDayOfTheWeek('friday', '17:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Ern Baxter',
+          start: this.getNextDayOfTheWeek('tuesday', '02:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '03:30'),
+          color: 'blue-grey',
+        },
+        {
+          name: 'Ern Baxter',
+          start: this.getNextDayOfTheWeek('tuesday', '14:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '15:30'),
+          color: 'blue-grey',
+        },
+        {
+          name: 'Ern Baxter',
+          start: this.getNextDayOfTheWeek('thursday', '02:30'),
+          end: this.getNextDayOfTheWeek('thursday', '03:30'),
+          color: 'blue-grey',
+        },
+        {
+          name: 'Ern Baxter',
+          start: this.getNextDayOfTheWeek('thursday', '14:30'),
+          end: this.getNextDayOfTheWeek('thursday', '15:30'),
+          color: 'blue-grey',
+        },
+        {
+          name: 'Jamie Buckingham',
+          start: this.getNextDayOfTheWeek('tuesday', '04:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '05:30'),
+          color: 'brown',
+        },
+        {
+          name: 'Jamie Buckingham',
+          start: this.getNextDayOfTheWeek('tuesday', '16:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '17:30'),
+          color: 'brown',
+        },
+        {
+          name: 'Jamie Buckingham',
+          start: this.getNextDayOfTheWeek('thursday', '04:30'),
+          end: this.getNextDayOfTheWeek('thursday', '05:30'),
+          color: 'brown',
+        },
+        {
+          name: 'Jamie Buckingham',
+          start: this.getNextDayOfTheWeek('thursday', '16:30'),
+          end: this.getNextDayOfTheWeek('thursday', '17:30'),
+          color: 'brown',
+        },
+        {
+          name: 'David Wilkerson',
+          start: this.getNextDayOfTheWeek('tuesday', '08:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '09:30'),
+          color: 'lime',
+        },
+        {
+          name: 'David Wilkerson',
+          start: this.getNextDayOfTheWeek('tuesday', '21:00'),
+          end: this.getNextDayOfTheWeek('tuesday', '22:00'),
+          color: 'lime',
+        },
+        {
+          name: 'David Wilkerson',
+          start: this.getNextDayOfTheWeek('thursday', '08:30'),
+          end: this.getNextDayOfTheWeek('thursday', '09:30'),
+          color: 'lime',
+        },
+        {
+          name: 'David Wilkerson',
+          start: this.getNextDayOfTheWeek('thursday', '21:00'),
+          end: this.getNextDayOfTheWeek('thursday', '22:00'),
+          color: 'lime',
+        },
+        {
+          name: 'Derek Prince',
+          start: this.getNextDayOfTheWeek('tuesday', '06:30'),
+          end: this.getNextDayOfTheWeek('tuesday', '07:30'),
+          color: 'cyan',
+        },
+        {
+          name: 'Derek Prince',
+          start: this.getNextDayOfTheWeek('tuesday', '19:00'),
+          end: this.getNextDayOfTheWeek('tuesday', '20:00'),
+          color: 'cyan',
+        },
+        {
+          name: 'Derek Prince',
+          start: this.getNextDayOfTheWeek('thursday', '06:30'),
+          end: this.getNextDayOfTheWeek('thursday', '07:30'),
+          color: 'cyan',
+        },
+        {
+          name: 'Derek Prince',
+          start: this.getNextDayOfTheWeek('thursday', '19:00'),
+          end: this.getNextDayOfTheWeek('thursday', '20:00'),
+          color: 'cyan',
+        },
+      ];
+    },
     cal() {
       return this.ready ? this.$refs.calendar : null;
     },
@@ -410,13 +411,31 @@ export default {
     dailyStartDay() {
       const d = new Date();
       const today = d.getDay();
-      if (today >= 1 && today <= 5) {
+      if (today >= 1 && today <= 5 && this.$vuetify.breakpoint.smAndDown) {
         return d.toISOString().substring(0, 10);
+        // eslint-disable-next-line max-len
+        // const friendlyDate = d.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).substring(0, 9);
       }
-      return '2021-02-01'; // monday
+      return this.getNextDayOfTheWeek('monday');
+    },
+    dailyEndDay() {
+      return this.getNextDayOfTheWeek('friday');
     },
   },
   methods: {
+    getNextDayOfTheWeek(dayName, time) {
+      const refDate = new Date();
+      const dayOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(
+        dayName.slice(0, 3).toLowerCase(),
+      );
+      refDate.setHours(0, 0, 0, 0);
+      refDate.setDate(refDate.getDate() + ((7 + dayOfWeek - refDate.getDay()) % 7));
+      const friendlyDate = refDate.toISOString().substring(0, 10);
+      if (!time) {
+        return friendlyDate;
+      }
+      return `${friendlyDate} ${time}`;
+    },
     getEventColor(event) {
       return event.color;
     },
@@ -451,7 +470,7 @@ export default {
   pointer-events: none;
 
   &.first::before {
-    content: '';
+    content: "";
     position: absolute;
     background-color: #ea4335;
     width: 12px;

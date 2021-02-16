@@ -17,7 +17,7 @@
       <v-col>
         <v-chip-group>
           <v-chip
-            :disabled="$route.name === 'Blog' ? true : false"
+            :disabled="$route.name === 'Blog'"
             v-for="b in blogs"
             :key="b.id"
             label
