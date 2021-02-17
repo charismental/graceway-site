@@ -3,16 +3,28 @@
     <v-container>
       <v-row justify="center">
         <v-col align="center">
-
-          <h4 text-center>Thank You! Your payment has been Processed.</h4>
-          <p text-center>We appreciate your business. Thank you from everyone
-            at GraceWay Radio!
+          <v-card elevation="0">
+            <v-card-title text-center>Your payment has been Processed.</v-card-title>
+            <v-card-subtitle text-center>From all of us here at GraceWay Radio,
+              thank you for your tax-deductible donation!
+            </v-card-subtitle>
+            <v-card-text
+            class="text-center">A receipt will be sent to your email address.</v-card-text>
+            <v-card-text
+            class="text-center">Your Invoice will say - CDM GraceWay Radio</v-card-text>
+            <v-btn
+              text
+              color="blue"
+              to="/"
+            >Return to Homepage</v-btn>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row class="justify-center mt-8 mb-n4">
+        <v-col>
+          <p class="text-center text-caption">Didn't recieve a reciept?
+            <a href="mailto:admin@gracewayradio.com">Send us an email</a>
           </p>
-          <v-btn
-            text
-            color="blue"
-            to="/"
-          >Return to Homepage</v-btn>
         </v-col>
       </v-row>
     </v-container>

@@ -5,9 +5,6 @@
         <v-col align="center">
 
           <h4 text-center>Your Payment Has Been Cancelled.</h4>
-          <p text-center>We appreciate your business. Thank you from everyone
-            at GraceWay Radio!
-          </p>
           <v-btn
             text
             color="blue"
