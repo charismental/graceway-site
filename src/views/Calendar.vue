@@ -423,13 +423,16 @@ export default {
     },
     getPreviousMonday() {
       const prevMonday = new Date();
-      const timeStamp = prevMonday.setDate(prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7));
+      const timeStamp = prevMonday.setDate(
+        prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7),
+      );
       const friendlyDate = new Date(timeStamp).toISOString().substring(0, 10);
       return friendlyDate;
     },
     getPreviousDate() {
       const prevDay = new Date();
-      // still have an issue with it being UTC date and not according to timeZone: 'America/Los_Angeles'
+      // still have an issue with it being UTC date
+      // and not according to timeZone: 'America/Los_Angeles'
       // -6 = Monday, -5 = tuesday, -4 = wednesday, -3 = thursday, -2 = friday, -1 = saturday,
       const timeStamp = prevDay.setDate(prevDay.getDate() - ((prevDay.getDay() + 7) % 7));
       const friendlyDate = new Date(timeStamp).toISOString().substring(0, 10);
