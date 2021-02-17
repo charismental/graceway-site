@@ -10,7 +10,13 @@
       interval="8000"
       style="position: relative"
     >
-      <v-carousel-item v-for="slide in slideShow" :key="slide.src" eager>
+      <v-carousel-item
+        :style="slide && slide.link ? 'cursor: pointer' : ''"
+        @click="navigateTo(slide)"
+        v-for="slide in slideShow"
+        :key="slide.src"
+        eager
+      >
         <v-img
           :src="`https://gracewayradio.com/slide/${slide.src}`"
           height="100%"
@@ -132,21 +138,22 @@ export default {
     showSnackbar: false,
     snackBarText: '',
     slideShow: [
-      {
-        src: '01 valentine.jpg',
-      },
+      // {
+      //   src: '01 valentine.jpg',
+      // },
       {
         src: '02.jpg',
       },
-      {
-        src: '03 valentine.jpg',
-      },
+      // {
+      //   src: '03 valentine.jpg',
+      // },
       {
         src: '04.jpg',
       },
-      // {
-      //   src: '04 donation.jpg',
-      // },
+      {
+        src: '04 donation.jpg',
+        link: 'Donate',
+      },
       // {
       //   src: '05 new year.jpg',
       // },
@@ -180,6 +187,11 @@ export default {
     },
   },
   methods: {
+    navigateTo(slideObject) {
+      if (slideObject?.link) {
+        this.$router.push({ name: slideObject.link });
+      }
+    },
     triggerSnackbar(text) {
       this.snackBarText = text;
       this.showSnackbar = true;
