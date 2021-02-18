@@ -115,7 +115,7 @@
                     style="background-color: #0d47a1"
                     :style="$vuetify.breakpoint.smAndDown ? 'font-size: 10vw' : ''"
                   >
-                    Featrued
+                    Featured
                   </div>
                 </div>
               </v-expand-transition></v-img
