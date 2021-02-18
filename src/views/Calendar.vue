@@ -38,362 +38,362 @@ export default {
       return [
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('monday', '01:00'),
-          end: this.getNextDayOfTheWeek('monday', '01:30'),
+          start: this.setEventDateAndTime('monday', '01:00'),
+          end: this.setEventDateAndTime('monday', '01:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('tuesday', '01:00'),
-          end: this.getNextDayOfTheWeek('tuesday', '01:30'),
+          start: this.setEventDateAndTime('tuesday', '01:00'),
+          end: this.setEventDateAndTime('tuesday', '01:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('wednesday', '01:00'),
-          end: this.getNextDayOfTheWeek('wednesday', '01:30'),
+          start: this.setEventDateAndTime('wednesday', '01:00'),
+          end: this.setEventDateAndTime('wednesday', '01:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('thursday', '01:00'),
-          end: this.getNextDayOfTheWeek('thursday', '01:30'),
+          start: this.setEventDateAndTime('thursday', '01:00'),
+          end: this.setEventDateAndTime('thursday', '01:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('friday', '01:00'),
-          end: this.getNextDayOfTheWeek('friday', '01:30'),
+          start: this.setEventDateAndTime('friday', '01:00'),
+          end: this.setEventDateAndTime('friday', '01:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('monday', '13:00'),
-          end: this.getNextDayOfTheWeek('monday', '13:30'),
+          start: this.setEventDateAndTime('monday', '13:00'),
+          end: this.setEventDateAndTime('monday', '13:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('tuesday', '13:00'),
-          end: this.getNextDayOfTheWeek('tuesday', '13:30'),
+          start: this.setEventDateAndTime('tuesday', '13:00'),
+          end: this.setEventDateAndTime('tuesday', '13:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('wednesday', '13:00'),
-          end: this.getNextDayOfTheWeek('wednesday', '13:30'),
+          start: this.setEventDateAndTime('wednesday', '13:00'),
+          end: this.setEventDateAndTime('wednesday', '13:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('thursday', '13:00'),
-          end: this.getNextDayOfTheWeek('thursday', '13:30'),
+          start: this.setEventDateAndTime('thursday', '13:00'),
+          end: this.setEventDateAndTime('thursday', '13:30'),
           color: 'red',
         },
         {
           name: 'Alistair Begg',
-          start: this.getNextDayOfTheWeek('friday', '13:00'),
-          end: this.getNextDayOfTheWeek('friday', '13:30'),
+          start: this.setEventDateAndTime('friday', '13:00'),
+          end: this.setEventDateAndTime('friday', '13:30'),
           color: 'red',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('monday', '02:30'),
-          end: this.getNextDayOfTheWeek('monday', '03:30'),
+          start: this.setEventDateAndTime('monday', '02:30'),
+          end: this.setEventDateAndTime('monday', '03:30'),
           color: 'green',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('monday', '14:30'),
-          end: this.getNextDayOfTheWeek('monday', '15:30'),
+          start: this.setEventDateAndTime('monday', '14:30'),
+          end: this.setEventDateAndTime('monday', '15:30'),
           color: 'green',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('wednesday', '02:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '03:30'),
+          start: this.setEventDateAndTime('wednesday', '02:30'),
+          end: this.setEventDateAndTime('wednesday', '03:30'),
           color: 'green',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('wednesday', '14:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '15:30'),
+          start: this.setEventDateAndTime('wednesday', '14:30'),
+          end: this.setEventDateAndTime('wednesday', '15:30'),
           color: 'green',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('friday', '02:30'),
-          end: this.getNextDayOfTheWeek('friday', '03:30'),
+          start: this.setEventDateAndTime('friday', '02:30'),
+          end: this.setEventDateAndTime('friday', '03:30'),
           color: 'green',
         },
         {
           name: 'David Pawson',
-          start: this.getNextDayOfTheWeek('friday', '14:30'),
-          end: this.getNextDayOfTheWeek('friday', '15:30'),
+          start: this.setEventDateAndTime('friday', '14:30'),
+          end: this.setEventDateAndTime('friday', '15:30'),
           color: 'green',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('monday', '06:30'),
-          end: this.getNextDayOfTheWeek('monday', '07:30'),
+          start: this.setEventDateAndTime('monday', '06:30'),
+          end: this.setEventDateAndTime('monday', '07:30'),
           color: 'blue',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('monday', '19:00'),
-          end: this.getNextDayOfTheWeek('monday', '20:00'),
+          start: this.setEventDateAndTime('monday', '19:00'),
+          end: this.setEventDateAndTime('monday', '20:00'),
           color: 'blue',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('wednesday', '06:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '07:30'),
+          start: this.setEventDateAndTime('wednesday', '06:30'),
+          end: this.setEventDateAndTime('wednesday', '07:30'),
           color: 'blue',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('wednesday', '19:00'),
-          end: this.getNextDayOfTheWeek('wednesday', '20:00'),
+          start: this.setEventDateAndTime('wednesday', '19:00'),
+          end: this.setEventDateAndTime('wednesday', '20:00'),
           color: 'blue',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('friday', '06:30'),
-          end: this.getNextDayOfTheWeek('friday', '07:30'),
+          start: this.setEventDateAndTime('friday', '06:30'),
+          end: this.setEventDateAndTime('friday', '07:30'),
           color: 'blue',
         },
         {
           name: 'John Casteel',
-          start: this.getNextDayOfTheWeek('friday', '19:00'),
-          end: this.getNextDayOfTheWeek('friday', '20:00'),
+          start: this.setEventDateAndTime('friday', '19:00'),
+          end: this.setEventDateAndTime('friday', '20:00'),
           color: 'blue',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('monday', '08:30'),
-          end: this.getNextDayOfTheWeek('monday', '09:30'),
+          start: this.setEventDateAndTime('monday', '08:30'),
+          end: this.setEventDateAndTime('monday', '09:30'),
           color: 'purple',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('monday', '21:00'),
-          end: this.getNextDayOfTheWeek('monday', '22:00'),
+          start: this.setEventDateAndTime('monday', '21:00'),
+          end: this.setEventDateAndTime('monday', '22:00'),
           color: 'purple',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('wednesday', '08:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '09:30'),
+          start: this.setEventDateAndTime('wednesday', '08:30'),
+          end: this.setEventDateAndTime('wednesday', '09:30'),
           color: 'purple',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('wednesday', '21:00'),
-          end: this.getNextDayOfTheWeek('wednesday', '22:00'),
+          start: this.setEventDateAndTime('wednesday', '21:00'),
+          end: this.setEventDateAndTime('wednesday', '22:00'),
           color: 'purple',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('friday', '08:30'),
-          end: this.getNextDayOfTheWeek('friday', '09:30'),
+          start: this.setEventDateAndTime('friday', '08:30'),
+          end: this.setEventDateAndTime('friday', '09:30'),
           color: 'purple',
         },
         {
           name: 'Paul Washer',
-          start: this.getNextDayOfTheWeek('friday', '21:00'),
-          end: this.getNextDayOfTheWeek('friday', '22:00'),
+          start: this.setEventDateAndTime('friday', '21:00'),
+          end: this.setEventDateAndTime('friday', '22:00'),
           color: 'purple',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('monday', '10:30'),
-          end: this.getNextDayOfTheWeek('monday', '11:00'),
+          start: this.setEventDateAndTime('monday', '10:30'),
+          end: this.setEventDateAndTime('monday', '11:00'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('monday', '23:00'),
-          end: this.getNextDayOfTheWeek('monday', '23:30'),
+          start: this.setEventDateAndTime('monday', '23:00'),
+          end: this.setEventDateAndTime('monday', '23:30'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('tuesday', '10:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '11:00'),
+          start: this.setEventDateAndTime('tuesday', '10:30'),
+          end: this.setEventDateAndTime('tuesday', '11:00'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('tuesday', '23:00'),
-          end: this.getNextDayOfTheWeek('tuesday', '23:30'),
+          start: this.setEventDateAndTime('tuesday', '23:00'),
+          end: this.setEventDateAndTime('tuesday', '23:30'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('wednesday', '10:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '11:00'),
+          start: this.setEventDateAndTime('wednesday', '10:30'),
+          end: this.setEventDateAndTime('wednesday', '11:00'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('wednesday', '23:00'),
-          end: this.getNextDayOfTheWeek('wednesday', '23:30'),
+          start: this.setEventDateAndTime('wednesday', '23:00'),
+          end: this.setEventDateAndTime('wednesday', '23:30'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('thursday', '10:30'),
-          end: this.getNextDayOfTheWeek('thursday', '11:00'),
+          start: this.setEventDateAndTime('thursday', '10:30'),
+          end: this.setEventDateAndTime('thursday', '11:00'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('thursday', '23:00'),
-          end: this.getNextDayOfTheWeek('thursday', '23:30'),
+          start: this.setEventDateAndTime('thursday', '23:00'),
+          end: this.setEventDateAndTime('thursday', '23:30'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('friday', '10:30'),
-          end: this.getNextDayOfTheWeek('friday', '11:00'),
+          start: this.setEventDateAndTime('friday', '10:30'),
+          end: this.setEventDateAndTime('friday', '11:00'),
           color: 'teal',
         },
         {
           name: 'Chuck Missler',
-          start: this.getNextDayOfTheWeek('friday', '23:00'),
-          end: this.getNextDayOfTheWeek('friday', '23:30'),
+          start: this.setEventDateAndTime('friday', '23:00'),
+          end: this.setEventDateAndTime('friday', '23:30'),
           color: 'teal',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('monday', '04:30'),
-          end: this.getNextDayOfTheWeek('monday', '05:30'),
+          start: this.setEventDateAndTime('monday', '04:30'),
+          end: this.setEventDateAndTime('monday', '05:30'),
           color: 'amber',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('monday', '16:30'),
-          end: this.getNextDayOfTheWeek('monday', '17:30'),
+          start: this.setEventDateAndTime('monday', '16:30'),
+          end: this.setEventDateAndTime('monday', '17:30'),
           color: 'amber',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('wednesday', '04:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '05:30'),
+          start: this.setEventDateAndTime('wednesday', '04:30'),
+          end: this.setEventDateAndTime('wednesday', '05:30'),
           color: 'amber',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('wednesday', '16:30'),
-          end: this.getNextDayOfTheWeek('wednesday', '17:30'),
+          start: this.setEventDateAndTime('wednesday', '16:30'),
+          end: this.setEventDateAndTime('wednesday', '17:30'),
           color: 'amber',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('friday', '04:30'),
-          end: this.getNextDayOfTheWeek('friday', '05:30'),
+          start: this.setEventDateAndTime('friday', '04:30'),
+          end: this.setEventDateAndTime('friday', '05:30'),
           color: 'amber',
         },
         {
           name: 'Curtis Dougherty',
-          start: this.getNextDayOfTheWeek('friday', '16:30'),
-          end: this.getNextDayOfTheWeek('friday', '17:30'),
+          start: this.setEventDateAndTime('friday', '16:30'),
+          end: this.setEventDateAndTime('friday', '17:30'),
           color: 'amber',
         },
         {
           name: 'Ern Baxter',
-          start: this.getNextDayOfTheWeek('tuesday', '02:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '03:30'),
+          start: this.setEventDateAndTime('tuesday', '02:30'),
+          end: this.setEventDateAndTime('tuesday', '03:30'),
           color: 'blue-grey',
         },
         {
           name: 'Ern Baxter',
-          start: this.getNextDayOfTheWeek('tuesday', '14:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '15:30'),
+          start: this.setEventDateAndTime('tuesday', '14:30'),
+          end: this.setEventDateAndTime('tuesday', '15:30'),
           color: 'blue-grey',
         },
         {
           name: 'Ern Baxter',
-          start: this.getNextDayOfTheWeek('thursday', '02:30'),
-          end: this.getNextDayOfTheWeek('thursday', '03:30'),
+          start: this.setEventDateAndTime('thursday', '02:30'),
+          end: this.setEventDateAndTime('thursday', '03:30'),
           color: 'blue-grey',
         },
         {
           name: 'Ern Baxter',
-          start: this.getNextDayOfTheWeek('thursday', '14:30'),
-          end: this.getNextDayOfTheWeek('thursday', '15:30'),
+          start: this.setEventDateAndTime('thursday', '14:30'),
+          end: this.setEventDateAndTime('thursday', '15:30'),
           color: 'blue-grey',
         },
         {
           name: 'Jamie Buckingham',
-          start: this.getNextDayOfTheWeek('tuesday', '04:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '05:30'),
+          start: this.setEventDateAndTime('tuesday', '04:30'),
+          end: this.setEventDateAndTime('tuesday', '05:30'),
           color: 'brown',
         },
         {
           name: 'Jamie Buckingham',
-          start: this.getNextDayOfTheWeek('tuesday', '16:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '17:30'),
+          start: this.setEventDateAndTime('tuesday', '16:30'),
+          end: this.setEventDateAndTime('tuesday', '17:30'),
           color: 'brown',
         },
         {
           name: 'Jamie Buckingham',
-          start: this.getNextDayOfTheWeek('thursday', '04:30'),
-          end: this.getNextDayOfTheWeek('thursday', '05:30'),
+          start: this.setEventDateAndTime('thursday', '04:30'),
+          end: this.setEventDateAndTime('thursday', '05:30'),
           color: 'brown',
         },
         {
           name: 'Jamie Buckingham',
-          start: this.getNextDayOfTheWeek('thursday', '16:30'),
-          end: this.getNextDayOfTheWeek('thursday', '17:30'),
+          start: this.setEventDateAndTime('thursday', '16:30'),
+          end: this.setEventDateAndTime('thursday', '17:30'),
           color: 'brown',
         },
         {
           name: 'David Wilkerson',
-          start: this.getNextDayOfTheWeek('tuesday', '08:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '09:30'),
+          start: this.setEventDateAndTime('tuesday', '08:30'),
+          end: this.setEventDateAndTime('tuesday', '09:30'),
           color: 'lime',
         },
         {
           name: 'David Wilkerson',
-          start: this.getNextDayOfTheWeek('tuesday', '21:00'),
-          end: this.getNextDayOfTheWeek('tuesday', '22:00'),
+          start: this.setEventDateAndTime('tuesday', '21:00'),
+          end: this.setEventDateAndTime('tuesday', '22:00'),
           color: 'lime',
         },
         {
           name: 'David Wilkerson',
-          start: this.getNextDayOfTheWeek('thursday', '08:30'),
-          end: this.getNextDayOfTheWeek('thursday', '09:30'),
+          start: this.setEventDateAndTime('thursday', '08:30'),
+          end: this.setEventDateAndTime('thursday', '09:30'),
           color: 'lime',
         },
         {
           name: 'David Wilkerson',
-          start: this.getNextDayOfTheWeek('thursday', '21:00'),
-          end: this.getNextDayOfTheWeek('thursday', '22:00'),
+          start: this.setEventDateAndTime('thursday', '21:00'),
+          end: this.setEventDateAndTime('thursday', '22:00'),
           color: 'lime',
         },
         {
           name: 'Derek Prince',
-          start: this.getNextDayOfTheWeek('tuesday', '06:30'),
-          end: this.getNextDayOfTheWeek('tuesday', '07:30'),
+          start: this.setEventDateAndTime('tuesday', '06:30'),
+          end: this.setEventDateAndTime('tuesday', '07:30'),
           color: 'cyan',
         },
         {
           name: 'Derek Prince',
-          start: this.getNextDayOfTheWeek('tuesday', '19:00'),
-          end: this.getNextDayOfTheWeek('tuesday', '20:00'),
+          start: this.setEventDateAndTime('tuesday', '19:00'),
+          end: this.setEventDateAndTime('tuesday', '20:00'),
           color: 'cyan',
         },
         {
           name: 'Derek Prince',
-          start: this.getNextDayOfTheWeek('thursday', '06:30'),
-          end: this.getNextDayOfTheWeek('thursday', '07:30'),
+          start: this.setEventDateAndTime('thursday', '06:30'),
+          end: this.setEventDateAndTime('thursday', '07:30'),
           color: 'cyan',
         },
         {
           name: 'Derek Prince',
-          start: this.getNextDayOfTheWeek('thursday', '19:00'),
-          end: this.getNextDayOfTheWeek('thursday', '20:00'),
+          start: this.setEventDateAndTime('thursday', '19:00'),
+          end: this.setEventDateAndTime('thursday', '20:00'),
           color: 'cyan',
         },
       ];
@@ -415,46 +415,42 @@ export default {
       const d = new Date();
       const today = d.getDay();
       if (today >= 1 && today <= 5 && this.$vuetify.breakpoint.smAndDown) {
-        return d.toISOString().substring(0, 10);
-        // eslint-disable-next-line max-len
-        // const friendlyDate = d.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }).substring(0, 9);
+        const timeStamp = d.setDate(d.getDate()) - 28800000;
+        const dateWithTimeZone = new Date(timeStamp).toISOString();
+        return dateWithTimeZone.substring(0, 10);
       }
-      return this.getPreviousMonday;
-    },
-    getPreviousMonday() {
-      const prevMonday = new Date();
-      const timeStamp = prevMonday.setDate(
-        prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7),
-      );
-      const friendlyDate = new Date(timeStamp).toISOString().substring(0, 10);
-      return friendlyDate;
-    },
-    getPreviousDate() {
-      const prevDay = new Date();
-      // still have an issue with it being UTC date
-      // and not according to timeZone: 'America/Los_Angeles'
-      // -6 = Monday, -5 = tuesday, -4 = wednesday, -3 = thursday, -2 = friday, -1 = saturday,
-      const timeStamp = prevDay.setDate(prevDay.getDate() - ((prevDay.getDay() + 7) % 7));
-      const friendlyDate = new Date(timeStamp).toISOString().substring(0, 10);
-      return friendlyDate;
+      return this.getPreviousMonday();
     },
     dailyEndDay() {
-      return this.getNextDayOfTheWeek('friday');
+      return this.getPreviousMonday('friday');
     },
   },
   methods: {
-    getNextDayOfTheWeek(dayName, time) {
-      const refDate = new Date();
-      const dayOfWeek = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].indexOf(
-        dayName.slice(0, 3).toLowerCase(),
-      );
-      refDate.setHours(0, 0, 0, 0);
-      refDate.setDate(refDate.getDate() + ((7 + dayOfWeek - refDate.getDay()) % 7));
-      const friendlyDate = refDate.toISOString().substring(0, 10);
-      if (!time) {
-        return friendlyDate;
+    getPreviousMonday(dayOfWeek) {
+      let offset = 0;
+      if (dayOfWeek === 'friday') {
+        offset = 4;
+      } else if (dayOfWeek === 'thursday') {
+        offset = 3;
+      } else if (dayOfWeek === 'wednesday') {
+        offset = 2;
+      } else if (dayOfWeek === 'tuesday') {
+        offset = 1;
       }
-      return `${friendlyDate} ${time}`;
+      const prevMonday = new Date();
+      const timeStamp = prevMonday.setDate(
+        prevMonday.getDate() - ((prevMonday.getDay() + 6) % 7) + offset,
+      );
+      const dateWithTimeZone = new Date(timeStamp - 28800000).toISOString();
+      const friendlyDate = dateWithTimeZone.substring(0, 10);
+      return friendlyDate;
+    },
+    setEventDateAndTime(dayName, time) {
+      const prevDate = this.getPreviousMonday(dayName);
+      if (!time) {
+        return prevDate;
+      }
+      return `${prevDate} ${time}`;
     },
     getEventColor(event) {
       return event.color;
