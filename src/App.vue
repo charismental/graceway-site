@@ -213,8 +213,8 @@ export default {
   name: 'App',
   components: { CFooter, BottomPlayer },
   data: () => ({
-    // stream: 'https://streamingv2.shoutcast.com/gwradio',
-    stream: 'https://rcast.live/stream/64776',
+    stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
+    // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
     songInfo: null,
     songHistory: [],

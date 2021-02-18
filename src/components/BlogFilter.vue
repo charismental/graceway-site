@@ -15,7 +15,7 @@
     </v-row >
     <v-row class="row_two" justify="center" align="center">
       <v-col>
-        <v-chip-group>
+        <v-chip-group column >
           <v-chip
             :disabled="$route.name === 'Blog'"
             v-for="b in blogs"
