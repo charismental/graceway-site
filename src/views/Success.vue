@@ -4,8 +4,8 @@
       <v-row justify="center">
         <v-col align="center">
           <v-card elevation="0">
-            <v-card-title text-center>Your payment has been Processed.</v-card-title>
-            <v-card-subtitle text-center>From all of us here at GraceWay Radio,
+            <h2>Your payment has been Processed.</h2>
+            <v-card-subtitle>From all of us here at GraceWay Radio,
               thank you for your tax-deductible donation!
             </v-card-subtitle>
             <v-card-text

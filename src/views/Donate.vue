@@ -7,23 +7,23 @@
     </v-row>
     <v-row justify="center">
       <v-col lg="10">
-    <v-tabs
-      v-model="tab"
-      fixed-tabs
-      background-color="blue darken-4"
-      dark
-      slider-color="yellow"
-      slider-size="4"
-      active-class="active_tab"
-    >
-      <v-tab
-        v-for="c in choices"
-        :key="c.name"
-        grow
-      >
-        {{c.name}}
-      </v-tab>
-    </v-tabs>
+        <v-tabs
+          v-model="tab"
+          fixed-tabs
+          background-color="blue darken-4"
+          dark
+          slider-color="yellow"
+          slider-size="4"
+          active-class="active_tab"
+        >
+          <v-tab
+            v-for="c in choices"
+            :key="c.name"
+            grow
+          >
+            {{c.name}}
+          </v-tab>
+        </v-tabs>
       </v-col>
     </v-row>
     <v-tabs-items v-model="tab">
@@ -41,10 +41,12 @@
             <v-card>
               <v-list dense>
                 <v-subheader>Donation Options - Please Select One</v-subheader>
-                <v-divider class="ma-0" inset></v-divider>
+                <v-divider
+                  class="ma-0"
+                  inset
+                ></v-divider>
                 <v-list-item-group
-                  v-model="max"
-                  color="blue darken-3"
+
                 >
                   <v-list-item
                     v-for="item in c.options"
@@ -90,22 +92,25 @@
       @loading="(v) => (loading = v)"
     />
     <v-row class="justify-center align-center mt-n3">
-      <v-col sm="7"
-            lg="5"
-            md="5">
-    <v-btn
-      class="mt-4"
-      block
-      :disabled="!selectedLineItem"
-      @click="submit"
-      :dark="!!selectedLineItem"
-      color="blue"
-    >Donate</v-btn>
+      <v-col
+        sm="7"
+        lg="5"
+        md="5"
+      >
+        <v-btn
+          class="mt-4"
+          block
+          :disabled="!selectedLineItem"
+          @click="submit"
+          :dark="!!selectedLineItem"
+          color="blue"
+        >Donate</v-btn>
       </v-col>
     </v-row>
 
-    <p class="text-center text-weak">Donations are handled by Stripe Checkout.</p>
-    <p class="text-center text-weak">You will return after the transaction.</p>
+    <p class="text-center text-weak">Your tax deductible donation
+      will be handled securely by Stripe Checkout.</p>
+    <p class="text-center text-weak">You will be redirected after the transaction.</p>
   </v-container>
 </template>
 
@@ -245,11 +250,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .active_tab {
-  font-size:1.1em;
-  transition:all 0.2s linear;
+  font-size: 1.1em;
+  transition: all 0.2s linear;
 
   &:active {
-    transform:scale(1.2);
+    transform: scale(1.2);
   }
+}
+.v-list-item:hover:not(v-list-item--active) {
+  border-left: 4px solid darkblue;
+  background-clip: padding-box;
+  background-color: rgba(144, 202, 249, 0.5);
 }
 </style>
