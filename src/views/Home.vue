@@ -17,11 +17,7 @@
         :key="slide.src"
         eager
       >
-        <v-img
-          :src="`https://gracewayradio.com/slide/${slide.src}`"
-          height="100%"
-          eager
-        />
+        <v-img :src="`https://gracewayradio.com/slide/${slide.src}`" height="100%" eager />
       </v-carousel-item>
     </v-carousel>
     <v-row>
@@ -29,7 +25,7 @@
         <v-card
           @click="
             $router.push({
-              name: 'Blogs',
+              name: 'Blogs'
             })
           "
         >
@@ -38,9 +34,7 @@
               <v-expand-transition>
                 <div
                   class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="
-                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
-                  "
+                  :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
                 >
                   <div
                     v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -51,30 +45,21 @@
                     Blog Page
                   </div>
                 </div>
-              </v-expand-transition></v-img
-            >
+              </v-expand-transition>
+            </v-img>
           </v-hover>
         </v-card>
       </v-col>
       <v-col cols="12" md="4">
         <v-dialog :value="showVerse" max-width="600">
           <template v-slot:activator="{ on, attrs }">
-            <v-card
-              style="cursor: pointer"
-              v-bind="attrs"
-              v-on="on"
-              @click="activateVerse"
-            >
+            <v-card style="cursor: pointer" v-bind="attrs" v-on="on" @click="activateVerse">
               <v-hover v-slot:default="{ hover }">
                 <v-img src="~@/assets/verse.jpg">
                   <v-expand-transition>
                     <div
                       class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                      :style="
-                        hover || $vuetify.breakpoint.smAndDown
-                          ? 'height: 38%'
-                          : 'height: 5%'
-                      "
+                      :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
                     >
                       <div
                         v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -82,16 +67,14 @@
                         style="background-color: #0d47a1"
                         :style="$vuetify.breakpoint.smAndDown ? 'font-size: 10vw' : ''"
                       >
-                        <span
-                          v-if="$vuetify.breakpoint.lgAndUp || $vuetify.breakpoint.smOnly"
-                        >
+                        <span v-if="$vuetify.breakpoint.lgAndUp || $vuetify.breakpoint.smOnly">
                           Verse of the Day
                         </span>
                         <span v-else>Today's Verse</span>
                       </div>
                     </div>
-                  </v-expand-transition></v-img
-                >
+                  </v-expand-transition>
+                </v-img>
               </v-hover>
             </v-card>
           </template>
@@ -99,15 +82,13 @@
         </v-dialog>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card @click="triggerSnackbar('What\'s New Page is Coming Soon!')">
+        <v-card @click.stop="dialog = true">
           <v-hover v-slot:default="{ hover }">
             <v-img src="~@/assets/news.jpg">
               <v-expand-transition>
                 <div
                   class="d-flex transition-fast-in-fast-out cyan lighten-2 v-card--reveal"
-                  :style="
-                    hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'
-                  "
+                  :style="hover || $vuetify.breakpoint.smAndDown ? 'height: 38%' : 'height: 5%'"
                 >
                   <div
                     v-if="hover || $vuetify.breakpoint.smAndDown"
@@ -118,10 +99,36 @@
                     Featured
                   </div>
                 </div>
-              </v-expand-transition></v-img
-            >
+              </v-expand-transition>
+            </v-img>
           </v-hover>
         </v-card>
+        <v-dialog
+          dark
+          scrollable
+          transition="dialog-bottom-transition"
+          v-model="dialog"
+          overlay-color="#263238"
+          overlay-opacity=".8"
+          max-width="350"
+        >
+          <v-card v-model="dialogText" color="#263238">
+            <v-card-text class="mt-4 mb-4">
+              <v-img contain :src="image" class="mb-2"></v-img>
+              <div v-html="content"></div>
+              <div v-for="l in link" :key="l.id">
+                <a :href="l.link" target="_blank">
+                  Amazon Books: Shaken by God by Jamie Buckingham</a
+                >
+              </div>
+            </v-card-text>
+            <v-card-actions @click="dialog = false">
+              <v-btn @click="dialog = false" color="primary">
+                Close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-col>
     </v-row>
     <v-snackbar v-model="showSnackbar" multi-line color="warning">
@@ -131,12 +138,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Home',
   data: () => ({
     model: 0,
     showSnackbar: false,
+    dialog: false,
+    dialogText: '',
     snackBarText: '',
+    content: '',
+    image: '',
+    link: [],
     slideShow: [
       // {
       //   src: '01 valentine.jpg',
@@ -176,7 +190,8 @@ export default {
       const getLength = (number) => number.toString().length;
       const today = new Date();
       let dayOfYear = Math.floor(
-        (today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24,
+        // eslint-disable-next-line comma-dangle
+        (today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24
       ).toString();
       if (getLength(parseInt(dayOfYear, 10)) === 1) {
         dayOfYear = `00${dayOfYear}`;
@@ -187,6 +202,20 @@ export default {
     },
   },
   methods: {
+    getFeatures() {
+      const url = 'https://gwrapi.herokuapp.com/featurette/2';
+      axios
+        .get(url)
+        .then((res) => {
+          this.content = res.data.content;
+          this.image = res.data.image;
+          this.link = res.data.link;
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        });
+    },
     navigateTo(slideObject) {
       if (slideObject?.link) {
         this.$router.push({ name: slideObject.link });
@@ -202,6 +231,9 @@ export default {
     activateVerse() {
       this.$router.push({ name: 'Verse', params: { verseId: this.dayOfYear } });
     },
+  },
+  mounted() {
+    this.getFeatures();
   },
 };
 </script>
