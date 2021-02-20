@@ -24,11 +24,9 @@ export default {
   components: {},
   methods: {
     makeRequest() {
-      const url = 'https://gwr-node.herokuapp.com/request';
+      const url = `https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
       axios
-        .post(url, {
-          songId: this.songId,
-        })
+        .get(url)
         .then((res) => {
           // eslint-disable-next-line no-console
           console.log(res.data);
