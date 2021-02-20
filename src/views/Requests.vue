@@ -24,9 +24,13 @@ export default {
   components: {},
   methods: {
     makeRequest() {
-      const url = `https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
+      const url = `https://cors-anywhere.herokuapp.com/https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
       axios
-        .get(url)
+        .get(url, {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+        })
         .then((res) => {
           // eslint-disable-next-line no-console
           console.log(res.data);
