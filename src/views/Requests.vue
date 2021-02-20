@@ -24,7 +24,7 @@ export default {
   components: {},
   methods: {
     makeRequest() {
-      const url = `https://cors-anywhere.herokuapp.com/https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
+      const url = `https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
       axios
         .get(url, {
           headers: {
