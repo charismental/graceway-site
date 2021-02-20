@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Donate from '../views/Donate.vue';
+import Requests from '../views/Requests.vue';
 import Blogs from '../views/Blogs.vue';
 import Blog from '../views/Blog.vue';
 import Contact from '../views/Contact.vue';
@@ -40,6 +41,11 @@ const routes = [
     path: '/cancel',
     name: 'Cancel',
     component: Cancel,
+  },
+  {
+    path: '/requests',
+    name: 'Requests',
+    component: Requests,
   },
   {
     path: '/blog',
