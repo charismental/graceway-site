@@ -1,6 +1,28 @@
 <template>
   <div class="requests">
-    <v-card class="mx-auto" max-width="600">
+    <v-card style="position: relative" class="mx-auto" max-width="600">
+      <v-overlay absolute :value="searchLoading">
+        <v-progress-circular indeterminate></v-progress-circular>
+      </v-overlay>
+      <v-card-text>
+        <v-text-field
+          placeholder="Search if you dare..."
+          :disabled="searchLoading"
+          v-model="searchTerm"
+        ></v-text-field>
+        <v-list v-if="searchResults.length">
+          <v-list-item
+            style="cursor: pointer"
+            @click="makeRequest(item.songid)"
+            v-for="item in searchResults"
+            :key="item.songid"
+          >
+            {{ item.title }} - {{ item.artist }}
+          </v-list-item>
+        </v-list>
+      </v-card-text>
+    </v-card>
+    <v-card class="mx-auto mt-4" max-width="600">
       <v-card-text>
         <div class="px-6">
           <v-text-field type="number" v-model.number="songId" />
@@ -33,14 +55,22 @@ import axios from 'axios';
 export default {
   name: 'Requests',
   data: () => ({
+    searchTerm: '',
+    searchResults: [],
     snackbar: false,
     songId: 1200,
     requestHeader: '',
     requestBody: '',
     requestLoading: false,
+    searchLoading: false,
   }),
   components: {},
   watch: {
+    searchTerm(val) {
+      if (val.length >= 3 && !this.searchLoading) {
+        this.fetchSongs();
+      }
+    },
     requestHeader(val) {
       if (val) {
         this.snackbar = true;
@@ -58,9 +88,35 @@ export default {
         this.requestBody = '';
       });
     },
-    makeRequest() {
+    fetchSongs() {
+      this.searchLoading = true;
+      const url = `https://gwr-node.herokuapp.com/api/songs?search=${this.searchTerm}`;
+
+      axios
+        .get(url)
+        .then((res) => {
+          if (res?.data && Array.isArray(res.data)) {
+            this.searchResults = res.data;
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        })
+        .finally(() => {
+          this.searchLoading = false;
+        });
+    },
+    makeRequest(id) {
+      if (this.requestLoading) {
+        return;
+      }
       this.requestLoading = true;
-      const url = `https://gwr-node.herokuapp.com/api/request?songId=${this.songId}`;
+      let { songId } = this;
+      if (id) {
+        songId = id;
+      }
+      const url = `https://gwr-node.herokuapp.com/api/request?songId=${songId}`;
       const parser = new DOMParser();
       axios
         .get(url)
