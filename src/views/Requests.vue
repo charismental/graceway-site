@@ -7,7 +7,6 @@
       <v-card-text>
         <v-text-field
           placeholder="Search if you dare..."
-          :disabled="searchLoading"
           v-model="searchTerm"
         ></v-text-field>
         <v-list v-if="searchResults.length">
@@ -67,7 +66,7 @@ export default {
   components: {},
   watch: {
     searchTerm(val) {
-      if (val.length >= 3 && !this.searchLoading) {
+      if (val.length >= 4) {
         this.fetchSongs();
       }
     },
