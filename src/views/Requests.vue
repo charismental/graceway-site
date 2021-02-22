@@ -60,7 +60,7 @@ export default {
     },
     makeRequest() {
       this.requestLoading = true;
-      const url = `https://gwr-node.herokuapp.com/request?songId=${this.songId}`;
+      const url = `https://gwr-node.herokuapp.com/api/request?songId=${this.songId}`;
       const parser = new DOMParser();
       axios
         .get(url)
