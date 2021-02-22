@@ -242,6 +242,12 @@ export default {
         disabled: false,
       },
       {
+        name: 'Song Requests',
+        link: { name: 'Requests' },
+        featured: false,
+        disabled: false,
+      },
+      {
         name: 'About Us',
         link: { name: 'About' },
         featured: false,
