@@ -1,10 +1,9 @@
 <template>
-  <div class="program-schedule">
-    <v-container width="700">
-      <v-row align="end" justify="center">
+    <v-container>
+      <v-row class="justify-center align-center">
         <v-col v-for="(s, index) in speakers" :key="s.name"
         lg="3" md="4" sm="6" xs="12" min-width="300" max-width="350">
-          <v-card rounded="xl" elevation="24" width="350">
+          <v-card rounded="xl" elevation="24" width="350" class="mx-auto">
           <v-img :src="require('@/assets/' + s.photo)"
           height="350" class="white--text">
                   <v-card-title>{{ s.name }}</v-card-title>
@@ -29,7 +28,6 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
 </template>
 
 <script>
@@ -72,7 +70,7 @@ export default {
       },
       {
         name: 'David Pawson',
-        photo: 'david_pawson.png',
+        photo: 'david_pawson.jpg',
         times: 'Mon, Wed, Fri @ 2:30AM, 2:30PM',
         about: `<p>Born in England in 1930,
         David began his career with a degree in Agriculture from Durham University.
@@ -273,40 +271,40 @@ export default {
         name: 'Jamie Buckingham',
         photo: 'jamie_buckingham.jpg',
         times: 'Tuesday, Thursday @ 4:30AM, 4:30PM',
-        about: `<p class="c6"><span class="c8 c5">A master storyteller 
-        and Bible teacher, Jamie Buckingham inspired and delighted 
-        millions around the world both in person and in print. He 
-        was recognized as one of the top Christian authors and 
-        speakers of the charismatic movement from the early 1970s 
+        about: `<p class="c6"><span class="c8 c5">A master storyteller
+        and Bible teacher, Jamie Buckingham inspired and delighted
+        millions around the world both in person and in print. He
+        was recognized as one of the top Christian authors and
+        speakers of the charismatic movement from the early 1970s
         until his death in 1992.</span></p><p>
         <span class="c8 c5"></span></p><p class="c6"><span class="c8 c5">
-        As a distinguished Bible scholar with graduate degrees in English 
-        Literature and Theology, Jamie was respected among liturgical, 
-        evangelical, and Pentecostal Christians. He was considered a close 
-        friend and confidant of many key Christian leaders of the late 20th 
+        As a distinguished Bible scholar with graduate degrees in English
+        Literature and Theology, Jamie was respected among liturgical,
+        evangelical, and Pentecostal Christians. He was considered a close
+        friend and confidant of many key Christian leaders of the late 20th
         century.</span></p><p><span class="c5 c8"></span></p>
-        <p class="c6"><span class="c5">Jamie was more than an author of books. 
+        <p class="c6"><span class="c5">Jamie was more than an author of books.
         He was an award-winning columnist for </span><span class="c5 c9">
         Charisma Magazine, </span><span class="c5">an editor at </span>
-        <span class="c5 c9">Guideposts Magazine </span><span class="c5">and 
+        <span class="c5 c9">Guideposts Magazine </span><span class="c5">and
         editor-in-chief of </span><span class="c5 c9">Ministries Today Magazine</span>
-        <span class="c8 c5">. A popular conference speaker, he was known as one of 
-        America&rsquo;s foremost authorities on the Sinai and Israel. He wrote and 
+        <span class="c8 c5">. A popular conference speaker, he was known as one of
+        America&rsquo;s foremost authorities on the Sinai and Israel. He wrote and
         produced more than 100 video teachings on location in the Holy Land.</span>
         </p><p><span class="c8 c5"></span></p><p class="c0">
-        <span class="c7">Many of Jamie Buckingham&rsquo;s best teachings are 
+        <span class="c7">Many of Jamie Buckingham&rsquo;s best teachings are
         again available on his website, &nbsp;</span><span">
         <a" href="https://www.jamiebuckinghamministries.com">
-        www.JamieBuckinghamMinistries.com</a></span><span class="c7 c10">, 
-        in audio, video, electronic and print formats. They provide comprehensive 
-        insight into Jamie&rsquo;s life, his family, and his church; the priorities 
-        of his heart and the focus of his ministry; his personal teaching style, 
-        which was marked by humility, transparency and authenticity; and his unique 
-        gifting as a storyteller and teacher of the Word of God flowing in the power 
-        of the Holy Spirit.</span></p><p class="c0"><span class="c7">Jamie&rsquo;s 
-        wisdom, insight, and penetrating observations about living life in the fulness 
-        of the Spirit are as relevant today as they were when they were first spoken, 
-        taped, or penned. His ministry continues to be a blessing to believers in the 
+        www.JamieBuckinghamMinistries.com</a></span><span class="c7 c10">,
+        in audio, video, electronic and print formats. They provide comprehensive
+        insight into Jamie&rsquo;s life, his family, and his church; the priorities
+        of his heart and the focus of his ministry; his personal teaching style,
+        which was marked by humility, transparency and authenticity; and his unique
+        gifting as a storyteller and teacher of the Word of God flowing in the power
+        of the Holy Spirit.</span></p><p class="c0"><span class="c7">Jamie&rsquo;s
+        wisdom, insight, and penetrating observations about living life in the fulness
+        of the Spirit are as relevant today as they were when they were first spoken,
+        taped, or penned. His ministry continues to be a blessing to believers in the
         U.S. and beyond. </span></p>`,
       },
       {
