@@ -67,6 +67,11 @@ export default {
         link: '<a href="https://www.liveradio.ie/"><img src="https://www.liveradio.ie/liveradio-logo.png" width="154" height="36" border="0" alt="Live Radio"/> </a>',
         listen: 'https://www.liveradio.ie/stations/graceway-radio',
       },
+      {
+        name: 'Listenonlineradio.com',
+        link: '<a href="https://www.listenonlineradio.com"><img src="https://www.listenonlineradio.com/assets/images/468x60.png" width="70%" border="0" alt="Listen Online Radio"/> </a>',
+        listen: 'https://www.listenonlineradio.com/usa/graceway-radio',
+      },
     ],
   }),
 };
