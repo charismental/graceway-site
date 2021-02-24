@@ -10,7 +10,7 @@
           @click="navigateHome"
           alt="Graceway Radio Logo"
           contain
-          :class="isMobile ? '' : 'ml-4'"
+          :class="isMobile ? '' : 'ml-2'"
           src="@/assets/logo.png"
           max-height="60"
           max-width="60"
@@ -18,8 +18,6 @@
       </div>
       <v-toolbar-title class="ml-2" style="cursor: pointer" @click="navigateHome">
         <div :class="$vuetify.breakpoint.smAndUp ? 'text-h5' : 'text-body-1'">
-          <!-- class="glitch"
-          data-text="Graceway Radio" -->
           Graceway Radio
         </div>
       </v-toolbar-title>
@@ -31,7 +29,7 @@
           :key="navItem.name"
           :text="!navItem.featured"
           active-class="active-button"
-          class="mr-2"
+          class="mr-1"
           :color="navItem.featured ? 'warning' : ''"
           exact
           :small="$vuetify.breakpoint.lgAndUp"
