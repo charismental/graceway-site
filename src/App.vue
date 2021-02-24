@@ -263,6 +263,12 @@ export default {
         disabled: true,
       },
       {
+        name: 'How to Listen',
+        link: { name: 'HowToListen' },
+        featured: false,
+        disabled: false,
+      },
+      {
         name: 'Make A Donation',
         link: { name: 'Donate' },
         featured: true,
