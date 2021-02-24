@@ -1,10 +1,19 @@
 <template>
   <div class="requests">
-    <v-dialog v-model="openSongInfo" width="500">
-      <v-card color="#1F7087" dark>
+    <v-dialog
+      v-model="openSongInfo"
+      width="550"
+      max-width="80%"
+    >
+      <v-card
+        color="#1F7087"
+        dark
+        v-if="!isMobile"
+      >
         <div class="d-flex flex-no-wrap justify-space-between">
           <div>
-            <v-card-title class="headline">{{
+            <v-card-title
+            >{{
               activeSong && activeSong.title ? activeSong.title : ""
             }}</v-card-title>
 
@@ -13,7 +22,12 @@
             }}</v-card-subtitle>
 
             <v-card-actions>
-              <v-btn @click="closeSongInfo" dark icon small>
+              <v-btn
+                @click="closeSongInfo"
+                dark
+                icon
+                small
+              >
                 <v-icon>mdi-close</v-icon>
               </v-btn>
               <v-btn
@@ -21,18 +35,70 @@
                 outlined
                 rounded
                 @click="makeRequest(activeSong.songid)"
-                >Request Song</v-btn
-              >
+              >Request Song</v-btn>
             </v-card-actions>
           </div>
 
-          <v-avatar class="ma-3" size="125" tile>
-            <v-img :src="itemImg(activeSong)"></v-img>
+          <v-avatar
+            class="ma-3"
+            size="125"
+            tile
+          >
+            <v-img
+              v-if="activeSong"
+              :src="itemImg(activeSong.picture)"
+            ></v-img>
           </v-avatar>
         </div>
       </v-card>
+            <v-card
+            v-else
+        color="#1F7087"
+        dark
+      >
+      <div style="display:block;">
+            <v-img
+              height="200"
+              class="ma-2"
+              contain
+              v-if="activeSong"
+              :src="itemImg(activeSong.picture)"
+            ></v-img>
+          <v-card-subtitle
+          class="text-center"
+          style="font-size:0.9em;">
+             {{ activeSong && activeSong.title ? activeSong.title : ""
+            }}</v-card-subtitle>
+
+          <v-card-subtitle
+          class="text-center">{{
+              activeSong && activeSong.artist ? activeSong.artist : ""
+            }}</v-card-subtitle>
+
+          <v-card-actions>
+            <v-btn
+              @click="closeSongInfo"
+              dark
+              icon
+              small
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-btn
+              class="ml-2 text-capitalize"
+              outlined
+              rounded
+              @click="makeRequest(activeSong.songid)"
+            >Request Song</v-btn>
+          </v-card-actions>
+          </div>
+      </v-card>
     </v-dialog>
-    <v-card class="mx-auto" max-width="600" max-height="800">
+    <v-card
+      class="mx-auto mt-8 mb-8"
+      width="600"
+      max-height="800"
+    >
       <v-card-text class="px-16">
         <v-text-field
           placeholder="Enter title or artist name..."
@@ -40,25 +106,64 @@
         ></v-text-field>
       </v-card-text>
       <v-card-text style="position: relative">
-      <v-overlay absolute :value="searchLoading">
-        <v-progress-circular indeterminate></v-progress-circular>
-      </v-overlay>
-        <v-list v-if="searchResults.length" height="600" style="overflow-y: auto">
-          <v-list-item v-for="item in searchResults" :key="item.songid">
+        <v-overlay
+          absolute
+          :value="searchLoading"
+        >
+          <v-progress-circular indeterminate></v-progress-circular>
+        </v-overlay>
+        <v-list
+          v-if="searchResults.length"
+          height="600"
+          style="overflow-y: auto"
+        >
+          <v-list-item
+            v-for="item in searchResults"
+            :key="item.songid"
+            class="song_list"
+          >
+            <v-avatar class="mr-2">
+              <v-img :src="itemImg(item.picture)"></v-img>
+            </v-avatar>
             <v-list-item-content>
-              <v-list-item-title style="cursor: pointer" @click="viewSongInfo(item)">
+              <v-list-item-title
+                style="cursor: pointer"
+                @click="viewSongInfo(item)"
+                id="list_link"
+                :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+              >
                 {{ item.title }}
               </v-list-item-title>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs}">
+                  <v-list-item-subtitle
+                    v-on="on"
+                    v-bind="attrs"
+                    style="cursor: pointer"
+                    @click="searchTerm = item.artist"
+                  :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+                  >
+                    {{ item.artist }}
+                  </v-list-item-subtitle>
+                </template>
+                <span>Search Artist {{item.artist}}?</span>
+              </v-tooltip>
               <v-list-item-subtitle
                 style="cursor: pointer"
-                @click="searchTerm = item.artist"
+                class="text-caption"
               >
-                {{ item.artist }}
+                {{ item.album }}
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
+          <v-divider></v-divider>
         </v-list>
       </v-card-text>
+    </v-card>
+    <v-card>
+      <v-row v-if="requestedSongs">
+        <v-col></v-col>
+      </v-row>
     </v-card>
     <v-snackbar
       :timeout="-1"
@@ -66,9 +171,16 @@
       v-model="snackbar"
     >
       <div class="white--text text-h3">{{ requestHeader }}</div>
-      <div class="black--text text-body-2" v-if="requestBody">{{ requestBody }}</div>
+      <div
+        class="black--text text-body-2"
+        v-if="requestBody"
+      >{{ requestBody }}</div>
       <template v-slot:action="{ attrs }">
-        <v-btn text v-bind="attrs" @click="closeSnackbar"> Close </v-btn>
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="closeSnackbar"
+        > Close </v-btn>
       </template>
     </v-snackbar>
   </div>
@@ -80,9 +192,11 @@ import axios from 'axios';
 export default {
   name: 'Requests',
   data: () => ({
+    smallScreen: false,
     openSongInfo: false,
     searchTerm: '',
     searchResults: [],
+    requestedSongs: [],
     snackbar: false,
     songId: 1200,
     requestHeader: '',
@@ -107,11 +221,19 @@ export default {
       }
     },
   },
+  computed: {
+    isMobile() {
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return !this.smallScreen;
+      }
+      return this.smallScreen;
+    },
+  },
   methods: {
     itemImg(item) {
       const url = 'https://gracewayradio.com/artwork/';
-      if (item?.picture) {
-        return url + item.picture;
+      if (item) {
+        return url + item;
       }
       if (this.loadingSongInfo) {
         return `${url}loading.gif`;
@@ -169,16 +291,53 @@ export default {
           const doc = parser.parseFromString(res.data, 'text/html');
           const responseElement = doc.getElementById('content');
           this.requestHeader = responseElement.children[0].innerHTML;
-          this.requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
+          this.requestBody = responseElement.children[1].innerHTML.replace(
+            '<br>',
+            '',
+          );
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         })
         .finally(() => {
+          if (this.requestHeader === 'Request Successful') {
+            this.searchTerm = '';
+            this.searchResults = [];
+            this.requestLoading = false;
+            setTimeout(() => {
+              this.closeSongInfo();
+            }, 3000);
+          }
           this.requestLoading = false;
+          setTimeout(() => {
+            this.closeSongInfo();
+          }, 3000);
         });
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.song_list {
+  background: #eee;
+
+  &:first-child {
+    border-top: 1px solid black;
+  }
+  &:nth-child(even) {
+    background: #f8f8f8;
+  }
+  &:hover {
+    background: #dbdbdb;
+  }
+}
+#list_link {
+  transition: all 0.5 ease-in-out;
+  &:hover {
+    color: blue !important;
+    font-size: 1.1em;
+  }
+}
+</style>
