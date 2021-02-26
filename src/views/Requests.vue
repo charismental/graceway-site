@@ -122,13 +122,15 @@
     <v-card v-if="recentSearches.length" width="600" class="mx-auto" elevation="0">
       <v-card-title>Recently Searched</v-card-title>
       <v-divider inset></v-divider>
-      <v-row >
+      <v-row justify="space-around">
         <v-col v-for="(term, i) in recentSearches" :key="i">
+          <v-chip-group column>
         <v-chip
-        @click="searchTerm = term"
-        color="primary"
+        @click="searchTerm = term;"
+        :color="randomColor()"
         class="ma-2"
         text-color="white">{{term}}</v-chip>
+          </v-chip-group>
         </v-col>
       </v-row>
     </v-card>
@@ -190,6 +192,10 @@ export default {
     },
   },
   methods: {
+    randomColor() {
+      const random = Math.floor(Math.random() * 16777215).toString(16);
+      return `#${random}`;
+    },
     itemImg(item) {
       const url = 'https://gracewayradio.com/artwork/';
       if (item) {
