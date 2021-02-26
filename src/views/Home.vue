@@ -223,9 +223,7 @@ export default {
         startDate.setHours(startDate.getHours() + 8);
         const endDate = new Date(feature.endPublish);
         endDate.setHours(endDate.getHours() + 8);
-        // return startDate < today;
         return endDate >= myToday && myToday >= startDate;
-        // return startDate <= today && endDate >= today;
       });
     },
     showVerse() {

@@ -3,6 +3,34 @@
     <audio id="audio" :src="stream">
       Your browser does not support the audio element.
     </audio>
+    <v-dialog :value="firstVisit" max-width="600">
+      <v-card class="welcome-card pb-6" dark rounded elevation="12">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn small icon @click="firstVisit = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-card-text class="py-8">
+          <div class="text-h4 text-center" style="color: #15cad5">
+            Welcome to Graceway Radio!
+          </div>
+          <div class="text-h5 text-center">Please click below to start listening</div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            class="mx-auto"
+            fab
+            color="grey lighten-1"
+            large
+            @click="playPause"
+          >
+            <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
+            <v-icon large v-else>mdi-pause</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-app-bar elevate-on-scroll app color="white">
       <div class="d-flex align-center">
         <v-img
@@ -214,6 +242,7 @@ export default {
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
+    firstVisit: false,
     songInfo: null,
     songHistory: [],
     songQueue: [],
@@ -320,6 +349,14 @@ export default {
         });
     },
     playPause() {
+      if (this.firstVisit) {
+        setTimeout(() => {
+          this.firstVisit = false;
+          if (!this.isMobile) {
+            this.openPlayer = true;
+          }
+        }, 1200);
+      }
       if (this.radioIsPlaying) {
         this.radioIsPlaying = false;
         // eslint-disable-next-line no-undef
@@ -341,6 +378,11 @@ export default {
       }
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.firstVisit = true;
+    }, 1800);
+  },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
@@ -361,6 +403,10 @@ html {
 </style>
 
 <style lang="scss" scoped>
+.welcome-card {
+  background-color: #323232;
+  border: 2px solid #15cad5;
+}
 .active-button {
   color: blue;
 }
