@@ -32,7 +32,7 @@
         </div>
       </v-card>
       <v-card v-else color="#1F7087" dark>
-        <div style="display:block;">
+        <div style="display: block">
           <v-img
             height="200"
             class="ma-2"
@@ -40,7 +40,7 @@
             v-if="activeSong"
             :src="itemImg(activeSong.picture)"
           ></v-img>
-          <v-card-subtitle class="text-center" style="font-size:0.9em;">
+          <v-card-subtitle class="text-center" style="font-size: 0.9em">
             {{ activeSong && activeSong.title ? activeSong.title : "" }}</v-card-subtitle
           >
 
@@ -84,7 +84,7 @@
                 style="cursor: pointer"
                 @click="viewSongInfo(item)"
                 id="list_link"
-                :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+                :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
               >
                 {{ item.title }}
               </v-list-item-title>
@@ -95,9 +95,7 @@
                     v-bind="attrs"
                     style="cursor: pointer"
                     @click="searchTerm = item.artist"
-                    :style="
-                      $vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'
-                    "
+                    :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
                   >
                     {{ item.artist }}
                   </v-list-item-subtitle>
@@ -106,7 +104,7 @@
               </v-tooltip>
               <v-list-item-subtitle
                 v-else
-                :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+                :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
               >
                 {{ item.artist }}
               </v-list-item-subtitle>
@@ -125,12 +123,13 @@
       <v-row justify="space-around">
         <v-col v-for="(term, i) in recentSearches" :key="i">
           <v-chip-group column>
-        <v-chip
-        v-model="recentResults"
-        @click="searchTerm = term;"
-        :color="randomColor()"
-        class="ma-2"
-        text-color="white">{{term}}</v-chip>
+            <v-chip
+              @click="searchTerm = term.search"
+              :color="term.color"
+              class="ma-2"
+              text-color="white"
+              >{{ term.search }}</v-chip
+            >
           </v-chip-group>
         </v-col>
       </v-row>
@@ -159,7 +158,6 @@ export default {
     openSongInfo: false,
     searchTerm: '',
     recentSearches: [],
-    recentResults: null,
     searchResults: [],
     snackbar: false,
     songId: 1200,
@@ -171,8 +169,8 @@ export default {
   }),
   components: {},
   watch: {
-    recentResults(term) {
-      localStorage.recentResults.saveSearch(term);
+    recentSearches() {
+      this.saveSearch();
     },
     searchTerm(val) {
       if (val.length >= 3) {
@@ -197,17 +195,9 @@ export default {
     },
   },
   methods: {
-    addSearchItem() {
-      if (!this.recentResults) {
-        return;
-      }
-      this.recentSearches.push(this.recentResults);
-      this.recentRsults = '';
-      this.saveSearch();
-    },
     saveSearch() {
-      const parsed = JSON.stringify(this.recentResults);
-      localStorage.setItem('recentResults', parsed);
+      const parsed = JSON.stringify(this.recentSearches);
+      localStorage.setItem('recentSearches', parsed);
     },
     randomColor() {
       const random = Math.floor(Math.random() * 16777215).toString(16);
@@ -275,25 +265,25 @@ export default {
           const responseElement = doc.getElementById('content');
           this.requestHeader = responseElement.children[0].innerHTML;
           this.requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
+          if (this.requestHeader === 'Request Successful') {
+            const recentRequestObj = {
+              search: this.searchTerm,
+              color: this.randomColor(),
+            };
+            this.recentSearches.push(recentRequestObj);
+            this.searchTerm = '';
+            this.searchResults = [];
+            setTimeout(() => {
+              this.closeSongInfo();
+            }, 3000);
+          }
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         })
         .finally(() => {
-          if (this.requestHeader === 'Request Successful') {
-            this.recentSearches.push(this.searchTerm);
-            this.searchTerm = '';
-            this.searchResults = [];
-            this.requestLoading = false;
-            setTimeout(() => {
-              this.closeSongInfo();
-            }, 3000);
-          }
           this.requestLoading = false;
-          setTimeout(() => {
-            this.closeSongInfo();
-          }, 3000);
         });
     },
   },
