@@ -126,6 +126,7 @@
         <v-col v-for="(term, i) in recentSearches" :key="i">
           <v-chip-group column>
         <v-chip
+        v-model="recentResults"
         @click="searchTerm = term;"
         :color="randomColor()"
         class="ma-2"
@@ -158,6 +159,7 @@ export default {
     openSongInfo: false,
     searchTerm: '',
     recentSearches: [],
+    recentResults: null,
     searchResults: [],
     snackbar: false,
     songId: 1200,
@@ -169,6 +171,9 @@ export default {
   }),
   components: {},
   watch: {
+    recentResults(term) {
+      localStorage.recentResults.saveSearch(term);
+    },
     searchTerm(val) {
       if (val.length >= 3) {
         this.fetchSongs();
@@ -192,6 +197,18 @@ export default {
     },
   },
   methods: {
+    addSearchItem() {
+      if (!this.recentResults) {
+        return;
+      }
+      this.recentSearches.push(this.recentResults);
+      this.recentRsults = '';
+      this.saveSearch();
+    },
+    saveSearch() {
+      const parsed = JSON.stringify(this.recentResults);
+      localStorage.setItem('recentResults', parsed);
+    },
     randomColor() {
       const random = Math.floor(Math.random() * 16777215).toString(16);
       return `#${random}`;
@@ -279,6 +296,11 @@ export default {
           }, 3000);
         });
     },
+  },
+  mounted() {
+    if (localStorage.getItem('recentSearches')) {
+      this.recentSearches = JSON.parse(localStorage.getItem('recentSearches'));
+    }
   },
 };
 </script>
