@@ -266,11 +266,19 @@ export default {
           this.requestHeader = responseElement.children[0].innerHTML;
           this.requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
           if (this.requestHeader === 'Request Successful') {
+            const now = new Date();
             const recentRequestObj = {
               search: this.searchTerm,
               color: this.randomColor(),
+              expiry: now.getTime() + 10800000,
             };
-            this.recentSearches.push(recentRequestObj);
+            const notGunnaDoIt = this.recentSearches
+              .some(
+                (term) => term.search === recentRequestObj.search,
+              );
+            if (!notGunnaDoIt) {
+              this.recentSearches.push(recentRequestObj);
+            }
             this.searchTerm = '';
             this.searchResults = [];
             setTimeout(() => {
@@ -284,12 +292,25 @@ export default {
         })
         .finally(() => {
           this.requestLoading = false;
+          setTimeout(() => {
+            this.closeSongInfo();
+          }, 3000);
         });
     },
   },
   mounted() {
     if (localStorage.getItem('recentSearches')) {
-      this.recentSearches = JSON.parse(localStorage.getItem('recentSearches'));
+      const searches = JSON.parse(localStorage.getItem('recentSearches'));
+      const filteredSearches = [];
+      searches.forEach((search) => {
+        const now = new Date();
+        if (now.getTime() > search.expiry) {
+          localStorage.removeItem(search);
+        } else {
+          filteredSearches.push(search);
+        }
+      });
+      this.recentSearches = filteredSearches;
     }
   },
 };
