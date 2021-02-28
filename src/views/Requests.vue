@@ -1,19 +1,10 @@
 <template>
   <div class="requests">
-    <v-dialog
-      v-model="openSongInfo"
-      width="550"
-      max-width="80%"
-    >
-      <v-card
-        color="#1F7087"
-        dark
-        v-if="!isMobile"
-      >
+    <v-dialog v-model="openSongInfo" width="550" max-width="80%">
+      <v-card color="#1F7087" dark v-if="!isMobile">
         <div class="d-flex flex-no-wrap justify-space-between">
           <div>
-            <v-card-title
-            >{{
+            <v-card-title>{{
               activeSong && activeSong.title ? activeSong.title : ""
             }}</v-card-title>
 
@@ -22,12 +13,7 @@
             }}</v-card-subtitle>
 
             <v-card-actions>
-              <v-btn
-                @click="closeSongInfo"
-                dark
-                icon
-                small
-              >
+              <v-btn @click="closeSongInfo" dark icon small>
                 <v-icon>mdi-close</v-icon>
               </v-btn>
               <v-btn
@@ -35,53 +21,35 @@
                 outlined
                 rounded
                 @click="makeRequest(activeSong.songid)"
-              >Request Song</v-btn>
+                >Request Song</v-btn
+              >
             </v-card-actions>
           </div>
 
-          <v-avatar
-            class="ma-3"
-            size="125"
-            tile
-          >
-            <v-img
-              v-if="activeSong"
-              :src="itemImg(activeSong.picture)"
-            ></v-img>
+          <v-avatar class="ma-3" size="125" tile>
+            <v-img v-if="activeSong" :src="itemImg(activeSong.picture)"></v-img>
           </v-avatar>
         </div>
       </v-card>
-            <v-card
-            v-else
-        color="#1F7087"
-        dark
-      >
-      <div style="display:block;">
-            <v-img
-              height="200"
-              class="ma-2"
-              contain
-              v-if="activeSong"
-              :src="itemImg(activeSong.picture)"
-            ></v-img>
-          <v-card-subtitle
-          class="text-center"
-          style="font-size:0.9em;">
-             {{ activeSong && activeSong.title ? activeSong.title : ""
-            }}</v-card-subtitle>
+      <v-card v-else color="#1F7087" dark>
+        <div style="display: block">
+          <v-img
+            height="200"
+            class="ma-2"
+            contain
+            v-if="activeSong"
+            :src="itemImg(activeSong.picture)"
+          ></v-img>
+          <v-card-subtitle class="text-center" style="font-size: 0.9em">
+            {{ activeSong && activeSong.title ? activeSong.title : "" }}</v-card-subtitle
+          >
 
-          <v-card-subtitle
-          class="text-center">{{
-              activeSong && activeSong.artist ? activeSong.artist : ""
-            }}</v-card-subtitle>
+          <v-card-subtitle class="text-center">{{
+            activeSong && activeSong.artist ? activeSong.artist : ""
+          }}</v-card-subtitle>
 
           <v-card-actions>
-            <v-btn
-              @click="closeSongInfo"
-              dark
-              icon
-              small
-            >
+            <v-btn @click="closeSongInfo" dark icon small>
               <v-icon>mdi-close</v-icon>
             </v-btn>
             <v-btn
@@ -89,16 +57,13 @@
               outlined
               rounded
               @click="makeRequest(activeSong.songid)"
-            >Request Song</v-btn>
+              >Request Song</v-btn
+            >
           </v-card-actions>
-          </div>
+        </div>
       </v-card>
     </v-dialog>
-    <v-card
-      class="mx-auto mt-8 mb-8"
-      width="600"
-      max-height="800"
-    >
+    <v-card class="mx-auto mt-8 mb-8" width="600" max-height="800">
       <v-card-text class="px-16">
         <v-text-field
           placeholder="Enter title or artist name..."
@@ -106,22 +71,11 @@
         ></v-text-field>
       </v-card-text>
       <v-card-text style="position: relative">
-        <v-overlay
-          absolute
-          :value="searchLoading"
-        >
+        <v-overlay absolute :value="searchLoading">
           <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
-        <v-list
-          v-if="searchResults.length"
-          height="600"
-          style="overflow-y: auto"
-        >
-          <v-list-item
-            v-for="item in searchResults"
-            :key="item.songid"
-            class="song_list"
-          >
+        <v-list v-if="searchResults.length" height="600" style="overflow-y: auto">
+          <v-list-item v-for="item in searchResults" :key="item.songid" class="song_list">
             <v-avatar class="mr-2">
               <v-img :src="itemImg(item.picture)"></v-img>
             </v-avatar>
@@ -130,28 +84,31 @@
                 style="cursor: pointer"
                 @click="viewSongInfo(item)"
                 id="list_link"
-                :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+                :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
               >
                 {{ item.title }}
               </v-list-item-title>
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs}">
+              <v-tooltip bottom v-if="!isMobile">
+                <template v-slot:activator="{ on, attrs }">
                   <v-list-item-subtitle
                     v-on="on"
                     v-bind="attrs"
                     style="cursor: pointer"
                     @click="searchTerm = item.artist"
-                  :style="$vuetify.breakpoint.smAndDown ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
+                    :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
                   >
                     {{ item.artist }}
                   </v-list-item-subtitle>
                 </template>
-                <span>Search Artist {{item.artist}}?</span>
+                <span>Search Artist {{ item.artist }}?</span>
               </v-tooltip>
               <v-list-item-subtitle
-                style="cursor: pointer"
-                class="text-caption"
+                v-else
+                :style="isMobile ? 'font-size:0.8rem;' : 'font-size:1.1rem'"
               >
+                {{ item.artist }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle style="cursor: pointer" class="text-caption">
                 {{ item.album }}
               </v-list-item-subtitle>
             </v-list-item-content>
@@ -160,9 +117,21 @@
         </v-list>
       </v-card-text>
     </v-card>
-    <v-card>
-      <v-row v-if="requestedSongs">
-        <v-col></v-col>
+    <v-card v-if="recentSearches.length" width="600" class="mx-auto" elevation="0">
+      <v-card-title>Recently Searched</v-card-title>
+      <v-divider inset></v-divider>
+      <v-row justify="space-around">
+        <v-col v-for="(term, i) in recentSearches" :key="i">
+          <v-chip-group column>
+            <v-chip
+              @click="searchTerm = term.search"
+              :color="term.color"
+              class="ma-2"
+              text-color="white"
+              >{{ term.search }}</v-chip
+            >
+          </v-chip-group>
+        </v-col>
       </v-row>
     </v-card>
     <v-snackbar
@@ -171,16 +140,9 @@
       v-model="snackbar"
     >
       <div class="white--text text-h3">{{ requestHeader }}</div>
-      <div
-        class="black--text text-body-2"
-        v-if="requestBody"
-      >{{ requestBody }}</div>
+      <div class="black--text text-body-2" v-if="requestBody">{{ requestBody }}</div>
       <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="closeSnackbar"
-        > Close </v-btn>
+        <v-btn text v-bind="attrs" @click="closeSnackbar"> Close </v-btn>
       </template>
     </v-snackbar>
   </div>
@@ -195,8 +157,8 @@ export default {
     smallScreen: false,
     openSongInfo: false,
     searchTerm: '',
+    recentSearches: [],
     searchResults: [],
-    requestedSongs: [],
     snackbar: false,
     songId: 1200,
     requestHeader: '',
@@ -207,6 +169,9 @@ export default {
   }),
   components: {},
   watch: {
+    recentSearches() {
+      this.saveSearch();
+    },
     searchTerm(val) {
       if (val.length >= 3) {
         this.fetchSongs();
@@ -230,6 +195,14 @@ export default {
     },
   },
   methods: {
+    saveSearch() {
+      const parsed = JSON.stringify(this.recentSearches);
+      localStorage.setItem('recentSearches', parsed);
+    },
+    randomColor() {
+      const random = Math.floor(Math.random() * 16777215).toString(16);
+      return `#${random}`;
+    },
     itemImg(item) {
       const url = 'https://gracewayradio.com/artwork/';
       if (item) {
@@ -291,30 +264,54 @@ export default {
           const doc = parser.parseFromString(res.data, 'text/html');
           const responseElement = doc.getElementById('content');
           this.requestHeader = responseElement.children[0].innerHTML;
-          this.requestBody = responseElement.children[1].innerHTML.replace(
-            '<br>',
-            '',
-          );
+          this.requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
+          if (this.requestHeader === 'Request Successful') {
+            const now = new Date();
+            const recentRequestObj = {
+              search: this.searchTerm,
+              color: this.randomColor(),
+              expiry: now.getTime() + 10800000,
+            };
+            const notGunnaDoIt = this.recentSearches
+              .some(
+                (term) => term.search === recentRequestObj.search,
+              );
+            if (!notGunnaDoIt) {
+              this.recentSearches.push(recentRequestObj);
+            }
+            this.searchTerm = '';
+            this.searchResults = [];
+            setTimeout(() => {
+              this.closeSongInfo();
+            }, 3000);
+          }
         })
         .catch((err) => {
           // eslint-disable-next-line no-console
           console.error(err);
         })
         .finally(() => {
-          if (this.requestHeader === 'Request Successful') {
-            this.searchTerm = '';
-            this.searchResults = [];
-            this.requestLoading = false;
-            setTimeout(() => {
-              this.closeSongInfo();
-            }, 3000);
-          }
           this.requestLoading = false;
           setTimeout(() => {
             this.closeSongInfo();
           }, 3000);
         });
     },
+  },
+  mounted() {
+    if (localStorage.getItem('recentSearches')) {
+      const searches = JSON.parse(localStorage.getItem('recentSearches'));
+      const filteredSearches = [];
+      searches.forEach((search) => {
+        const now = new Date();
+        if (now.getTime() > search.expiry) {
+          localStorage.removeItem(search);
+        } else {
+          filteredSearches.push(search);
+        }
+      });
+      this.recentSearches = filteredSearches;
+    }
   },
 };
 </script>

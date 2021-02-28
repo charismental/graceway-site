@@ -3,6 +3,34 @@
     <audio id="audio" :src="stream">
       Your browser does not support the audio element.
     </audio>
+    <v-dialog :value="firstVisit" max-width="600">
+      <v-card class="welcome-card pb-6" dark rounded elevation="12">
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn small icon @click="firstVisit = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-actions>
+        <v-card-text class="py-8">
+          <div class="text-h4 text-center" style="color: #15cad5">
+            Welcome to Graceway Radio!
+          </div>
+          <div class="text-h5 text-center">Please click below to start listening</div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            class="mx-auto"
+            fab
+            color="grey lighten-1"
+            large
+            @click="playPause"
+          >
+            <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
+            <v-icon large v-else>mdi-pause</v-icon>
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-app-bar elevate-on-scroll app color="white">
       <div class="d-flex align-center">
         <v-img
@@ -214,6 +242,7 @@ export default {
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
+    firstVisit: false,
     songInfo: null,
     songHistory: [],
     songQueue: [],
@@ -228,25 +257,25 @@ export default {
         featured: false,
       },
       {
-        name: 'Featured Speakers',
+        name: 'Speakers',
         link: { name: 'FeaturedSpeakers' },
         featured: false,
         disabled: false,
       },
       {
-        name: 'Program Schedule',
+        name: 'Schedule',
         link: { name: 'ProgramSchedule' },
         featured: false,
         disabled: false,
       },
       {
-        name: 'Song Requests',
+        name: 'Requests',
         link: { name: 'Requests' },
         featured: false,
         disabled: false,
       },
       {
-        name: 'About Us',
+        name: 'About',
         link: { name: 'About' },
         featured: false,
       },
@@ -263,13 +292,13 @@ export default {
         disabled: true,
       },
       {
-        name: 'How to Listen',
+        name: 'Links',
         link: { name: 'HowToListen' },
         featured: false,
         disabled: false,
       },
       {
-        name: 'Make A Donation',
+        name: 'Donate',
         link: { name: 'Donate' },
         featured: true,
         disabled: false,
@@ -320,6 +349,14 @@ export default {
         });
     },
     playPause() {
+      if (this.firstVisit) {
+        setTimeout(() => {
+          this.firstVisit = false;
+          if (!this.isMobile) {
+            this.openPlayer = true;
+          }
+        }, 1200);
+      }
       if (this.radioIsPlaying) {
         this.radioIsPlaying = false;
         // eslint-disable-next-line no-undef
@@ -341,6 +378,11 @@ export default {
       }
     },
   },
+  mounted() {
+    setTimeout(() => {
+      this.firstVisit = true;
+    }, 1800);
+  },
   computed: {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
@@ -361,16 +403,12 @@ html {
 </style>
 
 <style lang="scss" scoped>
+.welcome-card {
+  background-color: #323232;
+  border: 2px solid #15cad5;
+}
 .active-button {
   color: blue;
-}
-@mixin glitchCopy {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 .album-art {
   max-height: 300px;
@@ -393,56 +431,7 @@ html {
   height: 65px;
   background-color: dodgerblue;
 }
-.glitch {
-  position: relative;
-  color: black;
-  font-size: 4em;
-  letter-spacing: 0.5em;
-  animation: glitch-skew 2s infinite linear alternate-reverse;
-  text-shadow: 2px 1px 2px rgba(0, 107, 174, 0.5);
-  font-weight: bold;
 
-  &::before {
-    @include glitchCopy;
-    left: 2px;
-    text-shadow: -2px 0 #1b0bf5;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-
-  &::after {
-    @include glitchCopy;
-    left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #00f7ff;
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-  }
-}
-@keyframes glitch-anim {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-      transform: skew((random(100) / 100) + deg);
-    }
-  }
-}
-@keyframes glitch-anim2 {
-  $steps: 10;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-      transform: skew((random(100) / 100) + deg);
-    }
-  }
-}
-@keyframes glitch-skew {
-  $steps: 10;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      transform: skew((random(10) - 5) + deg);
-    }
-  }
-}
 @keyframes marquee {
   0% {
     transform: translateX(100%);

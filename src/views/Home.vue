@@ -141,15 +141,15 @@
           v-model="dialog"
           overlay-color="#263238"
           overlay-opacity=".8"
-          max-width="350"
+          max-width="400"
         >
-          <v-card dark color="#263238">
+          <v-card>
             <v-card-text v-for="(feature, i) in availableFeatures" :key="i" class="mt-4 mb-4">
               <v-img contain :src="feature.image" class="mb-2"></v-img>
               <div v-html="feature.content"></div>
               <div v-for="l in feature.link" :key="l.id">
                 <a :href="l.link" target="_blank">
-                  This should be a dynamic value, Frank</a
+                  {{l.link_text}}</a
                 >
               </div>
             </v-card-text>
@@ -223,9 +223,7 @@ export default {
         startDate.setHours(startDate.getHours() + 8);
         const endDate = new Date(feature.endPublish);
         endDate.setHours(endDate.getHours() + 8);
-        // return startDate < today;
         return endDate >= myToday && myToday >= startDate;
-        // return startDate <= today && endDate >= today;
       });
     },
     showVerse() {

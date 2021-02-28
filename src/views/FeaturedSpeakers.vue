@@ -111,7 +111,23 @@ export default {
         name: 'John Casteel',
         photo: 'john_casteel.jpg',
         times: 'Mon, Wed, Fri @ 6:30AM, 7:00PM',
-        about: '',
+        about: `<p><span >Dr. John Casteel began his ministry as a missionary in Cuba,
+         where he met his wife Marguerite. John translated and built church plants throughout
+         the area with his father and other missionary families. He and his wife then began
+          planting churches in Latin American for several years. Many of those churches are
+           still thriving today. John continues to visit the churches he launched, as well
+           mentors the beloved men and women who continue the minister to the people of the
+           area. In 1968, John and his wife Marguerite moved from Mexico to Tucson, Arizona,
+           where they raised their family and began the ministry of Grace Chapel.</span></p>
+           <p><span>The Church grew to become a ministry center with a large congregation with
+           over two-thousand attendees. After 39 years of pastoral leadership John now serves
+           at large as an evangelistic speaker and teacher. He is the author of the book entitled,
+           Seeing In The Dark.</span></p><p><span>His message is profound, filled with life-changing
+           principles, based completely on the Word of God. He ministers with a primary focus on Latin
+           America and Arizona. He is ordained with the International Church of the Foursquare Gospel,
+           and serves Southeast Arizona. He received his Doctor of Divinity degree from Southern
+            California Theological Seminary in 1988. He has four children and nine grandchildren.
+            He and his wife reside in Tucson, Arizona.</span></p>`,
       },
       {
         name: 'Paul Washer',
