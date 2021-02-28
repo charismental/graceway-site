@@ -410,14 +410,6 @@ html {
 .active-button {
   color: blue;
 }
-@mixin glitchCopy {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 .album-art {
   max-height: 300px;
 }
@@ -439,56 +431,7 @@ html {
   height: 65px;
   background-color: dodgerblue;
 }
-.glitch {
-  position: relative;
-  color: black;
-  font-size: 4em;
-  letter-spacing: 0.5em;
-  animation: glitch-skew 2s infinite linear alternate-reverse;
-  text-shadow: 2px 1px 2px rgba(0, 107, 174, 0.5);
-  font-weight: bold;
 
-  &::before {
-    @include glitchCopy;
-    left: 2px;
-    text-shadow: -2px 0 #1b0bf5;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-
-  &::after {
-    @include glitchCopy;
-    left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #00f7ff;
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-  }
-}
-@keyframes glitch-anim {
-  $steps: 20;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-      transform: skew((random(100) / 100) + deg);
-    }
-  }
-}
-@keyframes glitch-anim2 {
-  $steps: 10;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      clip: rect(random(100) + px, 9999px, random(100) + px, 0);
-      transform: skew((random(100) / 100) + deg);
-    }
-  }
-}
-@keyframes glitch-skew {
-  $steps: 10;
-  @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
-      transform: skew((random(10) - 5) + deg);
-    }
-  }
-}
 @keyframes marquee {
   0% {
     transform: translateX(100%);
