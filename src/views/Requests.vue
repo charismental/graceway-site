@@ -1,32 +1,42 @@
 <template>
   <div class="requests">
-    <v-dialog v-model="openSongInfo" width="550" max-width="80%">
-      <v-card color="#1F7087" dark v-if="!isMobile" style="position: relative">
+    <v-dialog v-model="openSongInfo" width="fit-content">
+      <v-card color="#1F7087" dark
+      style="position: relative pa-2"
+      :width="isMobile ? 'min-content': 'fit-content'"
+      class="mx-auto">
         <v-overlay absolute v-if="$store.state.feedbackLoading">
           <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
-        <div class="d-flex flex-no-wrap justify-space-between">
-          <div>
-            <v-card-title>{{
+        <div
+        :class=
+        "!isMobile ?
+        'd-flex flex-no-wrap justify-space-between' :
+        'd-flex flex-wrap-reverse justify-space-between'">
+          <div class="my-auto">
+            <v-card-title :class="!isMobile ? 'mt-2' : 'order-2;'"
+            :style="!isMobile ? '' : 'font-size:0.9em;'">{{
               activeSong && activeSong.title ? activeSong.title : ""
             }}</v-card-title>
 
-            <v-card-subtitle>{{
+            <v-card-subtitle :class="!isMobile ? '' : 'order-3'">{{
               activeSong && activeSong.artist ? activeSong.artist : ""
             }}</v-card-subtitle>
 
-            <v-card-actions>
-              <v-btn @click="closeSongInfo" dark icon small>
+            <v-card-actions :class="!isMobile ? 'mb-2' : 'mb-2 order-4'">
+              <v-btn @click="closeSongInfo"
+              dark icon small>
                 <v-icon>mdi-close</v-icon>
               </v-btn>
               <v-btn
-                class="ml-2 text-capitalize"
+                class="text-capitalize"
                 outlined
                 rounded
                 @click="makeRequest(activeSong.songid)"
                 >Request Song</v-btn
               >
-              <v-btn class="ml-2" small icon @click="toggleFavorite(activeSong)">
+              <v-btn
+              small icon @click="toggleFavorite(activeSong)">
                 <v-icon
                   color="error"
                   v-if="
@@ -39,40 +49,10 @@
             </v-card-actions>
           </div>
 
-          <v-avatar class="ma-3" size="125" tile>
+          <v-avatar :size="isMobile ? 270 : 160"
+          tile :class="!isMobile ? 'ma-3' : 'order-1 mx-auto ma-3 pa-2'">
             <v-img v-if="activeSong" :src="itemImg(activeSong.picture)"></v-img>
           </v-avatar>
-        </div>
-      </v-card>
-      <v-card v-else color="#1F7087" dark>
-        <div style="display: block">
-          <v-img
-            height="200"
-            class="ma-2"
-            contain
-            v-if="activeSong"
-            :src="itemImg(activeSong.picture)"
-          ></v-img>
-          <v-card-subtitle class="text-center" style="font-size: 0.9em">
-            {{ activeSong && activeSong.title ? activeSong.title : "" }}</v-card-subtitle
-          >
-
-          <v-card-subtitle class="text-center">{{
-            activeSong && activeSong.artist ? activeSong.artist : ""
-          }}</v-card-subtitle>
-
-          <v-card-actions>
-            <v-btn @click="closeSongInfo" dark icon small>
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-            <v-btn
-              class="ml-2 text-capitalize"
-              outlined
-              rounded
-              @click="makeRequest(activeSong.songid)"
-              >Request Song</v-btn
-            >
-          </v-card-actions>
         </div>
       </v-card>
     </v-dialog>
