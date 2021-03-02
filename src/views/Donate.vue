@@ -63,7 +63,9 @@
                         class="mr-2"
                       >mdi-credit-card-clock-outline</v-icon>
                       <v-list-item-content>
-                        <v-list-item-title>${{item.value}} {{item.frequency}}</v-list-item-title>
+                        <v-list-item-title
+                        :style="$vuetify.breakpoint.smAndDown ? '' : 'font-size:1.2em;'">
+                        ${{item.value}} {{item.frequency}}</v-list-item-title>
                       </v-list-item-content>
                     </v-list-item-icon>
                     <v-spacer></v-spacer>

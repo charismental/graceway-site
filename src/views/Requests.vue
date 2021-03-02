@@ -9,10 +9,10 @@
           <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
         <div
-        :class=
-        "!isMobile ?
-        'd-flex flex-no-wrap justify-space-between' :
-        'd-flex flex-wrap-reverse justify-space-between'">
+        :class="!isMobile ?
+        'd-flex flex-no-wrap justify-space-between'
+        :'d-flex flex-wrap-reverse justify-space-between'"
+        >
           <div class="my-auto">
             <v-card-title :class="!isMobile ? 'mt-2' : 'order-2;'"
             :style="!isMobile ? '' : 'font-size:0.9em;'">{{
