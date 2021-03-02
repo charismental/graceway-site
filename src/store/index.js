@@ -84,7 +84,7 @@ export default new Vuex.Store({
           .then((res) => {
             if (res?.data?.songid) {
               // eslint-disable-next-line no-console
-              console.log('unfavorited successfully');
+              console.log('Favorited Successfully');
             } else if (res?.data?.message) {
               // eslint-disable-next-line no-console
               console.log(res.data.message);
