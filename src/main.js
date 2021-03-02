@@ -25,5 +25,5 @@ new Vue({
 }).$mount('#app');
 
 store.subscribe((mutation, state) => {
-  localStorage.setItem('mySongs', JSON.stringify(state.mySongs));
+  localStorage.setItem('mySavedSongs', JSON.stringify(state.mySongs));
 });

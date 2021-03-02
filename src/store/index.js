@@ -18,8 +18,8 @@ export default new Vuex.Store({
       _state.feedbackLoading = _status;
     },
     INITIALIZE_STORE(_state) {
-      if (localStorage.getItem('mySongs') && !Array.isArray(localStorage.getItem('mySongs'))) {
-        const stored = JSON.parse(localStorage.getItem('mySongs'));
+      if (localStorage.getItem('mySavedSongs') && !Array.isArray(localStorage.getItem('mySavedSongs'))) {
+        const stored = JSON.parse(localStorage.getItem('mySavedSongs'));
         _state.mySongs = { ...stored };
       }
     },

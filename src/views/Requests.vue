@@ -212,7 +212,7 @@ export default {
       this.$store.dispatch('toggleFavorite', songObj);
     },
     songIsFavorited(songId) {
-      return this.$store.state.mySongs.favorites.some((song) => song.songid === songId);
+      return this.$store.state.mySongs?.favorites.some((song) => song.songid === songId);
     },
     saveSearch() {
       const parsed = JSON.stringify(this.recentSearches);
