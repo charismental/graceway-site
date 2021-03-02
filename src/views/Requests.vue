@@ -1,7 +1,10 @@
 <template>
   <div class="requests">
     <v-dialog v-model="openSongInfo" width="550" max-width="80%">
-      <v-card color="#1F7087" dark v-if="!isMobile">
+      <v-card color="#1F7087" dark v-if="!isMobile" style="position: relative">
+        <v-overlay absolute v-if="$store.state.feedbackLoading">
+          <v-progress-circular indeterminate></v-progress-circular>
+        </v-overlay>
         <div class="d-flex flex-no-wrap justify-space-between">
           <div>
             <v-card-title>{{
@@ -23,6 +26,16 @@
                 @click="makeRequest(activeSong.songid)"
                 >Request Song</v-btn
               >
+              <v-btn class="ml-2" small icon @click="toggleFavorite(activeSong)">
+                <v-icon
+                  color="error"
+                  v-if="
+                    activeSong && activeSong.songid && songIsFavorited(activeSong.songid)
+                  "
+                  >mdi-heart</v-icon
+                >
+                <v-icon v-else>mdi-heart-outline</v-icon>
+              </v-btn>
             </v-card-actions>
           </div>
 
@@ -195,6 +208,12 @@ export default {
     },
   },
   methods: {
+    toggleFavorite(songObj) {
+      this.$store.dispatch('toggleFavorite', songObj);
+    },
+    songIsFavorited(songId) {
+      return this.$store.state.mySongs.favorites.some((song) => song.songid === songId);
+    },
     saveSearch() {
       const parsed = JSON.stringify(this.recentSearches);
       localStorage.setItem('recentSearches', parsed);
@@ -272,10 +291,9 @@ export default {
               color: this.randomColor(),
               expiry: now.getTime() + 10800000,
             };
-            const notGunnaDoIt = this.recentSearches
-              .some(
-                (term) => term.search === recentRequestObj.search,
-              );
+            const notGunnaDoIt = this.recentSearches.some(
+              (term) => term.search === recentRequestObj.search,
+            );
             if (!notGunnaDoIt) {
               this.recentSearches.push(recentRequestObj);
             }

@@ -18,7 +18,12 @@ new Vue({
       localStorage.removeItem('path');
       this.$router.push(`/${path}`);
     }
+    this.$store.commit('INITIALIZE_STORE');
   },
   vuetify,
   render: (h) => h(App),
 }).$mount('#app');
+
+store.subscribe((mutation, state) => {
+  localStorage.setItem('mySongs', JSON.stringify(state.mySongs));
+});
