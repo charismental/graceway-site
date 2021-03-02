@@ -54,7 +54,7 @@ export default new Vuex.Store({
       commit('SET_FEEDBACK_LOADING', true);
       if (state.mySongs.favorites.some((song) => song.songid === songId)) {
         commit('REMOVE_SONG_FROM_FAVORITES', songId);
-        axios.post(url, { unfavorite: true })
+        axios.post(url, { feedback: { unfavorite: true } })
           .then((res) => {
             if (res?.data?.songid) {
               // eslint-disable-next-line no-console
@@ -80,7 +80,7 @@ export default new Vuex.Store({
           picture: songObj.picture,
         };
         commit('ADD_SONG_TO_FAVORITES', mapped);
-        axios.post(url, { favorite: true })
+        axios.post(url, { feedback: { favorite: true } })
           .then((res) => {
             if (res?.data?.songid) {
               // eslint-disable-next-line no-console
