@@ -27,19 +27,18 @@
                 <v-icon>mdi-close</v-icon>
               </v-btn>
               <v-btn
+                :loading="requestLoading"
                 class="text-capitalize"
                 outlined
                 rounded
-                @click="$emit('make-request')"
+                @click="makeRequest"
                 >Request Song</v-btn
               >
               <v-btn
-              small icon @click="$emit('toggle-favorite')">
+              small icon @click="toggleFavorite">
                 <v-icon
                   color="error"
-                  v-if="
-                    song && song.songid && favorited(song.songid)
-                  "
+                  v-if="favorited"
                   >mdi-heart</v-icon
                 >
                 <v-icon v-else>mdi-heart-outline</v-icon>
@@ -70,15 +69,20 @@ export default {
       type: String,
     },
   },
+  computed: {
+    requestLoading() {
+      return this.$store.state.requestLoading;
+    },
+    favorited() {
+      return this.$store.state.mySongs?.favorites.some((song) => song.songid === this.song?.songid);
+    },
+  },
   methods: {
     makeRequest() {
       this.$emit('make-request', this.song.songid);
     },
-    togFav() {
-      this.$emit('toggle-favorite', this.song.songid);
-    },
-    favorited() {
-      return this.song.songid;
+    toggleFavorite() {
+      this.$emit('toggle-favorite', this.song);
     },
   },
 };

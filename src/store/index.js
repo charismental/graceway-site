@@ -8,14 +8,40 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     feedbackLoading: false,
+    requestLoading: false,
+    searchLoading: false,
     mySongs: {
       rated: [],
       favorites: [],
     },
+    requestBody: '',
+    requestHeader: '',
+    recentSearches: [],
+    searchResults: [],
+    searchTerm: '',
   },
   mutations: {
+    SET_SEARCH_RESULTS(_state, _searchResults) {
+      _state.searchResults = _searchResults;
+    },
+    SET_RECENT_SEARCHES(_state, _recentSearches) {
+      _state.recentSearches = _recentSearches;
+    },
+    SET_REQUEST_STRINGS(_state, _requestStrings) {
+      _state.requestBody = _requestStrings.body;
+      _state.requestHeader = _requestStrings.header;
+    },
+    SET_SEARCH_TERM(_state, _searchTerm) {
+      _state.searchTerm = _searchTerm;
+    },
     SET_FEEDBACK_LOADING(_state, _status) {
       _state.feedbackLoading = _status;
+    },
+    SET_REQUEST_LOADING(_state, _status) {
+      _state.requestLoading = _status;
+    },
+    SET_SEARCH_LOADING(_state, _status) {
+      _state.searchLoading = _status;
     },
     INITIALIZE_STORE(_state) {
       if (localStorage.getItem('mySavedSongs') && !Array.isArray(localStorage.getItem('mySavedSongs'))) {
@@ -48,6 +74,71 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    fetchSongs({ commit }, searchTerm) {
+      commit('SET_SEARCH_LOADING', true);
+      const url = `https://gwr-node.herokuapp.com/api/songs?search=${searchTerm}`;
+
+      axios
+        .get(url)
+        .then((res) => {
+          if (res?.data && Array.isArray(res.data)) {
+            commit('SET_SEARCH_RESULTS', res.data);
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        })
+        .finally(() => {
+          commit('SET_SEARCH_LOADING', false);
+        });
+    },
+    makeRequest({ commit, state }, { songId, searchTerm }) {
+      commit('SET_REQUEST_LOADING', true);
+      const url = `https://gwr-node.herokuapp.com/api/request?songId=${songId}`;
+      const parser = new DOMParser();
+      axios
+        .get(url)
+        .then((res) => {
+          const doc = parser.parseFromString(res.data, 'text/html');
+          const responseElement = doc.getElementById('content');
+          const requestHeader = responseElement.children[0].innerHTML;
+          const requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
+          if (requestHeader === 'Request Successful') {
+            const now = new Date();
+            const recentRequestObj = {
+              search: searchTerm,
+              color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+              expiry: now.getTime() + 10800000,
+            };
+            const notGunnaDoIt = state.recentSearches.some(
+              (term) => term.search === recentRequestObj.search,
+            );
+            if (!notGunnaDoIt) {
+              const recentSearches = [...state.recentSearches, recentRequestObj];
+              commit('SET_RECENT_SEARCHES', recentSearches);
+            }
+            commit('SET_SEARCH_TERM', '');
+            commit('SET_SEARCH_RESULTS', []);
+          }
+          const requestStrings = {
+            header: requestHeader,
+            body: requestBody,
+          };
+          commit('SET_REQUEST_STRINGS', requestStrings);
+          return requestStrings;
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        })
+        .finally(() => {
+          commit('SET_REQUEST_LOADING', false);
+        });
+    },
+    setSearchTerm({ commit }, searchTerm) {
+      commit('SET_SEARCH_TERM', searchTerm);
+    },
     toggleFavorite({ state, commit }, songObj) {
       const songId = songObj.songid;
       const url = `https://gwr-node.herokuapp.com/api/song/${songId}`;
@@ -99,7 +190,8 @@ export default new Vuex.Store({
           });
       }
     },
-  },
-  modules: {
+    setRecentSearches({ commit }, recentSearches) {
+      commit('SET_RECENT_SEARCHES', recentSearches);
+    },
   },
 });

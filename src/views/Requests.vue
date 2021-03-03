@@ -1,71 +1,15 @@
 <template>
   <div class="requests">
     <v-dialog v-model="openSongInfo" width="fit-content">
-      <v-card color="#1F7087" dark
-      style="position: relative pa-2"
-      :width="isMobile ? 'min-content': 'fit-content'"
-      class="mx-auto">
-        <v-overlay absolute v-if="$store.state.feedbackLoading">
-          <v-progress-circular indeterminate></v-progress-circular>
-        </v-overlay>
-        <div
-        :class="!isMobile ?
-        'd-flex flex-no-wrap justify-space-between'
-        :'d-flex flex-wrap-reverse justify-space-between'"
-        >
-          <div class="my-auto">
-            <v-card-title :class="!isMobile ? 'mt-2' : 'order-2;'"
-            :style="!isMobile ? '' : 'font-size:0.9em;'">{{
-              activeSong && activeSong.title ? activeSong.title : ""
-            }}</v-card-title>
-
-            <v-card-subtitle :class="!isMobile ? '' : 'order-3'">{{
-              activeSong && activeSong.artist ? activeSong.artist : ""
-            }}</v-card-subtitle>
-
-            <v-card-actions :class="!isMobile ? 'mb-2' : 'mb-2 order-4'">
-              <v-btn @click="closeSongInfo"
-              dark icon small>
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-              <v-btn
-                class="text-capitalize"
-                outlined
-                rounded
-                @click="makeRequest(activeSong.songid)"
-                >Request Song</v-btn
-              >
-              <v-btn
-              small icon @click="toggleFavorite(activeSong)">
-                <v-icon
-                  color="error"
-                  v-if="
-                    activeSong && activeSong.songid && songIsFavorited(activeSong.songid)
-                  "
-                  >mdi-heart</v-icon
-                >
-                <v-icon v-else>mdi-heart-outline</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </div>
-
-          <v-avatar :size="isMobile ? 270 : 160"
-          tile :class="!isMobile ? 'ma-3' : 'order-1 mx-auto ma-3 pa-2'">
-            <v-img v-if="activeSong" :src="itemImg(activeSong)"></v-img>
-          </v-avatar>
-        </div>
-      </v-card>
-
-      <!-- <song-info-card
-      :isMobile="isMobile"
-      :song="activeSong"
-      :favorited="songIsFavorited(activeSong)"
-      :songPicture="itemImg(activeSong)"
-      @make-request="makeRequest(activeSong.songid)"
-      @toggle-favorite="toggleFavorite(activeSong.songid)"
-      @close-info="closeSongInfo"
-      ></song-info-card> -->
-
+      <song-info-card
+        :isMobile="isMobile"
+        :song="activeSong"
+        :favorited="songIsFavorited(activeSong)"
+        :songPicture="itemImg(activeSong)"
+        @make-request="makeRequest"
+        @toggle-favorite="toggleFavorite"
+        @close-info="closeSongInfo"
+      ></song-info-card>
     </v-dialog>
     <v-card class="mx-auto mt-8 mb-8" width="600" max-height="800">
       <v-card-text class="px-16">
@@ -153,26 +97,16 @@
 </template>
 
 <script>
-import axios from 'axios';
-// import SongInfoCard from '../components/SongInfoCard.vue';
+import SongInfoCard from '../components/SongInfoCard.vue';
 
 export default {
   name: 'Requests',
   data: () => ({
-    smallScreen: false,
     openSongInfo: false,
-    searchTerm: '',
-    recentSearches: [],
-    searchResults: [],
     snackbar: false,
-    songId: 1200,
-    requestHeader: '',
-    requestBody: '',
-    requestLoading: false,
-    searchLoading: false,
     activeSong: null,
   }),
-  components: {},
+  components: { SongInfoCard },
   watch: {
     recentSearches() {
       this.saveSearch();
@@ -187,16 +121,45 @@ export default {
         this.snackbar = true;
         setTimeout(() => {
           this.closeSnackbar();
+          this.closeSongInfo();
         }, 4000);
       }
     },
   },
   computed: {
+    recentSearches: {
+      get() {
+        return this.$store.state.recentSearches;
+      },
+      set(recentSearches) {
+        this.$store.dispatch('setRecentSearches', recentSearches);
+      },
+    },
+    searchTerm: {
+      get() {
+        return this.$store.state.searchTerm;
+      },
+      set(searchTerm) {
+        this.$store.dispatch('setSearchTerm', searchTerm);
+      },
+    },
+    searchResults() {
+      return this.$store.state.searchResults;
+    },
+    requestHeader() {
+      return this.$store.state.requestHeader;
+    },
+    requestBody() {
+      return this.$store.state.requestBody;
+    },
+    searchLoading() {
+      return this.$store.state.searchLoading;
+    },
+    requestLoading() {
+      return this.$store.state.requestLoading;
+    },
     isMobile() {
-      if (this.$vuetify.breakpoint.smAndDown) {
-        return !this.smallScreen;
-      }
-      return this.smallScreen;
+      return this.$vuetify.breakpoint.smAndDown;
     },
   },
   methods: {
@@ -209,10 +172,6 @@ export default {
     saveSearch() {
       const parsed = JSON.stringify(this.recentSearches);
       localStorage.setItem('recentSearches', parsed);
-    },
-    randomColor() {
-      const random = Math.floor(Math.random() * 16777215).toString(16);
-      return `#${random}`;
     },
     itemImg(item) {
       const url = 'https://gracewayradio.com/artwork/';
@@ -234,78 +193,26 @@ export default {
     },
     closeSnackbar() {
       this.snackbar = false;
-      this.$nextTick(() => {
-        this.requestHeader = '';
-        this.requestBody = '';
-      });
+      this.$store.commit('SET_REQUEST_STRINGS', { body: '', header: '' });
     },
     fetchSongs() {
-      this.searchLoading = true;
-      const url = `https://gwr-node.herokuapp.com/api/songs?search=${this.searchTerm}`;
-
-      axios
-        .get(url)
-        .then((res) => {
-          if (res?.data && Array.isArray(res.data)) {
-            this.searchResults = res.data;
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        })
-        .finally(() => {
-          this.searchLoading = false;
-        });
+      this.$store.dispatch('fetchSongs', this.searchTerm);
     },
     makeRequest(id) {
       if (this.requestLoading) {
         return;
       }
-      this.requestLoading = true;
-      let { songId } = this;
-      if (id) {
-        songId = id;
-      }
-      const url = `https://gwr-node.herokuapp.com/api/request?songId=${songId}`;
-      const parser = new DOMParser();
-      axios
-        .get(url)
-        .then((res) => {
-          const doc = parser.parseFromString(res.data, 'text/html');
-          const responseElement = doc.getElementById('content');
-          this.requestHeader = responseElement.children[0].innerHTML;
-          this.requestBody = responseElement.children[1].innerHTML.replace('<br>', '');
-          if (this.requestHeader === 'Request Successful') {
-            const now = new Date();
-            const recentRequestObj = {
-              search: this.searchTerm,
-              color: this.randomColor(),
-              expiry: now.getTime() + 10800000,
-            };
-            const notGunnaDoIt = this.recentSearches.some(
-              (term) => term.search === recentRequestObj.search,
-            );
-            if (!notGunnaDoIt) {
-              this.recentSearches.push(recentRequestObj);
-            }
-            this.searchTerm = '';
-            this.searchResults = [];
-            setTimeout(() => {
-              this.closeSongInfo();
-            }, 3000);
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        })
-        .finally(() => {
-          this.requestLoading = false;
+      const requestObj = {
+        songId: id,
+        searchTerm: this.searchTerm,
+      };
+      this.$store.dispatch('makeRequest', requestObj).then((response) => {
+        if (response?.requestHeader) {
           setTimeout(() => {
             this.closeSongInfo();
           }, 3000);
-        });
+        }
+      });
     },
   },
   mounted() {
