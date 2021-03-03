@@ -202,30 +202,10 @@ export default {
         School. He is thankful for his upbringing because it instilled in him not only
         what it meant to be a family, but also what it meant to completely trust in the
         Lord&rsquo;s provision and guidance. </p><p >
-        </p><p >During his High School years, he worked
-        &ldquo;morning tower&rdquo; (midnight to 8:00 am) as a roughneck in the oil fields
-        of Oklahoma and then rushed off to clean up and get to school. Fortunately, even
-        though he was often late and sometimes fell asleep in class, his teachers were
-        understanding of his situation. </p><p >
-        </p><p >However, keeping these kinds of hours and working
-        among worldly men did nothing to encourage his walk with the Lord and he and his
-        girlfriend found themselves in an unwanted pregnancy. So, at the age of 18, finding
-        himself the sole breadwinner and head of his own family, his love and need for the
-        Lord led him on a new and more passionate desire for the things of God. </p>
-        <p class="c0 c4"></p><p >With
-        his new family, he began attending a local church, but he soon discovered that the
-        life in Christ they presented was merely one of service to the church. His longing
-        for the intimate relationship with the Lord he had as a young boy eventually led
-        him to a small prayer meeting in the home of a local businessman. It was there he
-        met others who longed to know the Lord more and through their ministry Curtis
-        experienced the baptism in the Holy Spirit.</p><p >
-        </p><p >His marriage fell apart when his wife
-        decided that she no longer wanted to walk with God, the heartbreak of her decision
-        only propelled Curtis into a deeper and more real relationship with Jesus. At this
-        time, he found himself in Tucson, Arizona under the ministry and mentoring of &nbsp;
-        Dr. John Castell who was pastor of Grace Chapel. Under Pastor John&rsquo;s leadership,
-        Curtis learned what it meant to not only lead a Full Gospel church but also how to
-        truly love God&rsquo;s people in the process. </p><p >
+        </p><p >During his High School years, he worked “morning tower” (midnight to 8:00 am) as a roughneck in the oil fields of Oklahoma and then rushed off to clean up and get to school. Fortunately, even though he was often late and sometimes fell asleep in class, his teachers were understanding of his situation.
+        </p><p >
+        </p><p >However, keeping these kinds of hours and working among worldly men did nothing to encourage his walk with the Lord and he and his girlfriend found themselves in an unwanted pregnancy. So, at the age of 18, finding himself the sole breadwinner and head of his own family, his love and need for the Lord led him on a new and more passionate desire for the things of God. With his new family, he began attending a local church, but he soon discovered that the life in Christ they presented was merely one of service to the church. His longing for the intimate relationship with the Lord he had as a young boy eventually led him to a small prayer meeting in the home of a local businessman. There he met others who longed to know the Lord more and through their ministry experienced the baptism in the Holy Spirit.</p><p >
+        </p><p >Even though his marriage fell apart when his wife decided that she no longer wanted to walk with God, the heartbreak of her decision only propelled him into a deeper and more real relationship with Jesus. At this time, he found himself in Tucson, Arizona under the ministry and mentoring of  Dr. John Castell who was pastor of Grace Chapel. Under Pastor John’s leadership, Curtis learned what it meant to not only lead a Full Gospel church but also how to truly love God’s people in the process.</p><p >
         &nbsp; &nbsp;</p><p >Since then, Curtis Dougherty
         has been in ministry for over 40 years, and a pastor for over 30. As a gifted speaker
         &amp; teacher, he has inspired many into a deeper intimate relationship with the Lord.

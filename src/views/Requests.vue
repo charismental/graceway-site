@@ -51,10 +51,21 @@
 
           <v-avatar :size="isMobile ? 270 : 160"
           tile :class="!isMobile ? 'ma-3' : 'order-1 mx-auto ma-3 pa-2'">
-            <v-img v-if="activeSong" :src="itemImg(activeSong.picture)"></v-img>
+            <v-img v-if="activeSong" :src="itemImg(activeSong)"></v-img>
           </v-avatar>
         </div>
       </v-card>
+
+      <!-- <song-info-card
+      :isMobile="isMobile"
+      :song="activeSong"
+      :favorited="songIsFavorited(activeSong)"
+      :songPicture="itemImg(activeSong)"
+      @make-request="makeRequest(activeSong.songid)"
+      @toggle-favorite="toggleFavorite(activeSong.songid)"
+      @close-info="closeSongInfo"
+      ></song-info-card> -->
+
     </v-dialog>
     <v-card class="mx-auto mt-8 mb-8" width="600" max-height="800">
       <v-card-text class="px-16">
@@ -70,7 +81,7 @@
         <v-list v-if="searchResults.length" height="600" style="overflow-y: auto">
           <v-list-item v-for="item in searchResults" :key="item.songid" class="song_list">
             <v-avatar class="mr-2">
-              <v-img :src="itemImg(item.picture)"></v-img>
+              <v-img :src="itemImg(item)"></v-img>
             </v-avatar>
             <v-list-item-content>
               <v-list-item-title
@@ -143,6 +154,7 @@
 
 <script>
 import axios from 'axios';
+// import SongInfoCard from '../components/SongInfoCard.vue';
 
 export default {
   name: 'Requests',
@@ -205,7 +217,7 @@ export default {
     itemImg(item) {
       const url = 'https://gracewayradio.com/artwork/';
       if (item) {
-        return url + item;
+        return url + item?.picture;
       }
       if (this.loadingSongInfo) {
         return `${url}loading.gif`;

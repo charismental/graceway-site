@@ -13,7 +13,7 @@
           elevation="10"
           class="mx-auto">
             <v-img
-              height="200"
+              height="300"
               :src="blog.picture"
               cover
             >
