@@ -13,7 +13,7 @@
           <v-img
             :src="picture"
             class="rounded-t-lg"
-            max-height="240"
+            max-height="300"
             position='center center'
             cover
           >

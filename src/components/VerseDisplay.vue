@@ -40,11 +40,23 @@
           <v-icon color="white">mdi-facebook</v-icon>
         </a>
       </v-btn>
-      <v-btn @click.stop fab dark small color="#bd081c">
+      <v-btn
+        @click.stop
+        fab dark
+        small
+        color="#bd081c"
+        >
         <v-icon>mdi-pinterest</v-icon>
       </v-btn>
-      <v-btn @click.stop fab dark small color="#1da1f2">
+      <v-btn @click.stop fab dark small
+        color="#1da1f2">
+        <a
+         target="_blank"
+         class="twitter-share-button"
+         data-size="large"
+         :href="`https://twitter.com/intent/tweet?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}.jpg`">
         <v-icon>mdi-twitter</v-icon>
+        </a>
       </v-btn>
       <v-btn @click.stop fab dark small color="#c32aa3">
         <v-icon>mdi-instagram</v-icon>
@@ -63,11 +75,17 @@ export default {
     return {
       meta: [
         // Twitter Card
-        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Graceway Radio - Verse of the day' },
         {
           name: 'twitter:description',
           content: "Graceway Radio - See today's verse!",
+        },
+        {
+          name: 'twitter:creator', content: '@gracewayradio',
+        },
+        {
+          name: 'twitter:site', content: '@gracewayradio',
         },
         { name: 'twitter:image', content: this.verseOfTheDay },
         // Facebook OpenGraph
