@@ -54,7 +54,7 @@
          target="_blank"
          class="twitter-share-button"
          data-size="large"
-         :href="`https://twitter.com/intent/tweet?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}.jpg`">
+         :href="`https://twitter.com/intent/tweet?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}`">
         <v-icon>mdi-twitter</v-icon>
         </a>
       </v-btn>
