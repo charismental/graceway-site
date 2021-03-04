@@ -46,7 +46,10 @@
         small
         color="#bd081c"
         >
+        <a a data-pin-do="buttonPin" data-pin-tall="true" data-pin-round="true"
+        :href="`https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}&description=Verse%20of%20the%20Day`">
         <v-icon>mdi-pinterest</v-icon>
+        </a>
       </v-btn>
       <v-btn @click.stop fab dark small
         color="#1da1f2">
@@ -59,7 +62,9 @@
         </a>
       </v-btn>
       <v-btn @click.stop fab dark small color="#c32aa3">
+        <a href="https://instagram.com/gracewayradio/">
         <v-icon>mdi-instagram</v-icon>
+        </a>
       </v-btn>
     </v-speed-dial>
   </v-sheet>
