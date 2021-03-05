@@ -14,7 +14,7 @@
       </v-col>
     </v-row >
     <v-row class="row_two" justify="center" align="center">
-      <v-col>
+      <v-col v-if="!isMobile">
         <v-chip-group column >
           <v-chip
             :disabled="$route.name === 'Blog'"
@@ -29,6 +29,20 @@
         </v-chip-group>
         <v-chip color="accent" to="/blog" v-if="$route.name === 'Blog'">
         <v-icon class="pr-2">mdi-arrow-left-bold-outline</v-icon>Go Back</v-chip>
+      </v-col>
+      <v-col v-else>
+        <v-select
+          :items="blogs"
+          name="Categories"
+          item-text="category.name"
+          label="Categories"
+          item-value="category.name"
+          persistent-hint
+          @change="selectCategory"
+          clearable
+          item-color="primary"
+          solo>
+        </v-select>
       </v-col>
     </v-row>
   </v-container>
@@ -47,8 +61,15 @@ export default {
     },
   },
   components: {},
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+  },
   methods: {
     selectCategory(category) {
+      // eslint-disable-next-line no-console
+      console.log(category);
       this.$emit('select-category', category);
     },
   },

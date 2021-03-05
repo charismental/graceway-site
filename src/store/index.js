@@ -18,9 +18,13 @@ export default new Vuex.Store({
     requestHeader: '',
     recentSearches: [],
     searchResults: [],
+    features: [],
     searchTerm: '',
   },
   mutations: {
+    SET_FEATURES_RESULTS(_state, _features) {
+      _state.features = _features;
+    },
     SET_SEARCH_RESULTS(_state, _searchResults) {
       _state.searchResults = _searchResults;
     },
@@ -74,6 +78,28 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getFeatures({ commit, state }) {
+      const url = 'https://gwrapi.herokuapp.com/featurette';
+      axios
+        .get(url)
+        .then((res) => {
+          if (res && res.data && Array.isArray(res.data)) {
+            const featuresObj = res.data.map((feature) => ({
+              image: feature.image,
+              content: feature.content,
+              link: feature.link,
+              startPublish: feature.start_publish_date,
+              endPublish: feature.end_publish_date,
+            }));
+            const features = [...state.features, ...featuresObj];
+            commit('SET_FEATURES_RESULTS', features);
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        });
+    },
     fetchSongs({ commit }, searchTerm) {
       commit('SET_SEARCH_LOADING', true);
       const url = `https://gwr-node.herokuapp.com/api/songs?search=${searchTerm}`;

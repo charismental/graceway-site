@@ -167,7 +167,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'Home',
@@ -177,7 +176,7 @@ export default {
     dialog: false,
     dialogText: '',
     snackBarText: '',
-    features: [],
+    // features: [],
     // content: '',
     // image: '',
     // link: [],
@@ -213,6 +212,9 @@ export default {
     ],
   }),
   computed: {
+    features() {
+      return this.$store.state.features;
+    },
     availableFeatures() {
       const today = new Date();
       const myToday = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0);
@@ -246,24 +248,7 @@ export default {
   },
   methods: {
     getFeatures() {
-      const url = 'https://gwrapi.herokuapp.com/featurette';
-      axios
-        .get(url)
-        .then((res) => {
-          if (res && res.data && Array.isArray(res.data)) {
-            this.features = res.data.map((feature) => ({
-              image: feature.image,
-              content: feature.content,
-              link: feature.link,
-              startPublish: feature.start_publish_date,
-              endPublish: feature.end_publish_date,
-            }));
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        });
+      this.$store.dispatch('getFeatures');
     },
     navigateTo(slideObject) {
       if (slideObject?.link) {
