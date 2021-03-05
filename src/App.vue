@@ -3,6 +3,37 @@
     <audio id="audio" :src="stream">
       Your browser does not support the audio element.
     </audio>
+     <v-dialog v-model="openSongInfo" width="fit-content">
+          <v-card
+          color="#1F7087" dark
+      style="position: relative pa-2"
+      :width="isMobile ? 'min-content': 'fit-content'"
+      class="mx-auto">
+            <v-card-title>
+              <v-avatar size="240" tile>
+              <v-img
+              :src="itemImg(song)"></v-img>
+              </v-avatar>
+            </v-card-title>
+            <v-row>
+              <v-col>
+
+            <v-card-subtitle v-if="song">{{song.title}}</v-card-subtitle>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+
+            <v-card-text v-if="song">{{song.artist}}</v-card-text>
+              </v-col>
+            </v-row>
+            <v-card-actions>
+              <v-btn @click="closeSongInfo">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
     <v-dialog :value="firstVisit" max-width="600">
       <v-card class="welcome-card pb-6" dark rounded elevation="12">
         <v-card-actions>
@@ -158,13 +189,16 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
+
         <v-list two-line v-if="historyUpcoming === 'upcoming'">
           <div
             v-for="(song, i) in songQueue.slice(0, -1)"
             :key="`${song.artist}_${song.title}`"
           >
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content
+              style="cursor: pointer"
+               @click="viewSongInfo(song)">
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -178,7 +212,9 @@
             :key="`${song.artist}_${song.title}`"
           >
             <v-list-item>
-              <v-list-item-content>
+              <v-list-item-content
+              style="cursor: pointer"
+               @click="viewSongInfo(song)">
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
               </v-list-item-content>
@@ -242,8 +278,10 @@ export default {
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
+    openSongInfo: false,
     firstVisit: false,
     songInfo: null,
+    song: null,
     songHistory: [],
     songQueue: [],
     loadingSongInfo: false,
@@ -316,6 +354,14 @@ export default {
     const newInterval = setInterval(this.getSongInfo, 10000);
   },
   methods: {
+    viewSongInfo(songObj) {
+      this.song = songObj;
+      this.openSongInfo = true;
+    },
+    closeSongInfo() {
+      this.openSongInfo = false;
+      this.song = null;
+    },
     marqueeTrigger(el, att, val) {
       return !!(el && el[att] && el[att].length > val);
     },
