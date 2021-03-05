@@ -68,8 +68,6 @@ export default {
   },
   methods: {
     selectCategory(category) {
-      // eslint-disable-next-line no-console
-      console.log(category);
       this.$emit('select-category', category);
     },
   },

@@ -40,17 +40,18 @@
 </template>
 
 <script>
-import axios from 'axios';
 import BlogFilter from '../components/BlogFilter.vue';
 
 export default {
   name: 'Blogs',
   components: { BlogFilter },
   data: () => ({
-    blogs: [],
     selectedCategory: '',
   }),
   computed: {
+    blogs() {
+      return this.$store.state.blogs;
+    },
     filteredBlogs() {
       if (this.selectedCategory) {
         return this.blogs.filter(
@@ -72,18 +73,7 @@ export default {
       }
     },
     getBlogs() {
-      const url = 'https://gwrapi.herokuapp.com/blogs';
-      axios
-        .get(url)
-        .then((res) => {
-          if (res?.data) {
-            this.blogs = res.data;
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error(err);
-        });
+      this.$store.dispatch('getBlogs');
     },
   },
   created() {

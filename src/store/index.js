@@ -19,9 +19,13 @@ export default new Vuex.Store({
     recentSearches: [],
     searchResults: [],
     features: [],
+    blogs: [],
     searchTerm: '',
   },
   mutations: {
+    SET_BLOG_RESULTS(_state, _blogs) {
+      _state.blogs = _blogs;
+    },
     SET_FEATURES_RESULTS(_state, _features) {
       _state.features = _features;
     },
@@ -78,6 +82,21 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getBlogs({ commit, state }) {
+      const url = 'https://gwrapi.herokuapp.com/blogs';
+      axios
+        .get(url)
+        .then((res) => {
+          if (res?.data) {
+            const blogObjects = [...state.blogs, ...res.data];
+            commit('SET_BLOG_RESULTS', blogObjects);
+          }
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        });
+    },
     getFeatures({ commit, state }) {
       const url = 'https://gwrapi.herokuapp.com/featurette';
       axios
