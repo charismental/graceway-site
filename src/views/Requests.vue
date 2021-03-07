@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
 import SongInfoCard from '../components/SongInfoCard.vue';
 
 export default {
@@ -113,7 +114,7 @@ export default {
     },
     searchTerm(val) {
       if (val.length >= 3) {
-        this.fetchSongs();
+        this.search(val);
       }
     },
     requestHeader(val) {
@@ -216,6 +217,7 @@ export default {
     },
   },
   mounted() {
+    this.search = debounce(this.fetchSongs.bind(this), 1000);
     if (localStorage.getItem('recentSearches')) {
       const searches = JSON.parse(localStorage.getItem('recentSearches'));
       const filteredSearches = [];
