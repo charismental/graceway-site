@@ -12,6 +12,7 @@ import FeaturedSpeakers from '../views/FeaturedSpeakers.vue';
 import ProgramSchedule from '../views/Calendar.vue';
 import Success from '../views/Success.vue';
 import Cancel from '../views/Cancel.vue';
+import MailChimpSuccess from '../views/MailChimpSuccess.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,11 @@ const routes = [
         },
       },
     ],
+  },
+  {
+    path: '/newsletter-success',
+    name: 'MailChimpSuccess',
+    component: MailChimpSuccess,
   },
   {
     path: '/success',
