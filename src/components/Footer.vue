@@ -107,7 +107,7 @@
                       type="email"
                       value=""
                       name="EMAIL"
-                      placeholder="Newsletter Signup"
+                      placeholder="Email"
                       class="required email"
                       id="mce-EMAIL"
                     >
@@ -189,11 +189,12 @@ export default {
   font: 14px Helvetica, Arial, sans-serif;
 
   input[type=text], input[type=email] {
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
     width: 100%;
     padding: 0.4rem;
     background: rgb(250, 250, 250);
     border-radius: 8px;
-    margin-bottom: 0.3rem;
     outline: none;
     border: 1px solid #d3d3d3;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.09);

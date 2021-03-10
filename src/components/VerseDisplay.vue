@@ -47,7 +47,8 @@
         color="#bd081c"
         >
         <a a data-pin-do="buttonPin" data-pin-tall="true" data-pin-round="true"
-        :href="`https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}&description=Verse%20of%20the%20Day`">
+        :href="`https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}&description=Verse%20of%20the%20Day`"
+        style="text-decoration: none">
         <v-icon>mdi-pinterest</v-icon>
         </a>
       </v-btn>
@@ -57,12 +58,14 @@
          target="_blank"
          class="twitter-share-button"
          data-size="large"
-         :href="`https://twitter.com/intent/tweet?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}`">
+         :href="`https://twitter.com/intent/tweet?url=https%3A%2F%2Fgracewayradio.com%2Fverse%2F${$route.params.verseId}`"
+         style="text-decoration: none">
         <v-icon>mdi-twitter</v-icon>
         </a>
       </v-btn>
       <v-btn @click.stop fab dark small color="#c32aa3">
-        <a href="https://instagram.com/gracewayradio/">
+        <a href="https://instagram.com/gracewayradio/"
+        style="text-decoration: none">
         <v-icon>mdi-instagram</v-icon>
         </a>
       </v-btn>
