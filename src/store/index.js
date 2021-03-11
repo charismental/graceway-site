@@ -82,15 +82,15 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getBlogs({ commit, state }) {
+    getBlogs({ commit }) {
       const url = 'https://gwrapi.herokuapp.com/blogs';
       axios
         .get(url)
         .then((res) => {
-          if (res?.data) {
-            const blogObjects = [...state.blogs, ...res.data];
+          if (res?.data && Array.isArray(res.data)) {
+            const blogObjects = res.data;
             commit('SET_BLOG_RESULTS', blogObjects);
-          }
+          } // else ??
         })
         .catch((err) => {
           // eslint-disable-next-line no-console

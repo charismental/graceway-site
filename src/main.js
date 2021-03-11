@@ -12,17 +12,15 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  // beforeCreate() {
-  //   const path = localStorage.getItem('path');
-  //   if (path && path.length) {
-  //     localStorage.removeItem('path');
-  //     this.$router.push(`/${path}`);
-  //   }
-  // },
+  beforeCreate() {
+    this.$store.commit('INITIALIZE_STORE');
+  },
   vuetify,
   render: (h) => h(App),
 }).$mount('#app');
 
 store.subscribe((mutation, state) => {
-  localStorage.setItem('mySavedSongs', JSON.stringify(state.mySongs));
+  if (mutation.type === 'ADD_SONG_TO_FAVORITES' || mutation.type === 'REMOVE_SONG_FROM_FAVORITES') {
+    localStorage.setItem('mySavedSongs', JSON.stringify(state.mySongs));
+  }
 });
