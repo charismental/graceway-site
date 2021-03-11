@@ -39,7 +39,7 @@ export default {
       {
         name: 'Curtis Dougherty',
         photo: 'curtis_dougherty.jpg',
-        times: 'Mon, Wed, Fri @ 4:30AM, 4:30PM',
+        times: 'Mon - Fri @ 4:30AM, 4:30PM',
         about: `<p >Born in Los Angeles, California in 1953, Curtis Dougherty began his walk with the Lord at the
         tender age of 5 years old. His family was quite poor and moved numerous times a year until he reached
         High School. He is thankful for his upbringing because it instilled in him not only what it meant to be a
@@ -125,7 +125,7 @@ export default {
       {
         name: 'Jamie Buckingham',
         photo: 'jamie_buckingham.jpg',
-        times: 'Tuesday, Thursday @ 4:30AM, 4:30PM',
+        times: 'Tuesday, Thursday @ @ 6:30AM, 7:00PM',
         about: `<p class="c6"><span class="c8 c5">A master storyteller
         and Bible teacher, Jamie Buckingham inspired and delighted
         millions around the world both in person and in print. He
