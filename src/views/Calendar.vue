@@ -278,6 +278,18 @@ export default {
         },
         {
           name: 'Curtis Dougherty',
+          start: this.setEventDateAndTime('tuesday', '04:30'),
+          end: this.setEventDateAndTime('tuesday', '05:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.setEventDateAndTime('tuesday', '16:30'),
+          end: this.setEventDateAndTime('tuesday', '17:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
           start: this.setEventDateAndTime('wednesday', '04:30'),
           end: this.setEventDateAndTime('wednesday', '05:30'),
           color: 'amber',
@@ -286,6 +298,18 @@ export default {
           name: 'Curtis Dougherty',
           start: this.setEventDateAndTime('wednesday', '16:30'),
           end: this.setEventDateAndTime('wednesday', '17:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.setEventDateAndTime('thursday', '04:30'),
+          end: this.setEventDateAndTime('thursday', '05:30'),
+          color: 'amber',
+        },
+        {
+          name: 'Curtis Dougherty',
+          start: this.setEventDateAndTime('thursday', '16:30'),
+          end: this.setEventDateAndTime('thursday', '17:30'),
           color: 'amber',
         },
         {
@@ -325,30 +349,6 @@ export default {
           color: 'blue-grey',
         },
         {
-          name: 'Jamie Buckingham',
-          start: this.setEventDateAndTime('tuesday', '04:30'),
-          end: this.setEventDateAndTime('tuesday', '05:30'),
-          color: 'brown',
-        },
-        {
-          name: 'Jamie Buckingham',
-          start: this.setEventDateAndTime('tuesday', '16:30'),
-          end: this.setEventDateAndTime('tuesday', '17:30'),
-          color: 'brown',
-        },
-        {
-          name: 'Jamie Buckingham',
-          start: this.setEventDateAndTime('thursday', '04:30'),
-          end: this.setEventDateAndTime('thursday', '05:30'),
-          color: 'brown',
-        },
-        {
-          name: 'Jamie Buckingham',
-          start: this.setEventDateAndTime('thursday', '16:30'),
-          end: this.setEventDateAndTime('thursday', '17:30'),
-          color: 'brown',
-        },
-        {
           name: 'David Wilkerson',
           start: this.setEventDateAndTime('tuesday', '08:30'),
           end: this.setEventDateAndTime('tuesday', '09:30'),
@@ -373,25 +373,25 @@ export default {
           color: 'lime',
         },
         {
-          name: 'Derek Prince',
+          name: 'Jamie Buckingham',
           start: this.setEventDateAndTime('tuesday', '06:30'),
           end: this.setEventDateAndTime('tuesday', '07:30'),
           color: 'cyan',
         },
         {
-          name: 'Derek Prince',
+          name: 'Jamie Buckingham',
           start: this.setEventDateAndTime('tuesday', '19:00'),
           end: this.setEventDateAndTime('tuesday', '20:00'),
           color: 'cyan',
         },
         {
-          name: 'Derek Prince',
+          name: 'Jamie Buckingham',
           start: this.setEventDateAndTime('thursday', '06:30'),
           end: this.setEventDateAndTime('thursday', '07:30'),
           color: 'cyan',
         },
         {
-          name: 'Derek Prince',
+          name: 'Jamie Buckingham',
           start: this.setEventDateAndTime('thursday', '19:00'),
           end: this.setEventDateAndTime('thursday', '20:00'),
           color: 'cyan',
