@@ -125,7 +125,7 @@ export default {
       {
         name: 'Jamie Buckingham',
         photo: 'jamie_buckingham.jpg',
-        times: 'Tuesday, Thursday @ @ 6:30AM, 7:00PM',
+        times: 'Tuesday, Thursday @ 6:30AM, 7:00PM',
         about: `<p class="c6"><span class="c8 c5">A master storyteller
         and Bible teacher, Jamie Buckingham inspired and delighted
         millions around the world both in person and in print. He

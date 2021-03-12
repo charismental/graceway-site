@@ -97,7 +97,7 @@ export default new Vuex.Store({
           console.error(err);
         });
     },
-    getFeatures({ commit, state }) {
+    getFeatures({ commit }) {
       const url = 'https://gwrapi.herokuapp.com/featurette';
       axios
         .get(url)
@@ -110,8 +110,8 @@ export default new Vuex.Store({
               startPublish: feature.start_publish_date,
               endPublish: feature.end_publish_date,
             }));
-            const features = [...state.features, ...featuresObj];
-            commit('SET_FEATURES_RESULTS', features);
+            // const features = [...state.features, ...featuresObj];
+            commit('SET_FEATURES_RESULTS', featuresObj);
           }
         })
         .catch((err) => {
