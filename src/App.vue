@@ -206,10 +206,12 @@
     </v-main>
     <v-expand-transition>
       <bottom-player
+        v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown()}"
         v-if="isMobile"
         :currentSongInfo="songInfo"
         :songPicture="itemImg(songInfo)"
         :isPlaying="radioIsPlaying"
+        :playerIsOpen="fullSizePlayer"
         @play-pause="playPause"
       />
     </v-expand-transition>
@@ -226,6 +228,7 @@ export default {
   name: 'App',
   components: { CFooter, BottomPlayer, SongInfoCard },
   data: () => ({
+    fullSizePlayer: false,
     openSongInfo: false,
     activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
@@ -305,6 +308,12 @@ export default {
     const newInterval = setInterval(this.getSongInfo, 10000);
   },
   methods: {
+    onSwipeUp() {
+      this.fullSizePlayer = true;
+    },
+    onSwipeDown() {
+      this.fullSizePlayer = false;
+    },
     closeSongInfo() {
       this.openSongInfo = false;
       this.activeSong = null;
