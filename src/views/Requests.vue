@@ -4,10 +4,8 @@
       <song-info-card
         :isMobile="isMobile"
         :song="activeSong"
-        :favorited="songIsFavorited(activeSong)"
         :songPicture="itemImg(activeSong)"
         @make-request="makeRequest"
-        @toggle-favorite="toggleFavorite"
         @close-info="closeSongInfo"
       ></song-info-card>
     </v-dialog>
@@ -23,7 +21,13 @@
           <v-progress-circular indeterminate></v-progress-circular>
         </v-overlay>
         <v-list v-if="searchResults.length" height="600" style="overflow-y: auto">
-          <v-list-item v-for="item in searchResults" :key="item.songid" class="song_list">
+          <v-list-item
+            v-for="item in searchResults"
+            :key="item.songid"
+            class="song_list"
+            @click="isMobile ? viewSongInfo(item) : ''"
+            :style="isMobile ? 'cursor: pointer' : ''"
+          >
             <v-avatar class="mr-2">
               <v-img :src="itemImg(item)"></v-img>
             </v-avatar>
@@ -164,12 +168,6 @@ export default {
     },
   },
   methods: {
-    toggleFavorite(songObj) {
-      this.$store.dispatch('toggleFavorite', songObj);
-    },
-    songIsFavorited(songId) {
-      return this.$store.state.mySongs?.favorites.some((song) => song.songid === songId);
-    },
     saveSearch() {
       const parsed = JSON.stringify(this.recentSearches);
       localStorage.setItem('recentSearches', parsed);

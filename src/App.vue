@@ -3,6 +3,15 @@
     <audio id="audio" :src="stream">
       Your browser does not support the audio element.
     </audio>
+    <v-dialog v-model="openSongInfo" width="fit-content">
+      <song-info-card
+        :isMobile="isMobile"
+        :song="activeSong"
+        noRequests
+        :songPicture="itemImg(activeSong)"
+        @close-info="closeSongInfo"
+      ></song-info-card>
+    </v-dialog>
     <v-dialog :value="firstVisit" max-width="600">
       <v-card class="welcome-card pb-6" dark rounded elevation="12">
         <v-card-actions>
@@ -15,16 +24,12 @@
           <div class="text-h4 text-center" style="color: #15cad5">
             Welcome to Graceway Radio!
           </div>
-          <div class="text-h5 text-center">Please click below to start listening</div>
+          <div class="text-h5 text-center">
+            Please click below to start listening
+          </div>
         </v-card-text>
         <v-card-actions>
-          <v-btn
-            class="mx-auto"
-            fab
-            color="grey lighten-1"
-            large
-            @click="playPause"
-          >
+          <v-btn class="mx-auto" fab color="grey lighten-1" large @click="playPause">
             <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
             <v-icon large v-else>mdi-pause</v-icon>
           </v-btn>
@@ -53,7 +58,7 @@
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
         <v-btn
-          v-for="navItem in navItems.filter((nav) => !nav.disabled)"
+          v-for="navItem in navItems.filter(nav => !nav.disabled)"
           :key="navItem.name"
           :text="!navItem.featured"
           active-class="active-button"
@@ -114,15 +119,7 @@
           >
           </v-img>
 
-          <v-btn
-            fab
-            color="grey lighten-1"
-            large
-            bottom
-            right
-            absolute
-            @click="playPause"
-          >
+          <v-btn fab color="grey lighten-1" large bottom right absolute @click="playPause">
             <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
             <v-icon large v-else>mdi-pause</v-icon>
           </v-btn>
@@ -159,11 +156,8 @@
         </v-list>
         <v-divider></v-divider>
         <v-list two-line v-if="historyUpcoming === 'upcoming'">
-          <div
-            v-for="(song, i) in songQueue.slice(0, -1)"
-            :key="`${song.artist}_${song.title}`"
-          >
-            <v-list-item>
+          <div v-for="(song, i) in songQueue.slice(0, -1)" :key="`${song.artist}_${song.title}`">
+            <v-list-item style="cursor: pointer" @click="viewSongInfo(song)">
               <v-list-item-content>
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
@@ -173,11 +167,8 @@
           </div>
         </v-list>
         <v-list two-line v-else>
-          <div
-            v-for="(song, i) in songHistory.slice(0, -1)"
-            :key="`${song.artist}_${song.title}`"
-          >
-            <v-list-item>
+          <div v-for="(song, i) in songHistory.slice(0, -1)" :key="`${song.artist}_${song.title}`">
+            <v-list-item style="cursor: pointer" @click="viewSongInfo(song)">
               <v-list-item-content>
                 <v-list-item-title>{{ song.title }}</v-list-item-title>
                 <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
@@ -203,13 +194,8 @@
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
-          <v-list-item
-            v-for="navItem in navItems.filter((nav) => !nav.disabled)"
-            :key="navItem.name"
-          >
-            <v-list-item-title @click="navTo(navItem.link)">{{
-              navItem.name
-            }}</v-list-item-title>
+          <v-list-item v-for="navItem in navItems.filter(nav => !nav.disabled)" :key="navItem.name">
+            <v-list-item-title @click="navTo(navItem.link)">{{ navItem.name }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -234,11 +220,14 @@
 import axios from 'axios';
 import CFooter from '@/components/Footer.vue';
 import BottomPlayer from '@/components/BottomPlayer.vue';
+import SongInfoCard from '@/components/SongInfoCard.vue';
 
 export default {
   name: 'App',
-  components: { CFooter, BottomPlayer },
+  components: { CFooter, BottomPlayer, SongInfoCard },
   data: () => ({
+    openSongInfo: false,
+    activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
@@ -316,6 +305,14 @@ export default {
     const newInterval = setInterval(this.getSongInfo, 10000);
   },
   methods: {
+    closeSongInfo() {
+      this.openSongInfo = false;
+      this.activeSong = null;
+    },
+    viewSongInfo(songObj) {
+      this.activeSong = songObj;
+      this.openSongInfo = true;
+    },
     marqueeTrigger(el, att, val) {
       return !!(el && el[att] && el[att].length > val);
     },
