@@ -1,20 +1,24 @@
 <template>
   <v-expand-transition>
-    <v-footer :height="playerIsOpen ? '400px' : '100px'" app padless>
+    <v-footer :height="playerIsOpen ? '500vh' : '100px'" app padless>
       <v-card
         flat
         tile
-        :height="playerIsOpen ? '400px' : '100px'"
+        :height="playerIsOpen ? '500vh' : '100px'"
         color="#1E90FF"
         width="100%"
         class="text-center"
       >
         <v-container fluid class="pa-0">
           <v-row class="ml-0" align="center">
-            <v-col class="pa-0" col="3">
-              <v-img :src="songPicture" height="100px" max-width="100px"> </v-img>
+            <v-col class="pa-0" :cols="playerIsOpen ? '5' : '3'">
+              <v-img
+              :src="songPicture"
+              :height="playerIsOpen ? '100%' : '100px'"
+              :max-width="playerIsOpen ? '100%' : '100px'"
+              :class="playerIsOpen ? 'mx-auto' : ''"> </v-img>
             </v-col>
-            <v-col col="8" class="pr-0">
+            <v-col :cols="playerIsOpen ? '5' : '8'" class="pr-0">
               <div class="marquee-container">
                 <span
                   class="d-block text-left text-title white--text"

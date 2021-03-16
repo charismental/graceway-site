@@ -8,8 +8,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     feedbackLoading: false,
+    loadingSongInfo: false,
     requestLoading: false,
     searchLoading: false,
+    songInfo: {},
+    history: [],
+    queue: [],
     mySongs: {
       rated: [],
       favorites: [],
@@ -23,6 +27,18 @@ export default new Vuex.Store({
     searchTerm: '',
   },
   mutations: {
+    SET_SONG_OBJECT(_state, _song) {
+      _state.songInfo = _song;
+    },
+    SET_SONG_HISTORY(_state, _history) {
+      _state.history = _history;
+    },
+    SET_SONG_QUEUE(_state, _queue) {
+      _state.queue = _queue;
+    },
+    SET_SONG_LOADING(_state, _load) {
+      _state.loadingSongInfo = _load;
+    },
     SET_BLOG_RESULTS(_state, _blogs) {
       _state.blogs = _blogs;
     },
@@ -82,6 +98,24 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getSongInfo({ commit }) {
+      commit('SET_SONG_LOADING', true);
+      axios
+        .get('https://cascadechapel.com/samHTMweb/info.json')
+        .then((res) => {
+          if (res.data.song_info) {
+            commit('SET_SONG_OBJECT', res.data.song_info);
+            commit('SET_SONG_HISTORY', res.data.song_queue);
+            commit('SET_SONG_QUEUE', res.data.song_history);
+          }
+          commit('SET_SONG_LOADING', false);
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.error(err);
+          commit('SET_SONG_LOADING', false);
+        });
+    },
     getBlogs({ commit }) {
       const url = 'https://gwrapi.herokuapp.com/blogs';
       axios
