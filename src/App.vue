@@ -24,9 +24,7 @@
           <div class="text-h4 text-center" style="color: #15cad5">
             Welcome to Graceway Radio!
           </div>
-          <div class="text-h5 text-center">
-            Please click below to start listening
-          </div>
+          <div class="text-h5 text-center">Please click below to start listening</div>
         </v-card-text>
         <v-card-actions>
           <v-btn class="mx-auto" fab color="grey lighten-1" large @click="playPause">
@@ -58,7 +56,7 @@
       <v-spacer></v-spacer>
       <div v-if="!isMobile">
         <v-btn
-          v-for="navItem in navItems.filter(nav => !nav.disabled)"
+          v-for="navItem in navItems.filter((nav) => !nav.disabled)"
           :key="navItem.name"
           :text="!navItem.featured"
           active-class="active-button"
@@ -103,16 +101,20 @@
           <v-icon v-else>mdi-pause</v-icon>
         </v-btn>
       </v-btn>
-      <side-player
-      @play-pause="playPause"
-      :isPlaying="radioIsPlaying">
-      </side-player>
+      <!-- any state/actions in the store can be accessed directly in the components,
+      no need to access them here and pass them as props -->
+      <side-player @play-pause="playPause" :isPlaying="radioIsPlaying"> </side-player>
     </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
-          <v-list-item v-for="navItem in navItems.filter(nav => !nav.disabled)" :key="navItem.name">
-            <v-list-item-title @click="navTo(navItem.link)">{{ navItem.name }}</v-list-item-title>
+          <v-list-item
+            v-for="navItem in navItems.filter((nav) => !nav.disabled)"
+            :key="navItem.name"
+          >
+            <v-list-item-title @click="navTo(navItem.link)">{{
+              navItem.name
+            }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -122,8 +124,10 @@
       <c-footer v-if="$route.name !== 'About'" />
     </v-main>
     <v-expand-transition>
+      <!-- any state/actions in the store can be accessed directly in the components,
+      no need to access them here and pass them as props -->
       <bottom-player
-        v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown()}"
+        v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown() }"
         v-if="isMobile"
         :playerIsOpen="fullSizePlayer"
         :isPlaying="radioIsPlaying"
@@ -143,7 +147,10 @@ import SidePlayer from './components/SidePlayer.vue';
 export default {
   name: 'App',
   components: {
-    CFooter, BottomPlayer, SongInfoCard, SidePlayer,
+    CFooter,
+    BottomPlayer,
+    SongInfoCard,
+    SidePlayer,
   },
   data: () => ({
     fullSizePlayer: false,
