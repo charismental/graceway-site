@@ -13,7 +13,7 @@
           <v-row class="ml-0" align="center">
             <v-col class="pa-0" :cols="playerIsOpen ? '5' : '3'">
               <v-img
-              :src="songPicture"
+              :src="itemImg(songInfo)"
               :height="playerIsOpen ? '100%' : '100px'"
               :max-width="playerIsOpen ? '100%' : '100px'"
               :class="playerIsOpen ? 'mx-auto' : ''"> </v-img>
@@ -22,19 +22,19 @@
               <div class="marquee-container">
                 <span
                   class="d-block text-left text-title white--text"
-                  :class="[marqueeTrigger(currentSongInfo, 'title', 16) ? 'marquee' : '']"
+                  :class="[marqueeTrigger(songInfo, 'title', 16) ? 'marquee' : '']"
                   >{{
-                    currentSongInfo && currentSongInfo.title ? currentSongInfo.title : ""
+                    songInfo && songInfo.title ? songInfo.title : ""
                   }}</span
                 >
                 <span
                   class="d-block text-left mt-n1 text-subtitle-1 white--text"
                   :class="[
-                    marqueeTrigger(currentSongInfo, 'artist', 18) ? 'marquee' : '',
+                    marqueeTrigger(songInfo, 'artist', 18) ? 'marquee' : '',
                   ]"
                   >{{
-                    currentSongInfo && currentSongInfo.artist
-                      ? currentSongInfo.artist
+                    songInfo && songInfo.artist
+                      ? songInfo.artist
                       : ""
                   }}</span
                 >
@@ -58,45 +58,24 @@
 export default {
   name: 'player',
   props: {
-    currentSongInfo: {
-      type: Object,
-    },
-    songPicture: {
-      type: String,
+    playerIsOpen: {
+      type: Boolean,
     },
     isPlaying: {
       type: Boolean,
     },
-    playerIsOpen: {
-      type: Boolean,
+  },
+  computed: {
+    songInfo() {
+      return this.$store.state.songInfo;
     },
   },
-  // data() {
-  //   return {
-  //     isConnected: false
-  //   }
-  // },
-  // sockets: {
-  //   connect() {
-  //     this.isConnected = true
-  //   },
-
-  //   disconnect() {
-  //     this.isConnected = false
-  //   },
-  //   updateSongInfo() {
-  //     this.refreshSongInfo()
-  //   }
-  // },
-  //   computed: {
-  //     ...mapGetters(["currentSongInfo", "stream", "isPlaying", "imgUrl"])
-  //   },
-  // created() {
-  //   this.$store.dispatch("getCurrentSongs")
-  // },
   methods: {
     marqueeTrigger(el, att, val) {
       return !!(el && el[att] && el[att].length > val);
+    },
+    itemImg(songInfo) {
+      this.$store.dispatch('itemImg', songInfo);
     },
     // refreshSongInfo() {
     //   this.$store.dispatch("getCurrentSongs")

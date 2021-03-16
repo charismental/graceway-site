@@ -9,8 +9,8 @@
       <v-img
         width="auto"
         height="300"
-        :src="songPicture"
-        :alt="currentSongInfo && currentSongInfo.title ? currentSongInfo.title : 'Graceway Radio'"
+        :src="itemImg(songInfo)"
+        :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
         onerror="this.src='https://gracewayradio.com/artwork/customMissing.jpg'"
       >
       </v-img>
@@ -22,13 +22,13 @@
     </div>
     <div class="song-meta white--text">
       <div class="text-h6 marquee-container">
-        <div :class="[marqueeTrigger(currentSongInfo, 'title', 18) ? 'marquee' : '']">
-          {{ currentSongInfo && currentSongInfo.title ? currentSongInfo.title : "" }}
+        <div :class="[marqueeTrigger(songInfo, 'title', 18) ? 'marquee' : '']">
+          {{ songInfo && songInfo.title ? songInfo.title : "" }}
         </div>
       </div>
       <div class="text-body-2 marquee-container">
-        <div :class="[marqueeTrigger(currentSongInfo, 'artist', 36) ? 'marquee' : '']">
-          {{ currentSongInfo && currentSongInfo.artist ? currentSongInfo.artist : "" }}
+        <div :class="[marqueeTrigger(songInfo, 'artist', 36) ? 'marquee' : '']">
+          {{ songInfo && songInfo.artist ? songInfo.artist : "" }}
         </div>
       </div>
     </div>
@@ -95,15 +95,6 @@ export default {
     historyUpcoming: 'upcoming',
   }),
   props: {
-    openPlayer: {
-      type: Boolean,
-    },
-    songPicture: {
-      type: String,
-    },
-    currentSongInfo: {
-      type: Object,
-    },
     isPlaying: {
       type: Boolean,
     },
@@ -119,10 +110,24 @@ export default {
     history() {
       return this.$store.state.history;
     },
+    songInfo() {
+      return this.$store.state.songInfo;
+    },
+    openPlayer: {
+      get() {
+        return this.$store.state.openPlayer;
+      },
+      set() {
+        this.$store.dispatch('setOpenPlayer', false);
+      },
+    },
   },
   methods: {
-    viewTheSong(song) {
-      this.$emit('song-info', song);
+    itemImg(item) {
+      this.$store.dispatch('itemImg', item);
+    },
+    viewSongInfo(songObj) {
+      this.$store.dispatch('viewSongInfo', songObj);
     },
     marqueeTrigger(el, att, val) {
       return !!(el && el[att] && el[att].length > val);

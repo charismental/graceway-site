@@ -17,11 +17,11 @@
         <v-card-title
           :class="!isMobile ? 'mt-2' : 'order-2;'"
           :style="!isMobile ? '' : 'font-size:0.9em;'"
-          >{{ song && song.title ? song.title : "" }}</v-card-title
+          >{{ activeSong && activeSong.title ? activeSong.title : "" }}</v-card-title
         >
 
         <v-card-subtitle :class="!isMobile ? '' : 'order-3'">{{
-          song && song.artist ? song.artist : ""
+          activeSong && activeSong.artist ? activeSong.artist : ""
         }}</v-card-subtitle>
         <!-- song.minsec -->
         <!-- song.album -->
@@ -50,7 +50,7 @@
         tile
         :class="!isMobile ? 'ma-3' : 'order-1 mx-auto ma-3 pa-2'"
       >
-        <v-img v-if="song" :src="songPicture"></v-img>
+        <v-img v-if="activeSong" :src="itemImg(activeSong)"></v-img>
       </v-avatar>
     </div>
   </v-card>
@@ -67,9 +67,6 @@ export default {
     isMobile: {
       type: Boolean,
     },
-    song: {
-      type: Object,
-    },
     songPicture: {
       type: String,
     },
@@ -82,6 +79,9 @@ export default {
       //   !this.$store.state.songHistory.some((song) => song.songid === this.song.songid)
       //   && !this.$store.state.songQueue.some((song) => song.songid === this.song.songid)
       // );
+    },
+    activeSong() {
+      return this.$store.state.activeSong;
     },
     requestLoading() {
       return this.$store.state.requestLoading;
@@ -96,6 +96,9 @@ export default {
     },
     makeRequest() {
       this.$emit('make-request', this.song.songid);
+    },
+    itemImg(item) {
+      this.$store.dispatch('itemImg', item);
     },
   },
 };

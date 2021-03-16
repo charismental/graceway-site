@@ -104,12 +104,8 @@
         </v-btn>
       </v-btn>
       <side-player
-      :openPlayer="openPlayer"
-      :songPicture="itemImg(songInfo)"
-      :currentSongInfo="songInfo"
-      :isPlaying="radioIsPlaying"
-      @song-info="viewSongInfo"
-      @play-pause="playPause">
+      @play-pause="playPause"
+      :isPlaying="radioIsPlaying">
       </side-player>
     </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
@@ -129,10 +125,8 @@
       <bottom-player
         v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown()}"
         v-if="isMobile"
-        :currentSongInfo="songInfo"
-        :songPicture="itemImg(songInfo)"
-        :isPlaying="radioIsPlaying"
         :playerIsOpen="fullSizePlayer"
+        :isPlaying="radioIsPlaying"
         @play-pause="playPause"
       />
     </v-expand-transition>
@@ -154,18 +148,18 @@ export default {
   data: () => ({
     fullSizePlayer: false,
     openSongInfo: false,
-    activeSong: null,
+    // activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
     firstVisit: false,
+    // radioIsPlaying: false,
     // songInfo: null,
     // songHistory: [],
     // songQueue: [],
     // loadingSongInfo: false,
     openPlayer: false,
-    radioIsPlaying: false,
-    historyUpcoming: 'upcoming',
+    // historyUpcoming: 'upcoming',
     navItems: [
       {
         name: 'Home',
@@ -240,44 +234,13 @@ export default {
     },
     closeSongInfo() {
       this.openSongInfo = false;
-      this.activeSong = null;
+      this.$store.commit('SET_ACTIVE_SONG', null);
     },
-    viewSongInfo(songObj) {
-      this.activeSong = songObj;
-      this.openSongInfo = true;
-    },
-    // marqueeTrigger(el, att, val) {
-    //   return !!(el && el[att] && el[att].length > val);
-    // },
     itemImg(item) {
-      const url = 'https://gracewayradio.com/artwork/';
-      if (item?.picture) {
-        return url + item.picture;
-      }
-      if (this.loadingSongInfo) {
-        return `${url}loading.gif`;
-        // return `${url}graceway.png`;
-      }
-      return `${url}customMissing.jpg`;
+      return this.$store.dispatch('itemImg', item);
     },
     getSongInfo() {
       this.$store.dispatch('getSongInfo');
-      // this.loadingSongInfo = true;
-      // axios
-      //   .get('https://cascadechapel.com/samHTMweb/info.json')
-      //   .then((res) => {
-      //     if (res.data.song_info) {
-      //       this.songInfo = res.data.song_info;
-      //       this.songQueue = res.data.song_queue;
-      //       this.songHistory = res.data.song_history;
-      //     }
-      //     this.loadingSongInfo = false;
-      //   })
-      //   .catch((err) => {
-      //     // eslint-disable-next-line no-console
-      //     console.error(err);
-      //     this.loadingSongInfo = false;
-      //   });
     },
     playPause() {
       if (this.firstVisit) {
@@ -321,8 +284,14 @@ export default {
     loadingSongInfo() {
       return this.$store.state.loadingSongInfo;
     },
-    songInfo() {
-      return this.$store.state.songInfo;
+    radioIsPlaying() {
+      return this.$store.state.radioIsPlaying;
+    },
+    // openPlayer() {
+    //   return this.$store.state.openPlayer;
+    // },
+    activeSong() {
+      return this.$store.state.activeSong;
     },
   },
 };
