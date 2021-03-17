@@ -4,22 +4,22 @@
       <v-container fluid class="pa-0">
         <v-row class="ml-0" align="center">
           <v-col class="pa-0" col="3">
-            <v-img :src="songPicture" height="100px" max-width="100px"> </v-img>
+            <v-img :src="itemImg" height="100px" max-width="100px"> </v-img>
           </v-col>
           <v-col col="8" class="pr-0">
             <div class="marquee-container">
               <span
                 class="d-block text-left text-title white--text"
-                :class="[marqueeTrigger(currentSongInfo, 'title', 16) ? 'marquee' : '']"
+                :class="[marqueeTrigger(songInfo, 'title', 16) ? 'marquee' : '']"
                 >{{
-                  currentSongInfo && currentSongInfo.title ? currentSongInfo.title : ""
+                  songInfo && songInfo.title ? songInfo.title : ""
                 }}</span
               >
               <span
                 class="d-block text-left mt-n1 text-subtitle-1 white--text"
-                :class="[marqueeTrigger(currentSongInfo, 'artist', 18) ? 'marquee' : '']"
+                :class="[marqueeTrigger(songInfo, 'artist', 18) ? 'marquee' : '']"
                 >{{
-                  currentSongInfo && currentSongInfo.artist ? currentSongInfo.artist : ""
+                  songInfo && songInfo.artist ? songInfo.artist : ""
                 }}</span
               >
             </div>
@@ -52,13 +52,18 @@ export default {
     radioIsPlaying() {
       return this.$store.state.radioIsPlaying;
     },
+    itemImg: {
+      get() {
+        return this.$store.state.itemImage;
+      },
+      set(item) {
+        return this.$store.dispatch('itemImg', item);
+      },
+    },
   },
   methods: {
     marqueeTrigger(el, att, val) {
       return !!(el && el[att] && el[att].length > val);
-    },
-    itemImg(songInfo) {
-      this.$store.dispatch('itemImg', songInfo);
     },
     // refreshSongInfo() {
     //   this.$store.dispatch("getCurrentSongs")

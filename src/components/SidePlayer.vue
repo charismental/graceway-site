@@ -95,6 +95,10 @@ export default {
     historyUpcoming: 'upcoming',
   }),
   props: {
+    openPlayer: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {},
   computed: {
@@ -112,14 +116,6 @@ export default {
     },
     songInfo() {
       return this.$store.state.songInfo;
-    },
-    openPlayer: {
-      get() {
-        return this.$store.state.openPlayer;
-      },
-      set() {
-        this.$store.dispatch('setOpenPlayer', false);
-      },
     },
   },
   methods: {

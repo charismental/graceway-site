@@ -103,7 +103,8 @@
       </v-btn>
       <!-- any state/actions in the store can be accessed directly in the components,
       no need to access them here and pass them as props -->
-      <side-player @play-pause="playPause"> </side-player>
+      <side-player @play-pause="playPause"
+      :openPlayer='openPlayer'> </side-player>
     </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
@@ -163,7 +164,7 @@ export default {
     // songHistory: [],
     // songQueue: [],
     // loadingSongInfo: false,
-    // openPlayer: false,
+    openPlayer: false,
     // historyUpcoming: 'upcoming',
     navItems: [
       {
@@ -283,8 +284,13 @@ export default {
     loadingSongInfo() {
       return this.$store.state.loadingSongInfo;
     },
-    radioIsPlaying() {
-      return this.$store.state.radioIsPlaying;
+    radioIsPlaying: {
+      get() {
+        return this.$store.state.radioIsPlaying;
+      },
+      set(value) {
+        return this.$store.dispatch('RadioIsPlaying', value);
+      },
     },
     // openPlayer() {
     //   return this.$store.state.openPlayer;

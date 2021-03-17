@@ -12,7 +12,6 @@ export default new Vuex.Store({
     requestLoading: false,
     searchLoading: false,
     radioIsPlaying: false,
-    openPlayer: false,
     openSongInfo: false,
     activeSong: null,
     songInfo: {},
@@ -32,8 +31,8 @@ export default new Vuex.Store({
     searchTerm: '',
   },
   mutations: {
-    SET_OPEN_PLAYER(_state, _openPlayer) {
-      _state.openPlayer = _openPlayer;
+    RADIO_IS_PLAYING(_state, _radioIsPlaying) {
+      _state.radioIsPlaying = _radioIsPlaying;
     },
     SET_ITEM_IMAGE(_state, _itemImage) {
       _state.itemImage = _itemImage;
@@ -112,13 +111,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    RadioIsPlaying({ commit }, value) {
+      commit('RADIO_IS_PLAYING', value);
+    },
     viewSongInfo({ commit }, songObj) {
-      return commit('SET_ACTIVE_SONG', songObj);
+      commit('SET_ACTIVE_SONG', songObj);
     },
     itemImg({ state, commit }, item) {
       const url = 'https://gracewayradio.com/artwork/';
       if (item?.picture) {
-        return commit('SET_ITEM_IMAGE', url + item.picture);
+        commit('SET_ITEM_IMAGE', url + item.picture);
       }
       if (state.loadingSongInfo) {
         return `${url}loading.gif`;
@@ -242,9 +244,6 @@ export default new Vuex.Store({
         .finally(() => {
           commit('SET_REQUEST_LOADING', false);
         });
-    },
-    setOpenPlayer({ commit }, value) {
-      commit('SET_OPEN_PLAYER', value);
     },
     setSearchTerm({ commit }, searchTerm) {
       commit('SET_SEARCH_TERM', searchTerm);
