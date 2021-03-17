@@ -124,7 +124,6 @@ export default new Vuex.Store({
     },
     viewSongInfo({ commit }, songObj) {
       commit('SET_ACTIVE_SONG', songObj);
-      // set state to open the dialog?
     },
     getSongInfo({ commit }) {
       commit('SET_SONG_LOADING', true);

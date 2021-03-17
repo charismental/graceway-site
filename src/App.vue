@@ -95,8 +95,6 @@
           <v-icon v-else>mdi-pause</v-icon>
         </v-btn>
       </v-btn>
-      <!-- any state/actions in the store can be accessed directly in the components,
-      no need to access them here and pass them as props -->
       <side-player
         @play-pause="playPause"
         @close-player="openPlayer = false"
@@ -123,8 +121,6 @@
       <c-footer v-if="$route.name !== 'About'" />
     </v-main>
     <v-expand-transition>
-      <!-- any state/actions in the store can be accessed directly in the components,
-      no need to access them here and pass them as props -->
       <bottom-player
         v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown() }"
         v-if="isMobile"
@@ -151,18 +147,10 @@ export default {
     SidePlayer,
   },
   data: () => ({
-    // activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
-    // stream: 'https://rcast.live/stream/64776',
     openSideNav: false,
     firstVisit: false,
-    // radioIsPlaying: false,
-    // songInfo: null,
-    // songHistory: [],
-    // songQueue: [],
-    // loadingSongInfo: false,
     openPlayer: false,
-    // historyUpcoming: 'upcoming',
     navItems: [
       {
         name: 'Home',
@@ -284,9 +272,6 @@ export default {
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
-    loadingSongInfo() {
-      return this.$store.state.loadingSongInfo;
-    },
     radioIsPlaying: {
       get() {
         return this.$store.state.radioIsPlaying;
@@ -294,9 +279,6 @@ export default {
       set(value) {
         return this.$store.dispatch('RadioIsPlaying', value);
       },
-    },
-    activeSong() {
-      return this.$store.state.activeSong;
     },
   },
 };
@@ -321,42 +303,4 @@ html {
 .active-button {
   color: blue;
 }
-// .album-art {
-//   max-height: 300px;
-// }
-// .marquee-container {
-//   overflow: hidden;
-// }
-// .marquee {
-//   white-space: nowrap;
-//   animation: marquee 8s linear infinite;
-//   -webkit-animation: marquee 8s linear infinite;
-// }
-// .marquee:hover {
-//   -webkit-animation-play-state: paused;
-//   animation-play-state: paused;
-// }
-// .song-meta {
-//   padding-top: 5px;
-//   padding-left: 5px;
-//   height: 65px;
-//   background-color: dodgerblue;
-// }
-
-// @keyframes marquee {
-//   0% {
-//     transform: translateX(100%);
-//   }
-//   100% {
-//     transform: translateX(-130%);
-//   }
-// }
-// @-webkit-keyframes marquee {
-//   0% {
-//     transform: translateX(100%);
-//   }
-//   100% {
-//     transform: translateX(-130%);
-//   }
-// }
 </style>
