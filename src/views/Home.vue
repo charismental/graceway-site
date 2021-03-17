@@ -181,9 +181,9 @@ export default {
     // image: '',
     // link: [],
     slideShow: [
-      // {
-      //   src: '01 valentine.jpg',
-      // },
+      {
+        src: '01 patrick.jpg',
+      },
       {
         src: '02.jpg',
       },
