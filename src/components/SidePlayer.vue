@@ -16,7 +16,7 @@
       </v-img>
 
       <v-btn fab color="grey lighten-1" large bottom right absolute @click="$emit('play-pause')">
-        <v-icon large v-if="!isPlaying">mdi-play</v-icon>
+        <v-icon large v-if="!radioIsPlaying">mdi-play</v-icon>
         <v-icon large v-else>mdi-pause</v-icon>
       </v-btn>
     </div>
@@ -95,12 +95,12 @@ export default {
     historyUpcoming: 'upcoming',
   }),
   props: {
-    isPlaying: {
-      type: Boolean,
-    },
   },
   components: {},
   computed: {
+    radioIsPlaying() {
+      return this.$store.state.radioIsPlaying;
+    },
     loadingSongInfo() {
       return this.$store.state.loadingSongInfo;
     },

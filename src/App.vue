@@ -103,7 +103,7 @@
       </v-btn>
       <!-- any state/actions in the store can be accessed directly in the components,
       no need to access them here and pass them as props -->
-      <side-player @play-pause="playPause" :isPlaying="radioIsPlaying"> </side-player>
+      <side-player @play-pause="playPause"> </side-player>
     </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
@@ -130,7 +130,6 @@
         v-touch="{ up: () => onSwipeUp(), down: () => onSwipeDown() }"
         v-if="isMobile"
         :playerIsOpen="fullSizePlayer"
-        :isPlaying="radioIsPlaying"
         @play-pause="playPause"
       />
     </v-expand-transition>
@@ -153,7 +152,6 @@ export default {
     SidePlayer,
   },
   data: () => ({
-    fullSizePlayer: false,
     openSongInfo: false,
     // activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
@@ -165,7 +163,7 @@ export default {
     // songHistory: [],
     // songQueue: [],
     // loadingSongInfo: false,
-    openPlayer: false,
+    // openPlayer: false,
     // historyUpcoming: 'upcoming',
     navItems: [
       {
@@ -233,12 +231,6 @@ export default {
     const newInterval = setInterval(this.getSongInfo, 10000);
   },
   methods: {
-    onSwipeUp() {
-      this.fullSizePlayer = true;
-    },
-    onSwipeDown() {
-      this.fullSizePlayer = false;
-    },
     closeSongInfo() {
       this.openSongInfo = false;
       this.$store.commit('SET_ACTIVE_SONG', null);
