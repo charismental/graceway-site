@@ -1,14 +1,5 @@
 <template>
   <div class="requests">
-    <v-dialog v-model="openSongInfo" width="fit-content">
-      <song-info-card
-        :isMobile="isMobile"
-        :song="activeSong"
-        :songPicture="itemImg(activeSong)"
-        @make-request="makeRequest"
-        @close-info="closeSongInfo"
-      ></song-info-card>
-    </v-dialog>
     <v-card class="mx-auto mt-8 mb-8" width="600" max-height="800">
       <v-card-text class="px-16">
         <v-text-field
@@ -102,16 +93,13 @@
 
 <script>
 import debounce from 'lodash.debounce';
-import SongInfoCard from '../components/SongInfoCard.vue';
 
 export default {
   name: 'Requests',
   data: () => ({
-    openSongInfo: false,
     snackbar: false,
     activeSong: null,
   }),
-  components: { SongInfoCard },
   watch: {
     recentSearches() {
       this.saveSearch();
@@ -173,22 +161,10 @@ export default {
       localStorage.setItem('recentSearches', parsed);
     },
     itemImg(item) {
-      const url = 'https://gracewayradio.com/artwork/';
-      if (item) {
-        return url + item?.picture;
-      }
-      if (this.loadingSongInfo) {
-        return `${url}loading.gif`;
-      }
-      return `${url}customMissing.jpg`;
+      return this.$store.getters.itemImg(item);
     },
     viewSongInfo(songObj) {
-      this.activeSong = songObj;
-      this.openSongInfo = true;
-    },
-    closeSongInfo() {
-      this.openSongInfo = false;
-      this.activeSong = null;
+      this.$store.dispatch('viewSongInfo', songObj);
     },
     closeSnackbar() {
       this.snackbar = false;
@@ -198,6 +174,7 @@ export default {
       this.$store.dispatch('fetchSongs', this.searchTerm);
     },
     makeRequest(id) {
+      // Frank, this needs your help
       if (this.requestLoading) {
         return;
       }

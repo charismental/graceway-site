@@ -4,13 +4,7 @@
       Your browser does not support the audio element.
     </audio>
     <v-dialog v-model="openSongInfo" width="fit-content">
-      <song-info-card
-        :isMobile="isMobile"
-        :song="activeSong"
-        noRequests
-        :songPicture="itemImg(activeSong)"
-        @close-info="closeSongInfo"
-      ></song-info-card>
+      <song-info-card @close-info="closeSongInfo"></song-info-card>
     </v-dialog>
     <v-dialog :value="firstVisit" max-width="600">
       <v-card class="welcome-card pb-6" dark rounded elevation="12">
@@ -103,8 +97,12 @@
       </v-btn>
       <!-- any state/actions in the store can be accessed directly in the components,
       no need to access them here and pass them as props -->
-      <side-player @play-pause="playPause"
-      :openPlayer='openPlayer'> </side-player>
+      <side-player
+        @play-pause="playPause"
+        @close-player="openPlayer = false"
+        :openPlayer="openPlayer"
+      >
+      </side-player>
     </div>
     <v-navigation-drawer v-model="openSideNav" right app temporary>
       <v-list nav dense>
@@ -153,7 +151,6 @@ export default {
     SidePlayer,
   },
   data: () => ({
-    openSongInfo: false,
     // activeSong: null,
     stream: 'https://us3.streamingpulse.com/ssl/graceway_pulse',
     // stream: 'https://rcast.live/stream/64776',
@@ -234,10 +231,6 @@ export default {
   methods: {
     closeSongInfo() {
       this.openSongInfo = false;
-      this.$store.commit('SET_ACTIVE_SONG', null);
-    },
-    itemImg(item) {
-      return this.$store.dispatch('itemImg', item);
     },
     getSongInfo() {
       this.$store.dispatch('getSongInfo');
@@ -278,6 +271,16 @@ export default {
     }, 1800);
   },
   computed: {
+    openSongInfo: {
+      get() {
+        return !!this.$store.state.activeSong;
+      },
+      set(val) {
+        if (!val) {
+          this.$store.dispatch('viewSongInfo', null);
+        }
+      },
+    },
     isMobile() {
       return this.$vuetify.breakpoint.smAndDown;
     },
@@ -292,9 +295,6 @@ export default {
         return this.$store.dispatch('RadioIsPlaying', value);
       },
     },
-    // openPlayer() {
-    //   return this.$store.state.openPlayer;
-    // },
     activeSong() {
       return this.$store.state.activeSong;
     },

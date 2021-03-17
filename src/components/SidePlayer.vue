@@ -3,13 +3,13 @@
     fixed
     style="z-index: 4; padding-top: 60px"
     width="300"
-    v-model="openPlayer"
+    v-model="isOpen"
   >
     <div class="album-art" style="position: relative">
       <v-img
         width="auto"
         height="300"
-        :src="itemImg(songInfo)"
+        :src="itemImg"
         :alt="songInfo && songInfo.title ? songInfo.title : 'Graceway Radio'"
         onerror="this.src='https://gracewayradio.com/artwork/customMissing.jpg'"
       >
@@ -53,7 +53,7 @@
     <v-divider></v-divider>
     <v-list two-line v-if="historyUpcoming === 'upcoming'">
       <div v-for="(song, i) in history.slice(0, -1)" :key="`${song.artist}_${song.title}`">
-        <v-list-item style="cursor: pointer" @click="$emit('song-info')">
+        <v-list-item style="cursor: pointer" @click="viewSongInfo(song)">
           <v-list-item-content>
             <v-list-item-title>{{ song.title }}</v-list-item-title>
             <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
@@ -64,7 +64,7 @@
     </v-list>
     <v-list two-line v-else>
       <div v-for="(song, i) in queue.slice(0, -1)" :key="`${song.artist}_${song.title}`">
-        <v-list-item style="cursor: pointer" @click="viewTheSong(song)">
+        <v-list-item style="cursor: pointer" @click="viewSongInfo(song)">
           <v-list-item-content>
             <v-list-item-title>{{ song.title }}</v-list-item-title>
             <v-list-item-subtitle>{{ song.artist }}</v-list-item-subtitle>
@@ -81,7 +81,7 @@
       absolute
       right
       style="bottom: 10px"
-      @click="openPlayer = false"
+      @click="isOpen = false"
     >
       <v-icon large>mdi-close</v-icon>
     </v-btn>
@@ -102,6 +102,16 @@ export default {
   },
   components: {},
   computed: {
+    isOpen: {
+      get() {
+        return this.openPlayer;
+      },
+      set(val) {
+        if (!val) {
+          this.$emit('close-player');
+        }
+      },
+    },
     radioIsPlaying() {
       return this.$store.state.radioIsPlaying;
     },
@@ -117,11 +127,11 @@ export default {
     songInfo() {
       return this.$store.state.songInfo;
     },
+    itemImg() {
+      return this.$store.getters.itemImg(this.songInfo);
+    },
   },
   methods: {
-    itemImg(item) {
-      this.$store.dispatch('itemImg', item);
-    },
     viewSongInfo(songObj) {
       this.$store.dispatch('viewSongInfo', songObj);
     },

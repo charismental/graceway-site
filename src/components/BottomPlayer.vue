@@ -52,13 +52,8 @@ export default {
     radioIsPlaying() {
       return this.$store.state.radioIsPlaying;
     },
-    itemImg: {
-      get() {
-        return this.$store.state.itemImage;
-      },
-      set(item) {
-        return this.$store.dispatch('itemImg', item);
-      },
+    itemImg() {
+      return this.$store.getters.itemImg(this.songInfo);
     },
   },
   methods: {

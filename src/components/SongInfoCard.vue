@@ -30,7 +30,7 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-btn
-            v-if="!noRequests && !isQueued"
+            v-if="!noRequests"
             :loading="requestLoading"
             class="text-capitalize"
             outlined
@@ -50,7 +50,7 @@
         tile
         :class="!isMobile ? 'ma-3' : 'order-1 mx-auto ma-3 pa-2'"
       >
-        <v-img v-if="activeSong" :src="itemImg(activeSong)"></v-img>
+        <v-img v-if="activeSong" :src="itemImg"></v-img>
       </v-avatar>
     </div>
   </v-card>
@@ -59,26 +59,20 @@
 <script>
 export default {
   name: 'SongInfoCard',
-  props: {
-    noRequests: {
-      type: Boolean,
-      default: false,
-    },
-    isMobile: {
-      type: Boolean,
-    },
-    songPicture: {
-      type: String,
-    },
-  },
   computed: {
-    isQueued() {
-      return false;
-      // return (
-      //  this.$store.state.songInfo?.songid !== this.song.songid &&
-      //   !this.$store.state.songHistory.some((song) => song.songid === this.song.songid)
-      //   && !this.$store.state.songQueue.some((song) => song.songid === this.song.songid)
-      // );
+    isMobile() {
+      return this.$vuetify.breakpoint.smAndDown;
+    },
+    itemImg() {
+      return this.$store.getters.itemImg(this.activeSong);
+    },
+    noRequests() {
+      if (this.activeSong?.songid) {
+        return (this.$store.state.history.some((song) => song?.songid === this.activeSong.songid)
+          || this.$store.state.queue.some((song) => song?.songid === this.activeSong.songid)
+        );
+      }
+      return true;
     },
     activeSong() {
       return this.$store.state.activeSong;
@@ -87,18 +81,18 @@ export default {
       return this.$store.state.requestLoading;
     },
     favorited() {
-      return this.$store.state.mySongs?.favorites.some((song) => song.songid === this.song?.songid);
+      return this.$store.state.mySongs?.favorites.some(
+        (song) => song.songid === this.activeSong?.songid,
+      );
     },
   },
   methods: {
     toggleFavorite() {
-      this.$store.dispatch('toggleFavorite', this.song);
+      this.$store.dispatch('toggleFavorite', this.activeSong);
     },
     makeRequest() {
-      this.$emit('make-request', this.song.songid);
-    },
-    itemImg(item) {
-      this.$store.dispatch('itemImg', item);
+      // handle request obj here, dispatch directly
+      this.$emit('make-request', this.activeSong.songid);
     },
   },
 };

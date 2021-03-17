@@ -21,7 +21,6 @@ export default new Vuex.Store({
       rated: [],
       favorites: [],
     },
-    itemImage: '',
     requestBody: '',
     requestHeader: '',
     recentSearches: [],
@@ -33,9 +32,6 @@ export default new Vuex.Store({
   mutations: {
     RADIO_IS_PLAYING(_state, _radioIsPlaying) {
       _state.radioIsPlaying = _radioIsPlaying;
-    },
-    SET_ITEM_IMAGE(_state, _itemImage) {
-      _state.itemImage = _itemImage;
     },
     SET_ACTIVE_SONG(_state, _activeSong) {
       _state.activeSong = _activeSong;
@@ -110,23 +106,25 @@ export default new Vuex.Store({
       }
     },
   },
+  getters: {
+    itemImg: (state) => (songObj) => {
+      const url = 'https://gracewayradio.com/artwork/';
+      if (songObj?.picture) {
+        return url + songObj.picture;
+      }
+      if (state.loadingSongInfo) {
+        return `${url}loading.gif`;
+      }
+      return `${url}customMissing.jpg`;
+    },
+  },
   actions: {
     RadioIsPlaying({ commit }, value) {
       commit('RADIO_IS_PLAYING', value);
     },
     viewSongInfo({ commit }, songObj) {
       commit('SET_ACTIVE_SONG', songObj);
-    },
-    itemImg({ state, commit }, item) {
-      const url = 'https://gracewayradio.com/artwork/';
-      if (item?.picture) {
-        commit('SET_ITEM_IMAGE', url + item.picture);
-      }
-      if (state.loadingSongInfo) {
-        return `${url}loading.gif`;
-        // return `${url}graceway.png`;
-      }
-      return `${url}customMissing.jpg`;
+      // set state to open the dialog?
     },
     getSongInfo({ commit }) {
       commit('SET_SONG_LOADING', true);
